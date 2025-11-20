@@ -1062,25 +1062,25 @@ class StrapiApiService {
     if (params.filters) {
       if (params.filters.category?.slug?.$eq) {
         filteredProducts = filteredProducts.filter(
-          p => p.attributes.category.data.attributes.slug === params.filters.category.slug.$eq
+          p => p.attributes.category.data.attributes.slug === params.filters?.category?.slug?.$eq
         );
       }
       
       if (params.filters.featured !== undefined) {
         filteredProducts = filteredProducts.filter(
-          p => p.attributes.featured === params.filters.featured
+          p => p.attributes.featured === params.filters?.featured
         );
       }
       
       if (params.filters.bestSeller !== undefined) {
         filteredProducts = filteredProducts.filter(
-          p => p.attributes.bestSeller === params.filters.bestSeller
+          p => p.attributes.bestSeller === params.filters?.bestSeller
         );
       }
 
       if (params.filters.id?.$ne) {
         filteredProducts = filteredProducts.filter(
-          p => p.id !== params.filters.id.$ne
+          p => p.id !== params.filters?.id?.$ne
         );
       }
     }
@@ -1198,7 +1198,7 @@ class StrapiApiService {
     // Appliquer les filtres
     if (params.filters?.slug?.$eq) {
       filteredCategories = filteredCategories.filter(
-        c => c.attributes.slug === params.filters.slug.$eq
+        c => c.attributes.slug === params.filters?.slug?.$eq
       );
     }
     

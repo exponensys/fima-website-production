@@ -53,13 +53,13 @@ export function FimaCouchagePage({
 
   // Extraire les catégories FIMA Couchage avec fallback robuste
   const fimaCouchageCategories =
-    allCategories?.["fima-couchage"] &&
-    allCategories["fima-couchage"].length > 0
-      ? allCategories["fima-couchage"]
+    (allCategories as any)?.["fima-couchage"] &&
+    (allCategories as any)["fima-couchage"].length > 0
+      ? (allCategories as any)["fima-couchage"]
       : DEFAULT_CATEGORIES["fima-couchage"];
   
   // Mapper les catégories pour ajouter l'image principale (thumbnail ou première image)
-  const categoriesWithImages = fimaCouchageCategories.map(cat => ({
+  const categoriesWithImages = fimaCouchageCategories.map((cat: any) => ({
     ...cat,
     image: cat.thumbnail || (cat.images && cat.images.length > 0 ? cat.images[0] : undefined)
   }));
@@ -329,7 +329,7 @@ export function FimaCouchagePage({
 
                 {/* Grille 3 colonnes pour toutes les catégories - Design en cercle */}
                 <div className="grid grid-cols-3 gap-8 mb-6">
-                  {categoriesWithImages.map((category) => (
+                  {categoriesWithImages.map((category: any) => (
                     <div
                       key={category.id}
                       onClick={() => {
@@ -512,20 +512,14 @@ export function FimaCouchagePage({
       <DeliveryInstallationModal
         isOpen={isDeliveryModalOpen}
         onClose={() => setIsDeliveryModalOpen(false)}
-        businessUnit="FIMA Couchage"
-        details={expertisePoints[0].details}
       />
       <WarrantyModal
         isOpen={isWarrantyModalOpen}
         onClose={() => setIsWarrantyModalOpen(false)}
-        businessUnit="FIMA Couchage"
-        details={expertisePoints[1].details}
       />
       <QualityExpertiseModal
         isOpen={isQualityModalOpen}
         onClose={() => setIsQualityModalOpen(false)}
-        businessUnit="FIMA Couchage"
-        details={expertisePoints[2].details}
       />
     </div>
   );

@@ -159,11 +159,7 @@ export function UniversGlassPage({
             <button
               onClick={onBack}
               className="flex items-center gap-2 p-2 rounded-lg transition-colors mr-4"
-              style={{
-                ":hover": {
-                  backgroundColor: "rgba(14, 165, 233, 0.2)",
-                },
-              }}
+              style={{}}
               onMouseEnter={(e) =>
                 (e.currentTarget.style.backgroundColor =
                   "rgba(14, 165, 233, 0.2)")

@@ -50,9 +50,9 @@ export function FimaDesignPage({
 
   // Extraire les catégories FIMA Design avec fallback robuste
   const fimaDesignCategories =
-    allCategories?.["fima-design"] &&
-    allCategories["fima-design"].length > 0
-      ? allCategories["fima-design"]
+    (allCategories as any)?.["fima-design"] &&
+    (allCategories as any)["fima-design"].length > 0
+      ? (allCategories as any)["fima-design"]
       : DEFAULT_CATEGORIES["fima-design"];
 
   // Helper pour mapper les catégories avec les vraies images
@@ -343,7 +343,7 @@ export function FimaDesignPage({
                     {/* Grille 4 colonnes pour toutes les catégories */}
                     <div className="grid grid-cols-3 gap-4 mb-6">
                       {mapCategoriesWithImages("desktop").map(
-                        (category) => (
+                        (category: any) => (
                           <div
                             key={category.id}
                             onClick={() => {

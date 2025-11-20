@@ -112,7 +112,7 @@ export async function getHeroSlides(locale: 'fr' | 'en' = 'fr'): Promise<{
 export async function checkHeroSlidesExist(): Promise<boolean> {
   try {
     const result = await getHeroSlides();
-    return result.success && result.data && result.data.length > 0;
+    return !!(result.success && result.data && result.data.length > 0);
   } catch (error) {
     console.error('Erreur lors de la vérification des slides:', error);
     return false;

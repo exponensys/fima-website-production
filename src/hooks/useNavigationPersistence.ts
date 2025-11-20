@@ -27,7 +27,9 @@ type ViewType =
   | 'order-tracking'
   | 'sitemap'
   | 'brand-guidelines'
-  | 'cms';
+  | 'privacy-policy'
+  | 'cms'
+  | 'admin-dashboard';
 
 interface NavigationState {
   view: ViewType;
@@ -181,8 +183,12 @@ function getUrlFromState(state: NavigationState): string {
       return '/sitemap';
     case 'brand-guidelines':
       return '/brand-guidelines';
+    case 'privacy-policy':
+      return '/privacy-policy';
     case 'cms':
       return '/cms';
+    case 'admin-dashboard':
+      return '/admin-dashboard';
     default:
       return '/';
   }
@@ -277,7 +283,9 @@ function getStateFromUrl(): NavigationState | null {
   // Other pages
   if (path === '/sitemap') return { view: 'sitemap' };
   if (path === '/brand-guidelines') return { view: 'brand-guidelines' };
+  if (path === '/privacy-policy') return { view: 'privacy-policy' };
   if (path === '/cms' || path.startsWith('/cms/')) return { view: 'cms' };
+  if (path === '/admin-dashboard') return { view: 'admin-dashboard' };
 
   return null;
 }

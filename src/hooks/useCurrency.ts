@@ -13,7 +13,8 @@ export function useCurrency() {
    * @returns Prix formaté avec symbole
    */
   const formatPrice = (eurPrice: number | string): string => {
-    return formatCurrency(eurPrice, selectedCurrency);
+    const numericPrice = typeof eurPrice === 'string' ? parseFloat(eurPrice) : eurPrice;
+    return formatCurrency(numericPrice, selectedCurrency);
   };
 
   /**

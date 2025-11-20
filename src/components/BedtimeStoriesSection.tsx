@@ -9,7 +9,7 @@ export function BedtimeStoriesSection() {
 
   // Récupération des témoignages depuis Supabase
   const { testimonials, loading, error } = useTestimonials(
-    selectedLanguage === "en" ? "en" : "fr",
+    selectedLanguage as "en" | "fr",
     undefined, // category
     false, // featuredOnly
     true, // publishedOnly
@@ -30,7 +30,7 @@ export function BedtimeStoriesSection() {
               color: "#000000",
             }}
           >
-            {selectedLanguage === "en"
+            {(selectedLanguage as string) === "en"
               ? "FIMA bedtime stories"
               : "Avis et expériences clients"}
           </h2>
@@ -38,7 +38,7 @@ export function BedtimeStoriesSection() {
             className="text-sm md:text-lg max-w-2xl mx-auto"
             style={{ color: "#6E6E6E" }}
           >
-            {selectedLanguage === "en"
+            {(selectedLanguage as string) === "en"
               ? "Testimonials from our satisfied customers across West Africa."
               : "Témoignages de nos clients satisfaits."}
           </p>
@@ -82,7 +82,7 @@ export function BedtimeStoriesSection() {
           <>
             <div className="text-center py-12">
               <p style={{ color: "#6E6E6E" }}>
-                {selectedLanguage === "en"
+                {(selectedLanguage as string) === "en"
                   ? "Unable to load testimonials at this time."
                   : "Impossible de charger les témoignages pour le moment."}
               </p>
@@ -93,7 +93,7 @@ export function BedtimeStoriesSection() {
           // Message vide
           <div className="text-center py-12">
             <p style={{ color: "#6E6E6E" }}>
-              {selectedLanguage === "en"
+              {(selectedLanguage as string) === "en"
                 ? "No testimonials available at this time."
                 : "Aucun témoignage disponible pour le moment."}
             </p>
@@ -104,7 +104,7 @@ export function BedtimeStoriesSection() {
               // Avatar emoji basé sur le nom ou photo
               const avatar = testimonial.clientPhoto || "👤";
               const testimonialText =
-                selectedLanguage === "en"
+                (selectedLanguage as string) === "en"
                   ? testimonial.testimonialEn
                   : testimonial.testimonialFr;
 

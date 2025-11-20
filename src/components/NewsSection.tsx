@@ -48,7 +48,7 @@ export function NewsSection({
   const sliderRef = useRef<Slider>(null);
 
   const { blogs, loading, error } = useBlogs(
-    selectedLanguage,
+    selectedLanguage.toLowerCase() as "fr" | "en",
     selectedCategory,
   );
 

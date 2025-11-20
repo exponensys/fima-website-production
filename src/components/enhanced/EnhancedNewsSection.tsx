@@ -1,7 +1,7 @@
 import { Calendar, ArrowRight, User, Filter, RefreshCw } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { ImageWithFallback } from '../figma/ImageWithFallback';
-import { projectId, publicAnonKey } from '../utils/supabase/info';
+import { projectId, publicAnonKey } from '../../utils/supabase/info';
 
 interface NewsSectionProps {
   onNavigate?: (page: string) => void;

@@ -11,7 +11,7 @@ interface CompanyPresentationSectionProps {
 export function CompanyPresentationSection({ onNavigate, onExpertClick }: CompanyPresentationSectionProps) {
   const { selectedLanguage } = useLanguage();
   const { companyPresentation, loading, error } = useCompanyPresentation(
-    selectedLanguage === 'en' ? 'en' : 'fr'
+    selectedLanguage as 'en' | 'fr'
   );
 
   // Map icon names to components
@@ -61,7 +61,7 @@ export function CompanyPresentationSection({ onNavigate, onExpertClick }: Compan
         <div className="container mx-auto px-4">
           <div className="text-center py-12">
             <p style={{ color: '#6E6E6E' }}>
-              {selectedLanguage === 'en' 
+              {(selectedLanguage as string) === 'en' 
                 ? 'Unable to load company information at this time.' 
                 : 'Impossible de charger les informations de l\'entreprise pour le moment.'}
             </p>
@@ -72,15 +72,15 @@ export function CompanyPresentationSection({ onNavigate, onExpertClick }: Compan
   }
 
   // Get localized content
-  const tagline = selectedLanguage === 'en' ? companyPresentation.taglineEn : companyPresentation.taglineFr;
-  const title = selectedLanguage === 'en' ? companyPresentation.titleEn : companyPresentation.titleFr;
-  const description = selectedLanguage === 'en' ? companyPresentation.descriptionEn : companyPresentation.descriptionFr;
-  const badgeTitle = selectedLanguage === 'en' ? companyPresentation.badgeTitleEn : companyPresentation.badgeTitleFr;
-  const badgeSubtitle = selectedLanguage === 'en' ? companyPresentation.badgeSubtitleEn : companyPresentation.badgeSubtitleFr;
-  const statsLabel = selectedLanguage === 'en' ? companyPresentation.statsLabelEn : companyPresentation.statsLabelFr;
-  const ctaB2BText = selectedLanguage === 'en' ? companyPresentation.ctaB2BTextEn : companyPresentation.ctaB2BTextFr;
-  const ctaQuoteText = selectedLanguage === 'en' ? companyPresentation.ctaQuoteTextEn : companyPresentation.ctaQuoteTextFr;
-  const solutionsTitle = selectedLanguage === 'en' ? 'Our B2B solutions' : 'Nos solutions B2B';
+  const tagline = (selectedLanguage as string) === 'en' ? companyPresentation.taglineEn : companyPresentation.taglineFr;
+  const title = (selectedLanguage as string) === 'en' ? companyPresentation.titleEn : companyPresentation.titleFr;
+  const description = (selectedLanguage as string) === 'en' ? companyPresentation.descriptionEn : companyPresentation.descriptionFr;
+  const badgeTitle = (selectedLanguage as string) === 'en' ? companyPresentation.badgeTitleEn : companyPresentation.badgeTitleFr;
+  const badgeSubtitle = (selectedLanguage as string) === 'en' ? companyPresentation.badgeSubtitleEn : companyPresentation.badgeSubtitleFr;
+  const statsLabel = (selectedLanguage as string) === 'en' ? companyPresentation.statsLabelEn : companyPresentation.statsLabelFr;
+  const ctaB2BText = (selectedLanguage as string) === 'en' ? companyPresentation.ctaB2BTextEn : companyPresentation.ctaB2BTextFr;
+  const ctaQuoteText = (selectedLanguage as string) === 'en' ? companyPresentation.ctaQuoteTextEn : companyPresentation.ctaQuoteTextFr;
+  const solutionsTitle = (selectedLanguage as string) === 'en' ? 'Our B2B solutions' : 'Nos solutions B2B';
 
   // Filter and sort services
   const activeServices = companyPresentation.services
@@ -116,7 +116,7 @@ export function CompanyPresentationSection({ onNavigate, onExpertClick }: Compan
             <div className="grid grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
               {companyPresentation.highlights.map((highlight, index) => {
                 const Icon = iconMap[highlight.iconName] || Building;
-                const label = selectedLanguage === 'en' ? highlight.labelEn : highlight.labelFr;
+                const label = (selectedLanguage as string) === 'en' ? highlight.labelEn : highlight.labelFr;
                 
                 return (
                   <div key={index} className="text-center">
@@ -144,7 +144,7 @@ export function CompanyPresentationSection({ onNavigate, onExpertClick }: Compan
               </h4>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 text-sm">
                 {activeServices.map((service) => {
-                  const serviceTitle = selectedLanguage === 'en' ? service.titleEn : service.titleFr;
+                  const serviceTitle = (selectedLanguage as string) === 'en' ? service.titleEn : service.titleFr;
                   
                   return (
                     <div key={service.id} className="flex items-center gap-2">
@@ -242,10 +242,10 @@ export function CompanyPresentationSection({ onNavigate, onExpertClick }: Compan
               <div className="mb-4 md:mb-6">
                 <div className="text-3xl md:text-4xl mb-3 md:mb-4">{featuredTestimonial.iconEmoji || '🏨'}</div>
                 <blockquote className="text-base md:text-lg italic mb-3 md:mb-4" style={{ color: '#6E6E6E' }}>
-                  "{selectedLanguage === 'en' ? featuredTestimonial.quoteEn : featuredTestimonial.quoteFr}"
+                  "{(selectedLanguage as string) === 'en' ? featuredTestimonial.quoteEn : featuredTestimonial.quoteFr}"
                 </blockquote>
                 <cite style={{ color: '#000000' }}>
-                  {featuredTestimonial.authorName}, {selectedLanguage === 'en' ? featuredTestimonial.authorTitleEn : featuredTestimonial.authorTitleFr} - {featuredTestimonial.companyName}
+                  {featuredTestimonial.authorName}, {(selectedLanguage as string) === 'en' ? featuredTestimonial.authorTitleEn : featuredTestimonial.authorTitleFr} - {featuredTestimonial.companyName}
                 </cite>
               </div>
               <div className="flex flex-wrap justify-center items-center gap-2 md:gap-4 text-xs md:text-sm" style={{ color: '#6E6E6E' }}>
@@ -253,7 +253,7 @@ export function CompanyPresentationSection({ onNavigate, onExpertClick }: Compan
                 {featuredTestimonial.clientSince && (
                   <>
                     <span>•</span>
-                    <span>{selectedLanguage === 'en' ? 'Client since' : 'Client depuis'} {featuredTestimonial.clientSince}</span>
+                    <span>{(selectedLanguage as string) === 'en' ? 'Client since' : 'Client depuis'} {featuredTestimonial.clientSince}</span>
                   </>
                 )}
                 {featuredTestimonial.projectsInfo && (

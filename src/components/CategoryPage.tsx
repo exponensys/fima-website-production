@@ -97,17 +97,14 @@ export function CategoryPage({ category, onProductClick, onBack }: CategoryPageP
 
   // Convertir les données Strapi
   const convertStrapiProduct = (strapiProduct: StrapiProduct) => ({
+    ...strapiProduct.attributes,
     id: strapiProduct.id.toString(),
-    title: strapiProduct.attributes.title,
-    description: strapiProduct.attributes.shortDescription || strapiProduct.attributes.description,
-    price: `${strapiProduct.attributes.price}€`,
-    originalPrice: strapiProduct.attributes.originalPrice ? `${strapiProduct.attributes.originalPrice}€` : undefined,
-    discount: strapiProduct.attributes.discount ? `${strapiProduct.attributes.discount}%` : undefined,
-    badge: strapiProduct.attributes.bestSeller ? "BEST SELLER" : (strapiProduct.attributes.new ? "NOUVEAU" : undefined),
     image: strapiProduct.attributes.image.data.attributes.url,
     category: strapiProduct.attributes.category.data.attributes.name,
     sourceCurrency: 'EUR',
-    ...strapiProduct.attributes
+    price: `${strapiProduct.attributes.price}€`,
+    originalPrice: strapiProduct.attributes.originalPrice ? `${strapiProduct.attributes.originalPrice}€` : undefined,
+    discount: strapiProduct.attributes.discount ? `${strapiProduct.attributes.discount}%` : undefined
   });
 
   // Obtenir les informations de la catégorie

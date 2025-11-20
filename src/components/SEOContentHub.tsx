@@ -30,7 +30,7 @@ export function SEOContentHub({
 
   // Récupérer les blogs depuis le CMS
   const { blogs, loading, error } = useBlogs(
-    selectedLanguage === "en" ? "en" : "fr",
+    selectedLanguage.toLowerCase() === "en" ? "en" : "fr",
     undefined,
     true // Seulement les articles publiés
   );
@@ -40,7 +40,7 @@ export function SEOContentHub({
   // Mapper les blogs du CMS vers le format attendu par la page
   const cmsArticles = blogs.map((blog) => ({
     id: blog.id,
-    title: selectedLanguage === "en" ? blog.titleEn : blog.titleFr,
+    title: selectedLanguage.toLowerCase() === "en" ? blog.titleEn : blog.titleFr,
     subtitle: "", // Pas de subtitle dans le modèle Blog
     category: blog.category,
     type: "article",
@@ -48,7 +48,7 @@ export function SEOContentHub({
     author: blog.author,
     authorRole: "", // Pas de authorRole dans le modèle Blog
     publishDate: blog.publishedDate || blog.createdAt,
-    excerpt: selectedLanguage === "en" ? blog.summaryEn : blog.summaryFr,
+    excerpt: selectedLanguage.toLowerCase() === "en" ? blog.summaryEn : blog.summaryFr,
     image: blog.featuredImage || "https://images.unsplash.com/photo-1540932239986-30128078f3c5?w=1080",
     featured: false, // Tous les blogs du CMS ne sont pas featured par défaut
     keywords: blog.tags || [],
@@ -56,7 +56,7 @@ export function SEOContentHub({
     likes: blog.likes || 0,
     comments: 0, // Pas de comments dans le modèle Blog
     shares: 0, // Pas de shares dans le modèle Blog
-    content: selectedLanguage === "en" ? blog.contentEn : blog.contentFr,
+    content: selectedLanguage.toLowerCase() === "en" ? blog.contentEn : blog.contentFr,
     slug: blog.slug
   }));
 

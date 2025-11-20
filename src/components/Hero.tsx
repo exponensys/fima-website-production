@@ -46,7 +46,7 @@ export function Hero({
 
   // Animation du logo au scroll
   const logoRef = useRef<HTMLDivElement>(null);
-  const { hasScrolled, isAnimating } = useLogoScrollAnimation();
+  const { hasScrolled } = useLogoScrollAnimation();
 
   // Récupérer les slides depuis Supabase
   const {
@@ -88,6 +88,10 @@ export function Hero({
       background:
         "https://images.unsplash.com/photo-1718939045285-b67f9e9f9f8b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBiZWRyb29tJTIwZGVzaWduJTIwY29tZm9ydGFibGV8ZW58MXx8fHwxNzU4MTA2MzMxfDA&ixlib=rb-4.1.0&q=80&w=1080",
       slideDuration: 5000,
+      isVideo: false,
+      videoUrl: null,
+      videoPlayDuration: null,
+      videoLoop: false,
       ctaBgColor: "#FFFFFF",
       ctaTextColor: "#B5C233",
     },
@@ -586,9 +590,7 @@ export function Hero({
                   className="relative z-10 w-full max-w-lg md:max-w-2xl"
                   style={{
                     objectFit: "contain",
-                    willChange: isAnimating
-                      ? "transform, opacity"
-                      : "auto",
+                    willChange: "transform, opacity",
                   }}
                   initial={{ opacity: 1, y: 0, scale: 1 }}
                   animate={{

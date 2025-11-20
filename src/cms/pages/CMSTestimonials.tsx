@@ -60,7 +60,12 @@ export function CMSTestimonials() {
     e.preventDefault();
 
     if (editingId) {
-      const result = await updateTestimonial(editingId, formData);
+      const result = await updateTestimonial(editingId, { 
+        ...formData, 
+        rating: formData.rating as 1 | 2 | 3 | 4 | 5,
+        clientPosition: '',
+        clientCompany: ''
+      });
       if (result.success) {
         toast.success('Témoignage mis à jour avec succès');
         setIsAddingNew(false);
@@ -71,7 +76,12 @@ export function CMSTestimonials() {
         toast.error(result.error || 'Erreur lors de la mise à jour');
       }
     } else {
-      const result = await createTestimonial(formData);
+      const result = await createTestimonial({ 
+        ...formData, 
+        rating: formData.rating as 1 | 2 | 3 | 4 | 5,
+        clientPosition: '',
+        clientCompany: ''
+      });
       if (result.success) {
         toast.success('Témoignage créé avec succès');
         setIsAddingNew(false);

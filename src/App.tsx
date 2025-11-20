@@ -1331,10 +1331,7 @@ function AppContent() {
           />
           
           {/* Widgets positionnés en dehors du conteneur principal */}
-          <ChatWidget 
-            onNavigate={handleNavigation}
-            onExpertClick={handleExpertClick}
-          />
+          <ChatWidget />
         </div>
       )}
       

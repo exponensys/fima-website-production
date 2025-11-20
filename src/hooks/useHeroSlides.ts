@@ -40,14 +40,14 @@ export function useHeroSlides(): UseHeroSlidesReturn {
   const [slides, setSlides] = useState<HeroSlide[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const { currentLanguage } = useLanguage();
+  const { selectedLanguage } = useLanguage();
 
   const fetchSlides = async () => {
       try {
         setLoading(true);
         setError(null);
 
-        const locale = currentLanguage === 'en' ? 'en' : 'fr';
+        const locale = selectedLanguage === 'EN' ? 'en' : 'fr';
         const response = await fetch(
           `https://${projectId}.supabase.co/functions/v1/make-server-98c6ec1c/api/hero-slides?locale=${locale}`,
           {
@@ -105,7 +105,7 @@ export function useHeroSlides(): UseHeroSlidesReturn {
 
   useEffect(() => {
     fetchSlides();
-  }, [currentLanguage]);
+  }, [selectedLanguage]);
 
   return { slides, loading, error, refetch: fetchSlides };
 }

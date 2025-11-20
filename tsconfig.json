@@ -40,6 +40,7 @@
   ],
   "exclude": [
     "node_modules",
-    "temp_vite_files"
+    "temp_vite_files",
+    "src/supabase/functions"
   ]
 }

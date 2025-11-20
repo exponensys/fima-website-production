@@ -67,8 +67,11 @@ export function ProductCard({
   };
 
   // Convertir les prix dans la devise sélectionnée
-  const displayPrice = smartConvertPrice(price, sourceCurrency);
-  const displayOriginalPrice = originalPrice ? smartConvertPrice(originalPrice, sourceCurrency) : null;
+  const numericPrice = typeof price === 'string' ? parseFloat(price) : price;
+  const numericOriginalPrice = typeof originalPrice === 'string' ? parseFloat(originalPrice) : originalPrice;
+  
+  const displayPrice = smartConvertPrice(numericPrice, sourceCurrency);
+  const displayOriginalPrice = numericOriginalPrice ? smartConvertPrice(numericOriginalPrice, sourceCurrency) : null;
 
   return (
     <div 

@@ -31,11 +31,11 @@ interface MobileHeaderV2Props {
  */
 export function MobileHeaderV2({ onNavigate, onFavoritesClick }: MobileHeaderV2Props) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { cart, favorites } = useApp();
+  const { cartItems, favorites, getCartCount } = useApp();
   const { user } = useUser();
   const { hasScrolled } = useLogoScrollAnimation();
 
-  const totalItems = cart?.reduce((sum, item) => sum + item.quantity, 0) || 0;
+  const totalItems = getCartCount();
 
   const handleNavigateWithClose = (page: string, category?: string) => {
     setIsMobileMenuOpen(false);

@@ -72,7 +72,7 @@ export function AllProductsPage({ onProductClick, onBack, initialCategory }: All
   }, [initialCategory]);
 
   const filteredProducts = (allProducts || []).filter(product => {
-    const productName = product.name || product.title || '';
+    const productName = product.name || '';
     const productDescription = product.description || '';
     const searchLower = filters.search.toLowerCase();
     
@@ -93,8 +93,8 @@ export function AllProductsPage({ onProductClick, onBack, initialCategory }: All
       case 'price-low': return aPrice - bPrice;
       case 'price-high': return bPrice - aPrice;
       case 'name': 
-        const aName = a.name || a.title || '';
-        const bName = b.name || b.title || '';
+        const aName = a.name || '';
+        const bName = b.name || '';
         return aName.localeCompare(bName);
       default: return 0;
     }
@@ -240,7 +240,7 @@ export function AllProductsPage({ onProductClick, onBack, initialCategory }: All
                 const mappedProduct = {
                   id: product.id,
                   image: product.images?.[0] || '',
-                  title: product.name || product.title || '',
+                  title: product.name || '',
                   description: product.shortDescription || product.description || '',
                   // Passer le prix numérique et la devise source
                   price: product.price,

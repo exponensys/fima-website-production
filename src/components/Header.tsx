@@ -52,6 +52,8 @@ import {
   useLanguages,
   useCurrencies,
 } from "../hooks/useSiteSettings";
+import { LanguageCode } from "../utils/translations";
+import { CurrencyCode } from "../utils/currency";
 import { useProductCategories } from "../hooks/useProductCategories";
 import { useSupabaseBusinessUnits } from "../hooks/useSupabaseBusinessUnits";
 import { ProductsMegaMenu } from "./ProductsMegaMenu";
@@ -755,7 +757,7 @@ export function Header({
               <button
                 key={lang.code}
                 onClick={() => {
-                  setSelectedLanguage(lang.code);
+                  setSelectedLanguage(lang.code as LanguageCode);
                   setIsLanguageOpen(false);
                 }}
                 className="w-full text-left px-4 py-3 hover:bg-gray-100 active:bg-gray-200 flex items-center gap-3 text-gray-800 border-b border-gray-100 last:border-b-0"
@@ -853,7 +855,7 @@ export function Header({
                   onChange={(e) =>
                     setSearchQuery(e.target.value)
                   }
-                  size="110"
+                  size={110}
                   className="border-0 outline-0 ring-0 focus:ring-0 focus:border-0 bg-transparent text-sm lg:text-base px-3 lg:px-4 py-1.5 lg:py-2 flex-1"
                 />
                 <button
@@ -1103,7 +1105,7 @@ export function Header({
                         <button
                           key={lang.code}
                           onClick={() => {
-                            setSelectedLanguage(lang.code);
+                            setSelectedLanguage(lang.code as LanguageCode);
                             setIsLanguageOpen(false);
                           }}
                           onTouchStart={() => {}} // Force touch recognition
@@ -1153,7 +1155,7 @@ export function Header({
                         <button
                           key={currency.code}
                           onClick={() => {
-                            setSelectedCurrency(currency.code);
+                            setSelectedCurrency(currency.code as CurrencyCode);
                             setIsCurrencyOpen(false);
                           }}
                           onTouchStart={() => {}} // Force touch recognition
@@ -1564,7 +1566,7 @@ export function Header({
                         "✅ Langue changée vers:",
                         newLang,
                       );
-                      setSelectedLanguage(newLang);
+                      setSelectedLanguage(newLang as LanguageCode);
                       toast.success(
                         `Langue changée: ${newLang === "FR" ? "🇫🇷 Français" : "🇬🇧 English"}`,
                       );
@@ -1627,7 +1629,7 @@ export function Header({
                         "✅ Devise changée vers:",
                         newCurr,
                       );
-                      setSelectedCurrency(newCurr);
+                      setSelectedCurrency(newCurr as CurrencyCode);
                       toast.success(
                         `Devise changée: ${newCurr}`,
                       );

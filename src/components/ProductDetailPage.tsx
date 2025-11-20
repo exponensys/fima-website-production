@@ -539,7 +539,7 @@ export function ProductDetailPage({ product, onBack, onExpertClick, onProductCli
     
     // Ajouter toutes les images du produit si elles existent
     if (productToUse.images && Array.isArray(productToUse.images) && productToUse.images.length > 0) {
-      productToUse.images.forEach((imageSrc, index) => {
+      productToUse.images.forEach((imageSrc: string, index: number) => {
         media.push({
           type: 'image',
           src: imageSrc,
@@ -553,7 +553,7 @@ export function ProductDetailPage({ product, onBack, onExpertClick, onProductCli
     
     // Ajouter des variations de couleur
     if (productToUse.colors && productToUse.colors.length > 0) {
-      productToUse.colors.forEach((color, index) => {
+      productToUse.colors.forEach((color: any, index: number) => {
         if (color.image) {
           media.push({ 
             type: 'image', 
@@ -1017,7 +1017,7 @@ export function ProductDetailPage({ product, onBack, onExpertClick, onProductCli
                 <div className="mb-6">
                   <label className="block text-sm font-medium mb-3">Options disponibles</label>
                   <div className="grid grid-cols-1 gap-2">
-                    {productToUse.variations.map((variation, index) => {
+                    {productToUse.variations.map((variation: any, index: number) => {
                       const isSelected = selectedVariation?.id === variation.id || 
                                         (selectedVariation?.name === variation.name && selectedVariation?.price === variation.price);
                       const variationPrice = smartConvertPrice(variation.price, productToUse.sourceCurrency, selectedCurrency);
@@ -1092,7 +1092,7 @@ export function ProductDetailPage({ product, onBack, onExpertClick, onProductCli
                 <div className="mb-6">
                   <label className="block text-sm font-medium mb-3">Taille</label>
                   <div className="grid grid-cols-2 gap-2">
-                    {product.sizes.map((size, index) => (
+                    {product.sizes.map((size: any, index: number) => (
                       <button
                         key={index}
                         onClick={() => setSelectedSize(size)}
@@ -1126,7 +1126,7 @@ export function ProductDetailPage({ product, onBack, onExpertClick, onProductCli
                 <div className="mb-6">
                   <label className="block text-sm font-medium mb-3">Couleur</label>
                   <div className="flex gap-3">
-                    {product.colors.map((color, index) => (
+                    {product.colors.map((color: any, index: number) => (
                       <button
                         key={index}
                         onClick={() => setSelectedColor(color)}
@@ -1141,7 +1141,6 @@ export function ProductDetailPage({ product, onBack, onExpertClick, onProductCli
                         onMouseLeave={(e) => {
                           if (selectedColor?.name !== color.name) e.currentTarget.style.borderColor = '#e5e7eb';
                         }}
-                        style={{ backgroundColor: color.value || color.name }}
                         title={color.name}
                       />
                     ))}

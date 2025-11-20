@@ -21,7 +21,7 @@ interface NewsletterSectionProps {
 export function NewsletterSection({
   onNavigate,
 }: NewsletterSectionProps) {
-  const { currentLanguage } = useLanguage();
+  const { selectedLanguage } = useLanguage();
   const [email, setEmail] = useState("");
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [emailError, setEmailError] = useState("");
@@ -38,7 +38,7 @@ export function NewsletterSection({
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       setEmailError(
-        currentLanguage === "en"
+        selectedLanguage === "EN"
           ? "Invalid email format (ex: example@email.com)"
           : "Format email invalide (ex: example@email.com)"
       );
@@ -104,56 +104,56 @@ export function NewsletterSection({
 
   // Get localized text
   const tagline =
-    currentLanguage === "en"
+    selectedLanguage === "EN"
       ? "FIMA Newsletter"
       : "Newsletter FIMA";
   const title =
-    currentLanguage === "en"
+    selectedLanguage === "EN"
       ? "Stay connected with FIMA"
       : "Restez connecté avec FIMA";
   const subtitle =
-    currentLanguage === "en"
+    selectedLanguage === "EN"
       ? "Follow the news of our 3 businesses: bedding, carpentry-furnishing, and glazing-aluminum"
       : "Suivez l'actualité de nos 3 métiers : literie, menuiserie-ameublement, et vitrerie-aluminium";
   const emailPlaceholder =
-    currentLanguage === "en"
+    selectedLanguage === "EN"
       ? "Your email address"
       : "Votre adresse email";
   const subscribeButton =
-    currentLanguage === "en" ? "Subscribe" : "S'inscrire";
+    selectedLanguage === "EN" ? "Subscribe" : "S'inscrire";
   const subscribingButton =
-    currentLanguage === "en"
+    selectedLanguage === "EN"
       ? "Subscribing..."
       : "Inscription...";
   const successTitle =
-    currentLanguage === "en"
+    selectedLanguage === "EN"
       ? "Subscription successful!"
       : "Inscription réussie !";
   const successMessage =
-    currentLanguage === "en"
+    selectedLanguage === "EN"
       ? "Thank you for subscribing! You will soon receive our first newsletter with our latest news."
       : "Merci de votre inscription ! Vous recevrez bientôt notre première newsletter avec nos dernières actualités.";
   const subscribeAnother =
-    currentLanguage === "en"
+    selectedLanguage === "EN"
       ? "Subscribe with another address"
       : "S'inscrire avec une autre adresse";
   const privacyText =
-    currentLanguage === "en"
+    selectedLanguage === "EN"
       ? "By subscribing, you agree to receive our marketing emails. You can unsubscribe at any time."
       : "En vous inscrivant, vous acceptez de recevoir nos emails marketing. Vous pouvez vous désabonner à tout moment.";
   const privacyLink =
-    currentLanguage === "en"
+    selectedLanguage === "EN"
       ? "Privacy Policy"
       : "Politique de confidentialité";
   const subscribersCount = stats
     ? stats.activeSubscribers
     : 2500;
   const subscribersText =
-    currentLanguage === "en"
+    selectedLanguage === "EN"
       ? `+${subscribersCount} subscribers • 3 businesses`
       : `+${subscribersCount} abonnés • 3 métiers`;
   const emailFrequency =
-    currentLanguage === "en"
+    selectedLanguage === "EN"
       ? "📧 1 email per week maximum"
       : "📧 1 email par semaine maximum";
 

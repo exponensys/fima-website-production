@@ -83,7 +83,7 @@ export function EditProductModal({ isOpen, onClose, onProductUpdated, product }:
         benefits: product.benefits || [], // Nouveau champ Bénéfices
         isCustom: product.isCustom || false, // Nouveau champ : Produit sur mesure
         images: product.images || [],
-        status: product.status || 'active',
+        status: (product.status === 'out_of_stock' ? 'out-of-stock' : product.status) || 'active',
         specifications: product.specifications || {},
         featured: product.featured || false,
         variations: product.variations || []

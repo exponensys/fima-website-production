@@ -113,9 +113,10 @@ export function CMSProjects() {
         setEditingId(null);
       } else {
         // Création
+        const { id, ...projectData } = formData as Project;
         const newProject: Project = {
           id: Date.now().toString(),
-          ...formData as Project,
+          ...projectData,
         };
         setProjects(prev => [...prev, newProject]);
         toast.success('Projet créé avec succès');

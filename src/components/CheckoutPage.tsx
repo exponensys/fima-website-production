@@ -173,8 +173,8 @@ export function CheckoutPage({ onBack, onNavigate }: CheckoutPageProps) {
     };
     
     // Ajouter la commande à l'historique
-    const savedOrder = addOrder(newOrder);
-    setCreatedOrderId(savedOrder.id);
+    addOrder(newOrder);
+    setCreatedOrderId(newOrder.orderNumber);
     
     setCurrentStep('confirmation');
     

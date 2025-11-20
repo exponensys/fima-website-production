@@ -430,8 +430,8 @@ export function CMSCallToAction() {
                       className="px-6 py-3 font-medium transition-opacity hover:opacity-80"
                       style={getButtonStylePreview(
                         formData.button_style || 'primary',
-                        formData.button_style === 'outline' ? formData.background_color : '#E30613',
-                        formData.button_style === 'outline' ? formData.text_color : '#FFFFFF'
+                        formData.button_style === 'outline' ? (formData.background_color || '#E30613') : '#E30613',
+                        formData.button_style === 'outline' ? (formData.text_color || '#FFFFFF') : '#FFFFFF'
                       )}
                     >
                       {formData.button_text}

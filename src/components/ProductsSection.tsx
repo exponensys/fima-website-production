@@ -137,6 +137,7 @@ export function ProductsSection({
         // Charger dynamiquement depuis le CMS uniquement
         if (cmsCategories && !Array.isArray(cmsCategories) && cmsCategories['fima-couchage']) {
           return cmsCategories['fima-couchage'].map((cat: any) => ({
+            key: cat.slug,
             name: cat.name,
             slug: cat.slug,
             image: cat.thumbnail || `https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=400&h=400&fit=crop`,
@@ -167,6 +168,7 @@ export function ProductsSection({
         // Charger dynamiquement depuis le CMS uniquement
         if (cmsCategories && !Array.isArray(cmsCategories) && cmsCategories['fima-design']) {
           return cmsCategories['fima-design'].map((cat: any) => ({
+            key: cat.slug,
             name: cat.name,
             slug: cat.slug,
             image: cat.thumbnail || `https://images.unsplash.com/photo-1658595148963-13b7da6dcd6d?w=400&h=400&fit=crop`,
@@ -197,6 +199,7 @@ export function ProductsSection({
         // Charger dynamiquement depuis le CMS uniquement
         if (cmsCategories && !Array.isArray(cmsCategories) && cmsCategories['univers-glass']) {
           return cmsCategories['univers-glass'].map((cat: any) => ({
+            key: cat.slug,
             name: cat.name,
             slug: cat.slug,
             image: cat.thumbnail || `https://images.unsplash.com/photo-1749815362047-373af7e61072?w=400&h=400&fit=crop`,
@@ -345,8 +348,8 @@ export function ProductsSection({
     name: strapiCategory.attributes.name,
     value: strapiCategory.attributes.slug,
     business:
-      strapiCategory.attributes.business || "fima-couchage",
-    color: strapiCategory.attributes.color || "#B5C233",
+      (strapiCategory.attributes as any).business || "fima-couchage",
+    color: (strapiCategory.attributes as any).color || "#B5C233",
   });
 
   // Obtenir le nombre de produits pour la catégorie active

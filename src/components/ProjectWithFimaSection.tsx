@@ -16,6 +16,7 @@ import { TestimonialsInitButton } from "./TestimonialsInitButton";
 interface ProjectWithFimaSectionProps {
   onNavigate?: (page: string) => void;
   onQuoteRequest?: () => void;
+  onExpertClick?: (type: 'expert' | 'appointment') => void;
 }
 
 const processSteps = [
@@ -96,6 +97,7 @@ const projectTypes = [
 export function ProjectWithFimaSection({
   onNavigate,
   onQuoteRequest,
+  onExpertClick,
 }: ProjectWithFimaSectionProps) {
   const [currentTestimonial, setCurrentTestimonial] =
     useState(0);
@@ -104,7 +106,7 @@ export function ProjectWithFimaSection({
     testimonials,
     loading: testimonialsLoading,
     error: testimonialsError,
-  } = useTestimonials(selectedLanguage, undefined, true, true);
+  } = useTestimonials(selectedLanguage.toLowerCase() as "fr" | "en", undefined, true, true);
 
   // Mapper les testimonials Supabase vers le format attendu
   const mappedTestimonials = testimonials.map((t) => ({
@@ -116,7 +118,7 @@ export function ProjectWithFimaSection({
       t.clientPhoto ||
       "https://images.unsplash.com/photo-1709715357519-2a84f9765e57?w=1080",
     comment:
-      selectedLanguage === "fr"
+      selectedLanguage.toLowerCase() === "fr"
         ? t.testimonialFr
         : t.testimonialEn,
     rating: t.rating,

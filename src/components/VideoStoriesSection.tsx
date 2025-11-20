@@ -16,7 +16,7 @@ export function VideoStoriesSection() {
     loading, 
     error 
   } = useVideoStories(
-    selectedLanguage === 'en' ? 'en' : 'fr',
+    selectedLanguage.toLowerCase() === 'en' ? 'en' : 'fr',
     undefined, // category
     false, // featuredOnly
     true // publishedOnly
@@ -106,7 +106,7 @@ export function VideoStoriesSection() {
         <div className="container mx-auto px-4">
           <div className="text-center py-12">
             <p style={{ color: '#6E6E6E' }}>
-              {selectedLanguage === 'en' 
+              {selectedLanguage.toLowerCase() === 'en' 
                 ? 'Unable to load video stories at this time.' 
                 : 'Impossible de charger les vidéos pour le moment.'}
             </p>
@@ -122,7 +122,7 @@ export function VideoStoriesSection() {
         <div className="container mx-auto px-4">
           <div className="text-center py-12">
             <p style={{ color: '#6E6E6E' }}>
-              {selectedLanguage === 'en' 
+              {selectedLanguage.toLowerCase() === 'en' 
                 ? 'No video stories available at this time.' 
                 : 'Aucune vidéo disponible pour le moment.'}
             </p>
@@ -141,7 +141,7 @@ export function VideoStoriesSection() {
             className="text-xl md:text-3xl mb-4 md:mb-6"
             style={{ fontFamily: 'Montserrat', color: '#000000' }}
           >
-            {selectedLanguage === 'en' 
+            {selectedLanguage.toLowerCase() === 'en' 
               ? 'Our story is your story.' 
               : 'Notre histoire, c\'est votre histoire.'}
           </h2>
@@ -157,8 +157,8 @@ export function VideoStoriesSection() {
               }}
             >
               {videoStories.map((video) => {
-                const title = selectedLanguage === 'en' ? video.titleEn : video.titleFr;
-                const description = selectedLanguage === 'en' ? video.descriptionEn : video.descriptionFr;
+                const title = selectedLanguage.toLowerCase() === 'en' ? video.titleEn : video.titleFr;
+                const description = selectedLanguage.toLowerCase() === 'en' ? video.descriptionEn : video.descriptionFr;
                 
                 // ✅ Utiliser le thumbnail YouTube automatiquement si c'est une vidéo YouTube
                 const thumbnailUrl = isYouTubeUrl(video.videoUrl) && !video.thumbnailUrl
@@ -246,7 +246,7 @@ export function VideoStoriesSection() {
                 fontStyle: 'italic'
               }}
             >
-              "{selectedLanguage === 'en' ? mainQuote.quoteEn : mainQuote.quoteFr}"
+              "{selectedLanguage.toLowerCase() === 'en' ? mainQuote.quoteEn : mainQuote.quoteFr}"
             </blockquote>
             <cite 
               style={{ 
@@ -254,7 +254,7 @@ export function VideoStoriesSection() {
                 fontFamily: 'Montserrat'
               }}
             >
-              - {selectedLanguage === 'en' ? mainQuote.quoteAuthorEn : mainQuote.quoteAuthorFr}
+              - {selectedLanguage.toLowerCase() === 'en' ? mainQuote.quoteAuthorEn : mainQuote.quoteAuthorFr}
             </cite>
           </div>
         )}

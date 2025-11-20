@@ -10,7 +10,7 @@ interface TeamSectionProps {
 export function TeamSection({ onNavigate, onExpertClick }: TeamSectionProps) {
   const { selectedLanguage } = useLanguage();
   const { teamMembers, loading, error } = useTeam(
-    selectedLanguage === 'en' ? 'en' : 'fr',
+    selectedLanguage.toLowerCase() === 'en' ? 'en' : 'fr',
     true // activeOnly
   );
 
@@ -51,10 +51,10 @@ export function TeamSection({ onNavigate, onExpertClick }: TeamSectionProps) {
         <div className="container mx-auto px-4">
           <div className="text-center">
             <h2 style={{ fontFamily: 'Montserrat', color: '#000000' }}>
-              {selectedLanguage === 'en' ? 'Our team' : 'Notre équipe'}
+              {selectedLanguage.toLowerCase() === 'en' ? 'Our team' : 'Notre équipe'}
             </h2>
             <p className="mt-4" style={{ color: '#6E6E6E' }}>
-              {selectedLanguage === 'en' 
+              {selectedLanguage.toLowerCase() === 'en' 
                 ? 'Unable to load team members at this time.' 
                 : 'Impossible de charger les membres de l\'équipe pour le moment.'}
             </p>
@@ -71,10 +71,10 @@ export function TeamSection({ onNavigate, onExpertClick }: TeamSectionProps) {
         <div className="container mx-auto px-4">
           <div className="text-center">
             <h2 style={{ fontFamily: 'Montserrat', color: '#000000' }}>
-              {selectedLanguage === 'en' ? 'Our team' : 'Notre équipe'}
+              {selectedLanguage.toLowerCase() === 'en' ? 'Our team' : 'Notre équipe'}
             </h2>
             <p className="mt-4" style={{ color: '#6E6E6E' }}>
-              {selectedLanguage === 'en' 
+              {selectedLanguage.toLowerCase() === 'en' 
                 ? 'No team members available at this time.' 
                 : 'Aucun membre de l\'équipe disponible pour le moment.'}
             </p>
@@ -90,10 +90,10 @@ export function TeamSection({ onNavigate, onExpertClick }: TeamSectionProps) {
         {/* Header */}
         <div className="text-center mb-8 md:mb-12">
           <h2 style={{ fontFamily: 'Montserrat', color: '#000000' }}>
-            {selectedLanguage === 'en' ? 'Our team' : 'Notre équipe'}
+            {selectedLanguage.toLowerCase() === 'en' ? 'Our team' : 'Notre équipe'}
           </h2>
           <p className="mt-4 max-w-2xl mx-auto" style={{ color: '#6E6E6E' }}>
-            {selectedLanguage === 'en' 
+            {selectedLanguage.toLowerCase() === 'en' 
               ? 'Meet the passionate experts who have made FIMA a leader in furniture and furnishings since 1985' 
               : 'Découvrez les experts passionnés qui font de FIMA un leader dans le mobilier et l\'ameublement depuis 1985'}
           </p>
@@ -102,10 +102,10 @@ export function TeamSection({ onNavigate, onExpertClick }: TeamSectionProps) {
         {/* Team Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
           {teamMembers.map((member) => {
-            const name = selectedLanguage === 'en' ? member.nameEn : member.nameFr;
-            const position = selectedLanguage === 'en' ? member.positionEn : member.positionFr;
-            const description = selectedLanguage === 'en' ? member.descriptionEn : member.descriptionFr;
-            const department = selectedLanguage === 'en' ? member.departmentEn : member.departmentFr;
+            const name = selectedLanguage.toLowerCase() === 'en' ? member.nameEn : member.nameFr;
+            const position = selectedLanguage.toLowerCase() === 'en' ? member.positionEn : member.positionFr;
+            const description = selectedLanguage.toLowerCase() === 'en' ? member.descriptionEn : member.descriptionFr;
+            const department = selectedLanguage.toLowerCase() === 'en' ? member.departmentEn : member.departmentFr;
             
             return (
               <div key={member.id} className="bg-white p-4 md:p-6 shadow-lg hover:shadow-xl transition-shadow">
@@ -144,7 +144,7 @@ export function TeamSection({ onNavigate, onExpertClick }: TeamSectionProps) {
                         className="text-xs hover:underline"
                         style={{ color: '#B5C233' }}
                       >
-                        {selectedLanguage === 'en' ? 'Contact' : 'Contacter'}
+                        {selectedLanguage.toLowerCase() === 'en' ? 'Contact' : 'Contacter'}
                       </a>
                     </div>
                   )}
@@ -174,7 +174,7 @@ export function TeamSection({ onNavigate, onExpertClick }: TeamSectionProps) {
               e.currentTarget.style.color = '#6E6E6E';
             }}
           >
-            {selectedLanguage === 'en' ? 'Join our team' : 'Rejoindre notre équipe'}
+            {selectedLanguage.toLowerCase() === 'en' ? 'Join our team' : 'Rejoindre notre équipe'}
           </button>
         </div>
 
@@ -183,7 +183,7 @@ export function TeamSection({ onNavigate, onExpertClick }: TeamSectionProps) {
           <div className="mt-8 text-center">
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-100 text-blue-800 text-xs">
               <div className="w-2 h-2 bg-green-500 animate-pulse"></div>
-              {selectedLanguage === 'en' 
+              {selectedLanguage.toLowerCase() === 'en' 
                 ? 'Data loaded dynamically from Supabase' 
                 : 'Données chargées dynamiquement depuis Supabase'}
             </div>

@@ -197,7 +197,7 @@ export function AddProductModal({ isOpen, onClose, onProductAdded }: AddProductM
           price: Number(variation.price),
           stock: Number(variation.stock),
           sku: variation.sku || generateSKU(),
-          compareAtPrice: variation.compareAtPrice > 0 ? Number(variation.compareAtPrice) : undefined
+          compareAtPrice: (variation.compareAtPrice && variation.compareAtPrice > 0) ? Number(variation.compareAtPrice) : undefined
         }))
       };
 

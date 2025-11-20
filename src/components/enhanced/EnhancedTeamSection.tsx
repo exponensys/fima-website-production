@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { ImageWithFallback } from '../figma/ImageWithFallback';
-import { projectId, publicAnonKey } from '../utils/supabase/info';
+import { projectId, publicAnonKey } from '../../utils/supabase/info';
 
 interface TeamSectionProps {
   onNavigate?: (page: string) => void;

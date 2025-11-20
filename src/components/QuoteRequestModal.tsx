@@ -19,7 +19,7 @@ export function QuoteRequestModal({ isOpen, onClose }: QuoteRequestModalProps) {
     
     // Type de projet
     projectType: '',
-    businessUnit: [],
+    businessUnit: [] as string[],
     budget: '',
     timeline: '',
     
@@ -165,7 +165,7 @@ export function QuoteRequestModal({ isOpen, onClose }: QuoteRequestModalProps) {
       phone: '',
       company: '',
       projectType: '',
-      businessUnit: [],
+      businessUnit: [] as string[],
       budget: '',
       timeline: '',
       description: '',

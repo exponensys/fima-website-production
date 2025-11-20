@@ -382,11 +382,13 @@ export function B2BLandingPage({
                     className="w-16 h-16 rounded-full flex items-center justify-center mb-6"
                     style={{ backgroundColor: bgColor }}
                   >
-                    <FontAwesomeIcon
-                      icon={icon}
-                      className="w-7 h-7"
-                      style={{ color: iconColor }}
-                    />
+                    {icon && (
+                      <FontAwesomeIcon
+                        icon={icon}
+                        className="w-7 h-7"
+                        style={{ color: iconColor }}
+                      />
+                    )}
                   </div>
 
                   <h3
