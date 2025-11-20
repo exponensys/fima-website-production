@@ -8,7 +8,7 @@
 import { useState } from 'react';
 import { projectId, publicAnonKey } from '../utils/supabase/info';
 import { Button } from './ui/button';
-import { toast } from 'sonner@2.0.3';
+import { toast } from 'sonner';
 
 export function InitDataButton() {
   const [loading, setLoading] = useState(false);

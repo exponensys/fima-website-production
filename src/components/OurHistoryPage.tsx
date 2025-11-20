@@ -1,10 +1,10 @@
-import image_76eb04a06107aac17049b46414ee32567a0e3dc5 from "figma:asset/76eb04a06107aac17049b46414ee32567a0e3dc5.png";
-import image1985 from "figma:asset/a3b514bed4d9e8bd077d886d8a0f83bc80762cae.png";
-import image2015 from "figma:asset/1ce167b002f03ad021af8910a7cb432549feb714.png";
-import image2008 from "figma:asset/ec8b6823107c5a366f55b7ba8faa0ab7d47e5ce5.png";
-import image2024 from "figma:asset/c6487dd8bc2d05ff3b91c3d417a7256b9b9356c7.png";
-import image1992 from "figma:asset/1d8dcb4c235fc7ed31159b70c89822799bfe54f5.png";
-import image2013Archibat from "figma:asset/4b7d065ded94b2dc2df9d37aa63ccfce50b2cca7.png";
+const image_76eb04a06107aac17049b46414ee32567a0e3dc5 = '/76eb04a06107aac17049b46414ee32567a0e3dc5.png';
+const image1985 = '/a3b514bed4d9e8bd077d886d8a0f83bc80762cae.png';
+const image2015 = '/1ce167b002f03ad021af8910a7cb432549feb714.png';
+const image2008 = '/ec8b6823107c5a366f55b7ba8faa0ab7d47e5ce5.png';
+const image2024 = '/c6487dd8bc2d05ff3b91c3d417a7256b9b9356c7.png';
+const image1992 = '/1d8dcb4c235fc7ed31159b70c89822799bfe54f5.png';
+const image2013Archibat = '/4b7d065ded94b2dc2df9d37aa63ccfce50b2cca7.png';
 import { useState } from "react";
 import {
   ArrowLeft,

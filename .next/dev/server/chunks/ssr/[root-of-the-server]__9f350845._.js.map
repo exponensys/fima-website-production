@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 40, "column": 0}, "map": {"version":3,"sources":["file:///c:/Users/HP/projects/fimaWebsite/pages/_document.tsx"],"sourcesContent":["import { Html, Head, Main, NextScript } from 'next/document';\n\nexport default function Document() {\n  return (\n    <Html lang=\"fr\">\n      <Head>\n        <title>FIMA - Literie, Ameublement & Vitrerie depuis 1985</title>\n        <meta name=\"description\" content=\"FIMA - Spécialiste en literie, ameublement et vitrerie depuis 1985. Découvrez nos solutions B2B et B2C.\" />\n      </Head>\n      <body>\n        <Main />\n        <NextScript />\n      </body>\n    </Html>\n  );\n}"],"names":[],"mappings":";;;;;AAAA;;;AAEe,SAAS;IACtB,qBACE,qKAAC,iIAAI;QAAC,MAAK;;0BACT,qKAAC,iIAAI;;kCACH,qKAAC;kCAAM;;;;;;kCACP,qKAAC;wBAAK,MAAK;wBAAc,SAAQ;;;;;;;;;;;;0BAEnC,qKAAC;;kCACC,qKAAC,iIAAI;;;;;kCACL,qKAAC,uIAAU;;;;;;;;;;;;;;;;;AAInB"}}]
+}

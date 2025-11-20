@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Plus, Trash2, Edit, Video, Eye, EyeOff } from 'lucide-react';
 import { useVideoStories, useVideoStoryMutation } from '../../hooks/useVideoStories';
 import { Button } from '../../components/ui/button';
-import { toast } from 'sonner@2.0.3';
+import { toast } from 'sonner';
 import { VideoStoriesInitButton } from '../components/VideoStoriesInitButton';
 
 export function CMSVideos() {

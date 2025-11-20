@@ -1,5 +1,5 @@
-import image_1da2d5f603cd62a74c69b55293bcdadb2f6d8468 from 'figma:asset/1da2d5f603cd62a74c69b55293bcdadb2f6d8468.png';
-import image_326535ed3b2f6d21affed9e27db43914fc840cfb from 'figma:asset/326535ed3b2f6d21affed9e27db43914fc840cfb.png';
+const image_1da2d5f603cd62a74c69b55293bcdadb2f6d8468 = '/1da2d5f603cd62a74c69b55293bcdadb2f6d8468.png';
+const image_326535ed3b2f6d21affed9e27db43914fc840cfb = '/326535ed3b2f6d21affed9e27db43914fc840cfb.png';
 import { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -29,10 +29,10 @@ import {
 } from "./ui/tabs";
 import { Checkbox } from "./ui/checkbox";
 import { Separator } from "./ui/separator";
-import { toast } from "sonner@2.0.3";
+import { toast } from 'sonner';
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { useUser } from "../contexts/UserContext";
-import fimaLogo from "figma:asset/2a3a1c86b3f1ff31c7ff112d18730075fb8f827d.png";
+const fimaLogo = '/2a3a1c86b3f1ff31c7ff112d18730075fb8f827d.png';
 
 interface AuthPageProps {
   onBack: () => void;

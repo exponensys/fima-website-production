@@ -4,7 +4,7 @@ import { useProducts, useProductMutation } from '../../hooks/useProducts';
 import { AddProductModal } from '../components/AddProductModal';
 import { EditProductModal } from '../components/EditProductModal';
 import type { Product } from '../../hooks/useProducts';
-import { toast } from 'sonner@2.0.3';
+import { toast } from 'sonner';
 
 export function CMSProducts() {
   const [businessFilter, setBusinessFilter] = useState<string>('all');

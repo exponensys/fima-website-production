@@ -17,8 +17,8 @@ import {
   faPhone,
   faEnvelope,
 } from "@fortawesome/free-solid-svg-icons";
-import confortBrodeImage from "figma:asset/5bb4257f511908ba6d68f0f0b3c015dccb725fae.png";
-import eleganceUnieImage from "figma:asset/8005bf1c9e6576805405eb708f88ae021abea6d1.png";
+const confortBrodeImage = '/5bb4257f511908ba6d68f0f0b3c015dccb725fae.png';
+const eleganceUnieImage = '/8005bf1c9e6576805405eb708f88ae021abea6d1.png';
 
 interface FimaCouchagePageProps {
   onNavigate: (page: string, category?: string) => void;

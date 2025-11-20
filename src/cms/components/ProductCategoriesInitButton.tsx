@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { toast } from 'sonner@2.0.3';
+import { toast } from 'sonner';
 import { initProductCategories } from '../../utils/initProductCategoriesData';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFolderTree, faSpinner, faCheckCircle } from '@fortawesome/free-solid-svg-icons';

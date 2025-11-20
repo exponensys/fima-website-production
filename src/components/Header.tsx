@@ -1,10 +1,10 @@
-import image_657c215f98beaa37718ea9d4ec19b4ef660894a8 from "figma:asset/657c215f98beaa37718ea9d4ec19b4ef660894a8.png";
-import image_2eef465a3db6c27eb58e43a0e5473c9b7b3caf5d from "figma:asset/2eef465a3db6c27eb58e43a0e5473c9b7b3caf5d.png";
-import image_16f5aa14051faa89fe781369ef2ec1badcac7e8d from "figma:asset/16f5aa14051faa89fe781369ef2ec1badcac7e8d.png";
-import image_f854c7794a9ab7d0c09684a330f067a2080edcf6 from "figma:asset/f854c7794a9ab7d0c09684a330f067a2080edcf6.png";
-import image_bfee1efa158eed65cd0e62adf3c79b0e7a321689 from "figma:asset/bfee1efa158eed65cd0e62adf3c79b0e7a321689.png";
-import image_2a3a1c86b3f1ff31c7ff112d18730075fb8f827d from "figma:asset/2a3a1c86b3f1ff31c7ff112d18730075fb8f827d.png";
-import newHeaderLogo from "figma:asset/90a0803cf2304a13ca1191a66fb32d2239a69bdf.png";
+const image_657c215f98beaa37718ea9d4ec19b4ef660894a8 = '/657c215f98beaa37718ea9d4ec19b4ef660894a8.png';
+const image_2eef465a3db6c27eb58e43a0e5473c9b7b3caf5d = '/2eef465a3db6c27eb58e43a0e5473c9b7b3caf5d.png';
+const image_16f5aa14051faa89fe781369ef2ec1badcac7e8d = '/16f5aa14051faa89fe781369ef2ec1badcac7e8d.png';
+const image_f854c7794a9ab7d0c09684a330f067a2080edcf6 = '/f854c7794a9ab7d0c09684a330f067a2080edcf6.png';
+const image_bfee1efa158eed65cd0e62adf3c79b0e7a321689 = '/bfee1efa158eed65cd0e62adf3c79b0e7a321689.png';
+const image_2a3a1c86b3f1ff31c7ff112d18730075fb8f827d = '/2a3a1c86b3f1ff31c7ff112d18730075fb8f827d.png';
+const newHeaderLogo = '/90a0803cf2304a13ca1191a66fb32d2239a69bdf.png';
 import React, {
   useState,
   useEffect,
@@ -40,14 +40,14 @@ import {
   faBed,
   faWindowMaximize,
 } from "@fortawesome/free-solid-svg-icons";
-import { toast } from "sonner@2.0.3";
+import { toast } from 'sonner';
 import { useApp } from "../contexts/AppContext";
 import { useUser } from "../contexts/UserContext";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { Avatar, AvatarFallback } from "./ui/avatar";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
-import fimaLogo from "figma:asset/4b857e02fcaeb1cf1a3cbd382b322ca5ae9584ec.png";
+const fimaLogo = '/4b857e02fcaeb1cf1a3cbd382b322ca5ae9584ec.png';
 import {
   useLanguages,
   useCurrencies,

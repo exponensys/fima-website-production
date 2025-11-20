@@ -1,5 +1,5 @@
 import { useState, Suspense, lazy, Component, ReactNode, memo, useCallback, useEffect } from 'react';
-import { Toaster } from 'sonner@2.0.3';
+import { Toaster } from 'sonner';
 import { AppProvider } from './contexts/AppContext';
 import { UserProvider } from './contexts/UserContext';
 import { Header } from "./components/Header";
@@ -15,7 +15,7 @@ import { ScrollManager } from './components/ScrollManager';
 import { useNavigationPersistence } from './hooks/useNavigationPersistence';
 import { useFavicon } from './hooks/useFavicon';
 import { useProducts } from './hooks/useProducts';
-import faviconImage from 'figma:asset/ab0efc907f1f64cc2226cae1503e7b66f25a4a90.png';
+const faviconImage = '/ab0efc907f1f64cc2226cae1503e7b66f25a4a90.png';
 
 // Lazy load des composants lourds pour éviter les timeouts
 const ProductDetailPage = lazy(() => import("./components/ProductDetailPage").then(module => ({ default: module.ProductDetailPage })));

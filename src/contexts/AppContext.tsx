@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { toast } from 'sonner@2.0.3';
+import { toast } from 'sonner';
 import { CurrencyCode } from '../utils/currency';
 import { LanguageCode } from '../utils/translations';
 

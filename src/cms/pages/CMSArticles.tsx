@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Plus, Edit, Trash2, Eye, EyeOff, FileText } from 'lucide-react';
 import { useBlogs, useBlogMutation } from '../../hooks/useBlogs';
-import { toast } from 'sonner@2.0.3';
+import { toast } from 'sonner';
 import { ArticlesInitButton } from '../components/ArticlesInitButton';
 import { BlogFormModal } from '../components/BlogFormModal';
 

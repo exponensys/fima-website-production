@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Plus, Edit, Trash2, X, Save, RefreshCw, Upload, Image as ImageIcon } from 'lucide-react';
-import { toast } from 'sonner@2.0.3';
+import { toast } from 'sonner';
 import { useCMSCategories, CMSCategory } from '../../hooks/useCMSCategories';
 import { projectId, publicAnonKey } from '../../utils/supabase/info';
 

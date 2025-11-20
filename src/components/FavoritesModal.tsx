@@ -1,6 +1,6 @@
 import { X, Heart, ShoppingCart } from 'lucide-react';
 import { useApp } from '../contexts/AppContext';
-import { toast } from 'sonner@2.0.3';
+import { toast } from 'sonner';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { useCurrency } from '../hooks/useCurrency';
 import { smartConvertPrice } from '../utils/currency';

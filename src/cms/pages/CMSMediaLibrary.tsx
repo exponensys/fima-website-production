@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Upload, Image as ImageIcon, Trash2, Edit2, Copy, Check, Search, Filter, X } from 'lucide-react';
-import { toast } from 'sonner@2.0.3';
+import { toast } from 'sonner';
 import { projectId, publicAnonKey } from '../../utils/supabase/info';
 
 interface MediaItem {

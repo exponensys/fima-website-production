@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { createPortal } from "react-dom";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
-import megaMenuImage from "figma:asset/5bb4257f511908ba6d68f0f0b3c015dccb725fae.png";
+const megaMenuImage = '/5bb4257f511908ba6d68f0f0b3c015dccb725fae.png';
 import { useCMSCategories } from "../hooks/useCMSCategories";
 
 interface ProductsMegaMenuProps {

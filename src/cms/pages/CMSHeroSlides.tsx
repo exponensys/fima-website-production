@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Plus, Image as ImageIcon, Video as VideoIcon, Trash2, Edit, GripVertical, Wand2, Eye, EyeOff } from 'lucide-react';
-import { toast } from 'sonner@2.0.3';
+import { toast } from 'sonner';
 import { useHeroSlides } from '../../hooks/useHeroSlides';
 import { projectId, publicAnonKey } from '../../utils/supabase/info';
 import { initHeroSlides } from '../../utils/initHeroSlidesData';

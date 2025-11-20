@@ -1,7 +1,7 @@
 import { useState, useMemo, useEffect } from "react";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
 import { Breadcrumb, BreadcrumbItem } from "../Breadcrumb";
-import universGlassLogo from "figma:asset/f0de3e8715f2ded08408ceda5ecebe082177873c.png";
+const universGlassLogo = '/f0de3e8715f2ded08408ceda5ecebe082177873c.png';
 import { useCMSCategories } from "../../hooks/useCMSCategories";
 
 interface UniversGlassPageProps {

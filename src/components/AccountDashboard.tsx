@@ -30,7 +30,7 @@ import { Textarea } from './ui/textarea';
 import { Switch } from './ui/switch';
 import { Separator } from './ui/separator';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from './ui/dialog';
-import { toast } from 'sonner@2.0.3';
+import { toast } from 'sonner';
 
 interface AccountDashboardProps {
   onBack: () => void;

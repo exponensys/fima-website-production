@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark, faUser, faCalendar, faMessage, faPhone, faCheckCircle, faClock, faUsers, faAward } from '@fortawesome/free-solid-svg-icons';
-import { toast } from 'sonner@2.0.3';
+import { toast } from 'sonner';
 
 interface ExpertConsultationModalProps {
   isOpen: boolean;

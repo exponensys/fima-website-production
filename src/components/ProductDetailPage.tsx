@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { ArrowLeft, Heart, ShoppingCart, Star, Truck, Shield, RotateCcw, MessageCircle, Minus, Plus, Share2, ZoomIn, Play, RotateCw, ChevronLeft, ChevronRight, User, Verified, ThumbsUp, ThumbsDown, Filter, SortDesc } from 'lucide-react';
 import { useApp } from '../contexts/AppContext';
-import { toast } from 'sonner@2.0.3';
+import { toast } from 'sonner';
 import { ProductCard } from './ProductCard';
 import { useProducts as useSupabaseProducts } from '../hooks/useProducts';
 import { ImageWithFallback, extractImageUrl } from './figma/ImageWithFallback';

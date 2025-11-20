@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Plus, Edit, Trash2, Star, Eye, EyeOff } from 'lucide-react';
 import { useTestimonials, useTestimonialMutation } from '../../hooks/useTestimonials';
 import { Button } from '../../components/ui/button';
-import { toast } from 'sonner@2.0.3';
+import { toast } from 'sonner';
 import { TestimonialsInitButton } from '../components/TestimonialsInitButton';
 
 export function CMSTestimonials() {

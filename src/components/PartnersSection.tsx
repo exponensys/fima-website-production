@@ -1,11 +1,11 @@
-import logoAzalai from "figma:asset/0830b98154b75ab80e3cd699a5e2aa2e1ec34152.png";
-import logoIbis from "figma:asset/4037f113fae77642415a905d8754f0d8f97275e0.png";
-import logoSogelux from "figma:asset/2e32728242ef61bf86f6ae110315f7b4aa3c42f0.png";
-import logoDesign from "figma:asset/c5289162cd684976dd7a7917d335170174c8652f.png";
-import logoSofitel from "figma:asset/bc319577ff36e534afc433da243e1f45577b2ee8.png";
-import logoTiama from "figma:asset/f9f04472112108f54be0f6fac5b31408d105f61a.png";
-import logoBoyoot from "figma:asset/4673c7c573ce3de055ad9297c46aedc13b9bd55a.png";
-import logoZino from "figma:asset/0da4bee747388108bad21044a698ea1d39bed9f0.png";
+const logoAzalai = '/0830b98154b75ab80e3cd699a5e2aa2e1ec34152.png';
+const logoIbis = '/4037f113fae77642415a905d8754f0d8f97275e0.png';
+const logoSogelux = '/2e32728242ef61bf86f6ae110315f7b4aa3c42f0.png';
+const logoDesign = '/c5289162cd684976dd7a7917d335170174c8652f.png';
+const logoSofitel = '/bc319577ff36e534afc433da243e1f45577b2ee8.png';
+const logoTiama = '/f9f04472112108f54be0f6fac5b31408d105f61a.png';
+const logoBoyoot = '/4673c7c573ce3de055ad9297c46aedc13b9bd55a.png';
+const logoZino = '/0da4bee747388108bad21044a698ea1d39bed9f0.png';
 import { motion } from "motion/react";
 import { useEffect, useState } from "react";
 

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { RefreshCw } from 'lucide-react';
 import { Button } from '../../components/ui/button';
 import { initTestimonials } from '../../utils/initTestimonialsData';
-import { toast } from 'sonner@2.0.3';
+import { toast } from 'sonner';
 
 /**
  * 💬 Bouton d'initialisation des Témoignages

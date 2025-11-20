@@ -20,7 +20,7 @@ import {
   isYouTubeUrl,
   getYouTubeEmbedUrl,
 } from "../utils/videoUtils";
-import fimaLogo from "figma:asset/1da2d5f603cd62a74c69b55293bcdadb2f6d8468.png";
+const fimaLogo = '/1da2d5f603cd62a74c69b55293bcdadb2f6d8468.png';
 
 interface HeroProps {
   onNavigate: (page: string) => void;

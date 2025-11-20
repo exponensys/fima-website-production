@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Plus, Edit, Trash2, Save, X, Tag, Eye, EyeOff } from 'lucide-react';
 import { useArticleCategories, useArticleCategoryMutation } from '../../hooks/useArticleCategories';
 import { Button } from '../../components/ui/button';
-import { toast } from 'sonner@2.0.3';
+import { toast } from 'sonner';
 
 export function CMSArticleCategories() {
   const [isAddingNew, setIsAddingNew] = useState(false);

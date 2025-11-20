@@ -15,8 +15,8 @@ import {
 import { useApp } from "../contexts/AppContext";
 import { useUser } from "../contexts/UserContext";
 import { useLogoScrollAnimation } from "../hooks/useLogoScrollAnimation";
-import fimaLogoIcon from 'figma:asset/f854c7794a9ab7d0c09684a330f067a2080edcf6.png';
-import fimaLogoText from 'figma:asset/657c215f98beaa37718ea9d4ec19b4ef660894a8.png';
+const fimaLogoIcon = '/f854c7794a9ab7d0c09684a330f067a2080edcf6.png';
+const fimaLogoText = '/657c215f98beaa37718ea9d4ec19b4ef660894a8.png';
 
 interface MobileHeaderV2Props {
   onNavigate: (page: string, category?: string, data?: any) => void;

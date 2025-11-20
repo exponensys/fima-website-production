@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Images, X, Check, Search, Upload, Filter } from 'lucide-react';
 import { useMediaLibrary } from '../../hooks/useMediaLibrary';
-import { toast } from 'sonner@2.0.3';
+import { toast } from 'sonner';
 import { projectId, publicAnonKey } from '../../utils/supabase/info';
 
 interface ImagePickerProps {

@@ -3,7 +3,7 @@ import { CallToAction } from './CallToAction';
 import { useCallToAction } from '../hooks/useCallToAction';
 import { initCallToActionData, checkCallToActionData } from '../utils/initCallToActionData';
 import { PlayCircle, CheckCircle, XCircle, Loader2, Database, Eye } from 'lucide-react';
-import { toast } from 'sonner@2.0.3';
+import { toast } from 'sonner';
 
 /**
  * Composant de test pour les Call to Action

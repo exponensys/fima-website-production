@@ -11,7 +11,7 @@ import {
   faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
-import fimaFooterLogo from "figma:asset/1da2d5f603cd62a74c69b55293bcdadb2f6d8468.png";
+const fimaFooterLogo = '/1da2d5f603cd62a74c69b55293bcdadb2f6d8468.png';
 
 interface FooterProps {
   onNavigate?: (

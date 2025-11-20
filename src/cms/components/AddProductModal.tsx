@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { X, Upload, Plus, Trash2 } from 'lucide-react';
-import { toast } from 'sonner@2.0.3';
+import { toast } from 'sonner';
 import { useCMSCategories } from '../../hooks/useCMSCategories';
 import { useProductMutation, type ProductVariation } from '../../hooks/useProducts';
 import { RichTextEditor } from './RichTextEditor';
