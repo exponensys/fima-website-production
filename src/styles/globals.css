@@ -1,0 +1,1196 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --font-size: 14px;
+  
+  /* FIMA Brand Colors */
+  --fima-green: #B5C233;
+  --fima-gray: #6E6E6E;
+  --fima-gray-dark: #5E5F52;
+  --fima-gray-light: #C0C0C0;
+  --fima-red: #E30613;
+  --fima-blue: #0EA5E9;
+  --fima-black: #000000;
+  --fima-white: #FFFFFF;
+  
+  --background: #ffffff;
+  --foreground: #000000;
+  --card: #ffffff;
+  --card-foreground: #000000;
+  --popover: #ffffff;
+  --popover-foreground: #000000;
+  --primary: #B5C233;
+  --primary-foreground: #ffffff;
+  --secondary: #6E6E6E;
+  --secondary-foreground: #ffffff;
+  --muted: #f8f9fa;
+  --muted-foreground: #6E6E6E;
+  --accent: #B5C233;
+  --accent-foreground: #ffffff;
+  --destructive: #E30613;
+  --destructive-foreground: #ffffff;
+  --border: #C0C0C0;
+  --input: transparent;
+  --input-background: #f8f9fa;
+  --switch-background: #C0C0C0;
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --ring: #B5C233;
+  --chart-1: #B5C233;
+  --chart-2: #E30613;
+  --chart-3: #6E6E6E;
+  --chart-4: #C0C0C0;
+  --chart-5: #000000;
+  --radius: 0;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #000000;
+  --sidebar-primary: #B5C233;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f8f9fa;
+  --sidebar-accent-foreground: #000000;
+  --sidebar-border: #C0C0C0;
+  --sidebar-ring: #B5C233;
+}
+
+.dark {
+  --background: #000000;
+  --foreground: #ffffff;
+  --card: #1a1a1a;
+  --card-foreground: #ffffff;
+  --popover: #1a1a1a;
+  --popover-foreground: #ffffff;
+  --primary: #B5C233;
+  --primary-foreground: #000000;
+  --secondary: #6E6E6E;
+  --secondary-foreground: #ffffff;
+  --muted: #2a2a2a;
+  --muted-foreground: #C0C0C0;
+  --accent: #B5C233;
+  --accent-foreground: #000000;
+  --destructive: #E30613;
+  --destructive-foreground: #ffffff;
+  --border: #6E6E6E;
+  --input: #2a2a2a;
+  --ring: #B5C233;
+  --sidebar: #1a1a1a;
+  --sidebar-foreground: #ffffff;
+  --sidebar-primary: #B5C233;
+  --sidebar-primary-foreground: #000000;
+  --sidebar-accent: #2a2a2a;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #6E6E6E;
+  --sidebar-ring: #B5C233;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-input-background: var(--input-background);
+  --color-switch-background: var(--switch-background);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+  --radius-xl: 0;
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  /* BASE - Anti-bounce SIMPLIFIÉ */
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+    overflow-x: hidden;
+    overscroll-behavior-y: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  html {
+    overflow-y: scroll;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+    overflow-y: auto;
+    position: relative;
+  }
+  
+  /* Root container - SANS surcharge */
+  #root {
+    min-height: 100%;
+    width: 100%;
+  }
+}
+
+/**
+ * FIMA Typography System
+ */
+@layer base {
+  :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) {
+    h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--fima-black);
+    }
+
+    h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2rem;
+      font-weight: 600;
+      line-height: 1.3;
+      color: var(--fima-black);
+    }
+
+    h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      line-height: 1.4;
+      color: var(--fima-black);
+    }
+
+    h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      line-height: 1.4;
+      color: var(--fima-black);
+    }
+
+    p {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.6;
+      color: var(--fima-gray);
+    }
+
+    label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1.5;
+      color: var(--fima-black);
+    }
+
+    button {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1;
+    }
+
+    input {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.5;
+    }
+  }
+}
+
+/* Prevent container overflow on mobile */
+@layer utilities {
+  .container {
+    @apply max-w-full;
+    overflow-x: hidden;
+  }
+  
+  /* Fix flex overflow on mobile */
+  .flex {
+    min-width: 0;
+  }
+  
+  /* Products Grid - Desktop: 3 colonnes, Mobile: 1 colonne */
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 1fr;
+    gap: 1.5rem;
+    width: 100%;
+  }
+  
+  @media (max-width: 768px) {
+    .products-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      padding: 0 0.5rem;
+    }
+  }
+  
+  /* Logo FIMA - Tailles responsive */
+  .fima-logo-mobile {
+    height: 1.5rem !important; /* 24px - Logo compact pour header mobile */
+    width: auto !important;
+    object-fit: contain !important;
+  }
+  
+  .fima-logo-desktop {
+    height: 1.75rem; /* 28px - Réduit encore pour plus de compacité */
+    width: auto;
+    max-width: 100px; /* Réduit de 140px à 100px */
+    object-fit: contain;
+  }
+  
+  /* Boutons FIMA - Styles globaux */
+  .fima-btn-primary {
+    background-color: #B5C233;
+    color: #6E6E6E;
+    border: 2px solid #B5C233;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    /* Mobile touch optimization */
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
+  }
+  
+  .fima-btn-primary:hover {
+    background-color: #a0ad2b;
+    border-color: #a0ad2b;
+    color: #5E5F52;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(181, 194, 51, 0.3);
+  }
+  
+  .fima-btn-primary:active {
+    background-color: #a0ad2b;
+    border-color: #a0ad2b;
+    color: #5E5F52;
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(181, 194, 51, 0.2);
+  }
+  
+  .fima-btn-secondary {
+    background-color: #B5C233;
+    color: #6E6E6E;
+    border: 2px solid #B5C233;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    /* Mobile touch optimization */
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
+  }
+  
+  .fima-btn-secondary:hover {
+    background-color: #a0ad2b;
+    border-color: #a0ad2b;
+    color: #5E5F52;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(181, 194, 51, 0.3);
+  }
+  
+  .fima-btn-secondary:active {
+    background-color: #a0ad2b;
+    border-color: #a0ad2b;
+    color: #5E5F52;
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(181, 194, 51, 0.2);
+  }
+  
+  /* Boutons avec icônes - Alignement du texte */
+  .fima-btn-primary > *:not(svg),
+  .fima-btn-secondary > *:not(svg) {
+    display: inline-block;
+  }
+
+  /* ======================================= */
+  /* Boutons spécifiques par métier */
+  /* ======================================= */
+  
+  /* FIMA COUCHAGE - Vert Anis #B5C233 avec texte gris #6E6E6E */
+  .fima-couchage-btn-primary {
+    background-color: #B5C233;
+    color: #6E6E6E;
+    border: 2px solid #B5C233;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
+  }
+  
+  .fima-couchage-btn-primary:hover {
+    background-color: #a0ad2b;
+    border-color: #a0ad2b;
+    color: #5E5F52;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(181, 194, 51, 0.3);
+  }
+  
+  .fima-couchage-btn-primary:active {
+    background-color: #a0ad2b;
+    border-color: #a0ad2b;
+    color: #5E5F52;
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(181, 194, 51, 0.2);
+  }
+
+  .fima-couchage-btn-secondary {
+    background-color: transparent;
+    color: #6E6E6E;
+    border: 2px solid #B5C233;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
+  }
+  
+  .fima-couchage-btn-secondary:hover {
+    background-color: rgba(181, 194, 51, 0.1);
+    border-color: #a0ad2b;
+    color: #5E5F52;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(181, 194, 51, 0.2);
+  }
+  
+  .fima-couchage-btn-secondary:active {
+    background-color: rgba(181, 194, 51, 0.2);
+    border-color: #a0ad2b;
+    color: #5E5F52;
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(181, 194, 51, 0.15);
+  }
+
+  /* FIMA DESIGN - Rouge #E30613 avec texte blanc */
+  .fima-design-btn-primary {
+    background-color: #E30613;
+    color: #FFFFFF;
+    border: 2px solid #E30613;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
+  }
+  
+  .fima-design-btn-primary:hover {
+    background-color: #c00510;
+    border-color: #c00510;
+    color: #FFFFFF;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(227, 6, 19, 0.3);
+  }
+  
+  .fima-design-btn-primary:active {
+    background-color: #c00510;
+    border-color: #c00510;
+    color: #FFFFFF;
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(227, 6, 19, 0.2);
+  }
+
+  .fima-design-btn-secondary {
+    background-color: transparent;
+    color: #6E6E6E;
+    border: 2px solid #E30613;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
+  }
+  
+  .fima-design-btn-secondary:hover {
+    background-color: rgba(227, 6, 19, 0.1);
+    border-color: #c00510;
+    color: #E30613;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(227, 6, 19, 0.2);
+  }
+  
+  .fima-design-btn-secondary:active {
+    background-color: rgba(227, 6, 19, 0.2);
+    border-color: #c00510;
+    color: #E30613;
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(227, 6, 19, 0.15);
+  }
+
+  /* UNIVERS GLASS - Bleu Cyan #0EA5E9 avec texte blanc */
+  .univers-glass-btn-primary {
+    background-color: #0EA5E9;
+    color: #FFFFFF;
+    border: 2px solid #0EA5E9;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
+  }
+  
+  .univers-glass-btn-primary:hover {
+    background-color: #0284c7;
+    border-color: #0284c7;
+    color: #FFFFFF;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+  }
+  
+  .univers-glass-btn-primary:active {
+    background-color: #0284c7;
+    border-color: #0284c7;
+    color: #FFFFFF;
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(14, 165, 233, 0.2);
+  }
+
+  .univers-glass-btn-secondary {
+    background-color: transparent;
+    color: #6E6E6E;
+    border: 2px solid #0EA5E9;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
+  }
+  
+  .univers-glass-btn-secondary:hover {
+    background-color: rgba(14, 165, 233, 0.1);
+    border-color: #0284c7;
+    color: #0EA5E9;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(14, 165, 233, 0.2);
+  }
+  
+  .univers-glass-btn-secondary:active {
+    background-color: rgba(14, 165, 233, 0.2);
+    border-color: #0284c7;
+    color: #0EA5E9;
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(14, 165, 233, 0.15);
+  }
+
+  /* Boutons avec icônes - Alignement du texte pour toutes les variantes */
+  .fima-couchage-btn-primary > *:not(svg),
+  .fima-couchage-btn-secondary > *:not(svg),
+  .fima-design-btn-primary > *:not(svg),
+  .fima-design-btn-secondary > *:not(svg),
+  .univers-glass-btn-primary > *:not(svg),
+  .univers-glass-btn-secondary > *:not(svg) {
+    display: inline-block;
+  }
+  
+  /* Touch optimization pour tous les boutons et liens */
+  button, 
+  a,
+  [role="button"] {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+  }
+  
+  /* Prevent text selection on interactive elements - NO pointer-events blocking */
+  button *,
+  a *,
+  [role="button"] * {
+    user-select: none;
+    /* pointer-events: none; ⛔ REMOVED - this was blocking all interactions */
+  }
+  
+  /* Business Unit Card Button - Active state for mobile */
+  .business-unit-btn:active {
+    opacity: 0.9;
+    transform: scale(0.98);
+  }
+  
+  @media (hover: hover) {
+    .business-unit-btn:hover {
+      filter: brightness(0.95);
+    }
+  }
+}
+
+/**
+ * MOBILE LAYOUT - Anti-Bounce ULTRA-SIMPLIFIÉ
+ * Moins de CSS = Moins de problèmes
+ */
+@media (max-width: 768px) {
+  /* Reset essentiel uniquement */
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    position: relative;
+    overflow-x: hidden;
+    overscroll-behavior-y: none;
+  }
+  
+  html {
+    overflow-y: scroll;
+    height: 100%;
+  }
+  
+  body {
+    overflow-y: auto;
+    min-height: 100%;
+  }
+  
+  /* Anti-bounce sur tous les scrollables */
+  * {
+    overscroll-behavior: none;
+  }
+  
+  /* Root - Simple */
+  #root {
+    width: 100%;
+    min-height: 100%;
+  }
+  
+  /* Touch-friendly clickables */
+  button,
+  a,
+  [role="button"],
+  input[type="button"],
+  input[type="submit"] {
+    touch-action: manipulation !important;
+    -webkit-tap-highlight-color: transparent !important;
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Container principal */
+  body > div > div {
+    margin: 5px !important;
+  }
+  
+  /* Header & Hero - Sans marges inutiles */
+  header,
+  .hero-full-width {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    border-top: none !important;
+  }
+
+  /* Main content */
+  main {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-top: 0 !important;
+  }
+  
+  main > *:first-child {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+
+  /* Sections - Espacement mobile */
+  section {
+    padding: 2.5rem 1.25rem !important;
+    margin-bottom: 0 !important;
+  }
+  
+  /* Section avec background - Padding supplémentaire pour respiration */
+  section[class*="bg-gray"],
+  section[class*="bg-white"] {
+    padding: 3rem 1.5rem !important;
+  }
+
+  /* TYPOGRAPHIE MOBILE - Hiérarchie claire et lisible */
+  h1 {
+    font-size: 1.875rem !important; /* 30px */
+    line-height: 1.2 !important;
+    margin-bottom: 1rem !important;
+    letter-spacing: -0.02em;
+  }
+
+  h2 {
+    font-size: 1.5rem !important; /* 24px */
+    line-height: 1.3 !important;
+    margin-bottom: 0.875rem !important;
+    letter-spacing: -0.01em;
+  }
+
+  h3 {
+    font-size: 1.25rem !important; /* 20px */
+    line-height: 1.4 !important;
+    margin-bottom: 0.75rem !important;
+  }
+
+  h4 {
+    font-size: 1.125rem !important; /* 18px */
+    line-height: 1.4 !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  p {
+    font-size: 0.9375rem !important; /* 15px */
+    line-height: 1.6 !important;
+    margin-bottom: 1rem !important;
+    color: #4a5568;
+  }
+
+  /* GRILLES - Espacement confortable */
+  .grid-cols-1 {
+    gap: 1.5rem !important;
+  }
+
+  /* CARTES - Design moderne avec ombres subtiles */
+  .card,
+  [class*="bg-white"][class*="shadow"] {
+    margin-bottom: 1.5rem !important;
+    padding: 1.25rem !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+    transition: all 0.3s ease;
+  }
+  
+  .card:active,
+  [class*="bg-white"][class*="shadow"]:active {
+    transform: scale(0.98);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  /* BOUTONS - Taille et espacement optimaux */
+  .fima-btn-primary,
+  .fima-btn-secondary,
+  .fima-couchage-btn-primary,
+  .fima-couchage-btn-secondary,
+  .fima-design-btn-primary,
+  .fima-design-btn-secondary,
+  .univers-glass-btn-primary,
+  .univers-glass-btn-secondary {
+    padding: 0.875rem 1.5rem !important;
+    margin: 0.75rem 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-height: 48px !important;
+    font-size: 1rem !important;
+    width: 100%;
+    transition: all 0.2s ease;
+  }
+  
+  .fima-btn-primary > *:not(svg),
+  .fima-btn-secondary > *:not(svg),
+  .fima-couchage-btn-primary > *:not(svg),
+  .fima-couchage-btn-secondary > *:not(svg),
+  .fima-design-btn-primary > *:not(svg),
+  .fima-design-btn-secondary > *:not(svg),
+  .univers-glass-btn-primary > *:not(svg),
+  .univers-glass-btn-secondary > *:not(svg) {
+    display: inline-block !important;
+    transform: translateY(1px) !important;
+  }
+
+  /* IMAGES - Responsive et optimisées */
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  video, iframe {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+  }
+  
+  [class*="aspect-"] {
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  /* ESPACEMENT VERTICAL - Rythme visuel harmonieux */
+  .space-y-16 > * + * {
+    margin-top: 3rem !important;
+  }
+  
+  .space-y-12 > * + * {
+    margin-top: 2.5rem !important;
+  }
+  
+  .space-y-8 > * + * {
+    margin-top: 2rem !important;
+  }
+  
+  .space-y-6 > * + * {
+    margin-top: 1.5rem !important;
+  }
+  
+  .space-y-4 > * + * {
+    margin-top: 1rem !important;
+  }
+
+  /* PADDING VERTICAL - Cohérent et aéré */
+  .py-16 {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
+  
+  .py-12 {
+    padding-top: 2.5rem !important;
+    padding-bottom: 2.5rem !important;
+  }
+  
+  .py-8 {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+  
+  .py-6 {
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+  }
+
+  /* MARGES VERTICALES - Espacement entre blocs */
+  .my-16 {
+    margin-top: 3rem !important;
+    margin-bottom: 3rem !important;
+  }
+  
+  .my-12 {
+    margin-top: 2.5rem !important;
+    margin-bottom: 2.5rem !important;
+  }
+  
+  .my-8 {
+    margin-top: 2rem !important;
+    margin-bottom: 2rem !important;
+  }
+
+  /* CONTAINER - Padding horizontal confortable */
+  .container {
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+    max-width: 100% !important;
+  }
+  
+  /* Prevent overflow */
+  h1, h2, h3, h4, h5, h6, p {
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+  
+  button {
+    min-width: 0;
+    word-break: break-word;
+  }
+
+  /* HERO - Hauteur optimisée pour mobile */
+  .min-h-screen {
+    min-height: 75vh !important;
+  }
+
+  /* TRANSITIONS ENTRE SECTIONS - Fluides */
+  section + section {
+    border-top: 1px solid rgba(229, 231, 235, 0.8);
+  }
+  
+  /* Sections avec background - Pas de bordure */
+  section[class*="bg-gray"] + section,
+  section + section[class*="bg-gray"] {
+    border-top: none;
+  }
+
+  /* FORMULAIRES - Touch-friendly */
+  input, 
+  textarea, 
+  select {
+    font-size: 16px !important; /* Évite le zoom iOS */
+    padding: 0.875rem !important;
+    min-height: 48px !important;
+  }
+  
+  /* SÉLECTEURS MOBILE - Visibilité garantie */
+  #mobile-lang-select,
+  #mobile-currency-select {
+    appearance: menulist !important;
+    -webkit-appearance: menulist !important;
+    -moz-appearance: menulist !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 100% !important;
+    min-height: 48px !important;
+    font-size: 16px !important;
+    padding: 0.75rem 1rem !important;
+    background-color: #ffffff !important;
+    border: 3px solid #6E6E6E !important;
+    color: #000000 !important;
+    font-weight: 500 !important;
+    cursor: pointer !important;
+    z-index: 10 !important;
+    position: relative !important;
+  }
+  
+  #mobile-lang-select:focus,
+  #mobile-currency-select:focus {
+    outline: 3px solid #B5C233 !important;
+    border-color: #B5C233 !important;
+  }
+  
+  #mobile-lang-select option,
+  #mobile-currency-select option {
+    padding: 12px !important;
+    font-size: 16px !important;
+    background-color: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  /* BADGES - Taille lisible */
+  [class*="badge"],
+  .fima-badge-green,
+  .fima-badge-red {
+    padding: 0.5rem 0.875rem !important;
+    font-size: 0.875rem !important;
+  }
+
+  /* CAROUSEL - Smooth scrolling */
+  .snap-x {
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scroll-padding: 1rem;
+  }
+  
+  .snap-center {
+    scroll-snap-align: center;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* MOBILE CATEGORY CARDS - Démarrage sans espace */
+  .md\:hidden {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+
+  main > div:first-child.md\:hidden {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+
+  /* FLEXBOX - Espacement optimal */
+  .flex-col.sm\:flex-row {
+    gap: 1rem;
+  }
+  
+  .flex {
+    min-width: 0;
+  }
+
+  /* TABLES - Responsive */
+  table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* NAVIGATION - Touch targets optimaux */
+  nav a,
+  nav button {
+    min-height: 44px !important;
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem !important;
+  }
+
+  /* MODALS - Pleine largeur sur mobile */
+  [role="dialog"] {
+    max-width: calc(100vw - 2rem) !important;
+    margin: 1rem !important;
+  }
+
+  /* SHADOWS - Subtiles et modernes */
+  .shadow-sm {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+  }
+  
+  .shadow {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+  }
+  
+  .shadow-md {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12) !important;
+  }
+  
+  .shadow-lg {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15) !important;
+  }
+
+  /* HOVER EFFECTS - Remplacés par active sur mobile */
+  .hover\:shadow-lg:active {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12) !important;
+  }
+  
+  .hover\:scale-105:active {
+    transform: scale(0.98) !important;
+  }
+
+  /* LOADING STATES - Visible et agréable */
+  .animate-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.7;
+    }
+  }
+
+  /* TOP BAR - Compact sur mobile */
+  .py-1\.5 {
+    padding-top: 0.375rem !important;
+    padding-bottom: 0.375rem !important;
+  }
+
+  /* Scrollable areas internes - Contenir le bounce */
+  [data-scrollable],
+  .overflow-auto,
+  .overflow-y-auto {
+    overscroll-behavior: contain !important;
+  }
+  
+  /* PAGES - Padding pour compenser MobileHeaderV2 fixe (120px) */
+  /* Sur mobile, ajouter du padding en haut de TOUTES les pages */
+  main {
+    padding-top: 120px !important;
+  }
+  
+  /* Exception: Page d'accueil - la classe peut être sur le main lui-même ou sur un enfant */
+  main.force-zero-margin,
+  main:has(.force-zero-margin) {
+    padding-top: 0 !important;
+  }
+}
+
+/* React Slick Carousel Styles */
+.slick-slider {
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  user-select: none;
+  touch-action: pan-y;
+}
+
+.slick-list {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+.slick-list:focus {
+  outline: none;
+}
+
+.slick-list.dragging {
+  cursor: pointer;
+  cursor: hand;
+}
+
+.slick-slider .slick-track,
+.slick-slider .slick-list {
+  transform: translate3d(0, 0, 0);
+}
+
+.slick-track {
+  position: relative;
+  top: 0;
+  left: 0;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.slick-track:before,
+.slick-track:after {
+  display: table;
+  content: '';
+}
+
+.slick-track:after {
+  clear: both;
+}
+
+.slick-loading .slick-track {
+  visibility: hidden;
+}
+
+.slick-slide {
+  display: none;
+  float: left;
+  height: 100%;
+  min-height: 1px;
+}
+
+.slick-slide img {
+  display: block;
+}
+
+.slick-slide.slick-loading img {
+  display: none;
+}
+
+.slick-slide.dragging img {
+  pointer-events: none;
+}
+
+.slick-initialized .slick-slide {
+  display: block;
+}
+
+.slick-loading .slick-slide {
+  visibility: hidden;
+}
+
+.slick-vertical .slick-slide {
+  display: block;
+  height: auto;
+  border: 1px solid transparent;
+}
+
+/* Dots */
+.slick-dots {
+  position: absolute;
+  bottom: -40px;
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  text-align: center;
+}
+
+.slick-dots li {
+  position: relative;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin: 0 5px;
+  padding: 0;
+  cursor: pointer;
+}
+
+.slick-dots li button {
+  font-size: 0;
+  line-height: 0;
+  display: block;
+  width: 20px;
+  height: 20px;
+  padding: 5px;
+  cursor: pointer;
+  color: transparent;
+  border: 0;
+  outline: none;
+  background: transparent;
+}
+
+.slick-dots li button:before {
+  font-size: 10px;
+  line-height: 20px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  content: '•';
+  text-align: center;
+  opacity: 0.35;
+  color: #B5C233;
+  transition: opacity 0.3s ease;
+}
+
+.slick-dots li.slick-active button:before {
+  opacity: 1;
+  color: #B5C233;
+}
+
+.slick-dots li button:hover:before,
+.slick-dots li button:focus:before {
+  opacity: 0.75;
+}
