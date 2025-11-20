@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///c:/Users/HP/projects/fimaWebsite/pages/index.tsx"],"sourcesContent":["import { GetStaticProps } from 'next';\nimport App from '../src/App';\n\nexport default function HomePage() {\n  return <App />;\n}\n\nexport const getStaticProps: GetStaticProps = async () => {\n  return {\n    props: {},\n    revalidate: 60, // Revalidate every 60 seconds\n  };\n};"],"names":[],"mappings":";;;;;;;AACA;;;;AAEe,SAAS;IACtB,qBAAO,0JAAC,kHAAG;;;;;AACb;KAFwB"}}]
-}
