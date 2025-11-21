@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200">
+  <circle cx="200" cy="100" r="80" fill="none" stroke="#ff6600" stroke-width="4"/>
+  <g transform="translate(160,40)">
+    <ellipse cx="0" cy="0" rx="8" ry="12" fill="#ffd700"/>
+    <ellipse cx="15" cy="-5" rx="8" ry="12" fill="#ff6600"/>
+    <ellipse cx="30" cy="0" rx="8" ry="12" fill="#32cd32"/>
+    <ellipse cx="45" cy="-5" rx="8" ry="12" fill="#ff1493"/>
+    <ellipse cx="60" cy="0" rx="8" ry="12" fill="#9370db"/>
+    <ellipse cx="75" cy="-5" rx="8" ry="12" fill="#00bfff"/>
+  </g>
+  <text x="200" y="120" font-family="Arial, sans-serif" font-size="36" font-weight="bold" text-anchor="middle" fill="#32cd32">SARA</text>
+  <text x="200" y="145" font-family="Arial, sans-serif" font-size="12" font-weight="normal" text-anchor="middle" fill="#333">7e EDITION</text>
+  <text x="200" y="160" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#ff6600">2025</text>
+</svg>

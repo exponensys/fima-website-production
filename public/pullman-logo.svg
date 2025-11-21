@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300">
+  <g>
+    <circle cx="80" cy="150" r="60" fill="none" stroke="#333" stroke-width="8"/>
+    <g transform="translate(20,120)">
+      <line x1="0" y1="0" x2="40" y2="0" stroke="#333" stroke-width="4"/>
+      <line x1="0" y1="10" x2="40" y2="10" stroke="#333" stroke-width="4"/>
+      <line x1="0" y1="20" x2="40" y2="20" stroke="#333" stroke-width="4"/>
+      <line x1="0" y1="30" x2="40" y2="30" stroke="#333" stroke-width="4"/>
+      <line x1="0" y1="40" x2="40" y2="40" stroke="#333" stroke-width="4"/>
+      <line x1="0" y1="50" x2="40" y2="50" stroke="#333" stroke-width="4"/>
+      <line x1="0" y1="60" x2="40" y2="60" stroke="#333" stroke-width="4"/>
+    </g>
+    <text x="200" y="130" font-family="Arial, sans-serif" font-size="48" font-weight="300" fill="#333">pullman</text>
+    <text x="200" y="170" font-family="Arial, sans-serif" font-size="14" font-weight="400" fill="#333" letter-spacing="4">HOTELS AND RESORTS</text>
+  </g>
+</svg>

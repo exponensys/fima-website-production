@@ -6,6 +6,13 @@ const logoSofitel = '/bc319577ff36e534afc433da243e1f45577b2ee8.png';
 const logoTiama = '/f9f04472112108f54be0f6fac5b31408d105f61a.png';
 const logoBoyoot = '/4673c7c573ce3de055ad9297c46aedc13b9bd55a.png';
 const logoZino = '/0da4bee747388108bad21044a698ea1d39bed9f0.png';
+const logoSamsung = '/samsung-logo.svg';
+const logoAeria = '/aeria-logo.svg';
+const logoSocieteGenerale = '/angola-flag.svg';
+const logoPullman = '/pullman-logo.svg';
+const logoDipndip = '/dipndip-logo.svg';
+const logoKpmg = '/kpmg-logo.svg';
+const logoSara = '/sara-logo.svg';
 import { motion } from "motion/react";
 import { useEffect, useState } from "react";
 
@@ -19,6 +26,13 @@ export function PartnersSection({ onNavigate }: PartnersSectionProps) {
     { name: "Ibis", logo: logoIbis },
     { name: "Sofitel Luxury Hotels", logo: logoSofitel },
     { name: "Hôtel TIAMA", logo: logoTiama },
+    { name: "Samsung", logo: logoSamsung },
+    { name: "AERIA", logo: logoAeria },
+    { name: "Société Générale", logo: logoSocieteGenerale },
+    { name: "Pullman Hotels", logo: logoPullman },
+    { name: "dipndip", logo: logoDipndip },
+    { name: "KPMG", logo: logoKpmg },
+    { name: "SARA 2025", logo: logoSara },
     { name: "Sogelux", logo: logoSogelux },
     { name: "Partenaire Design", logo: logoDesign },
     { name: "BOYOOT Immobilier", logo: logoBoyoot },
@@ -28,6 +42,13 @@ export function PartnersSection({ onNavigate }: PartnersSectionProps) {
     { name: "Ibis", logo: logoIbis },
     { name: "Sofitel Luxury Hotels", logo: logoSofitel },
     { name: "Hôtel TIAMA", logo: logoTiama },
+    { name: "Samsung", logo: logoSamsung },
+    { name: "AERIA", logo: logoAeria },
+    { name: "Société Générale", logo: logoSocieteGenerale },
+    { name: "Pullman Hotels", logo: logoPullman },
+    { name: "dipndip", logo: logoDipndip },
+    { name: "KPMG", logo: logoKpmg },
+    { name: "SARA 2025", logo: logoSara },
     { name: "Sogelux", logo: logoSogelux },
     { name: "Partenaire Design", logo: logoDesign },
     { name: "BOYOOT Immobilier", logo: logoBoyoot },
@@ -56,7 +77,7 @@ export function PartnersSection({ onNavigate }: PartnersSectionProps) {
           <motion.div
             className="flex gap-8"
             animate={{
-              x: isPaused ? undefined : [0, -3600],
+              x: [0, -3600],
             }}
             transition={{
               x: {
@@ -66,6 +87,7 @@ export function PartnersSection({ onNavigate }: PartnersSectionProps) {
                 ease: "linear",
               },
             }}
+            style={{ animationPlayState: isPaused ? 'paused' : 'running' }}
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
           >
