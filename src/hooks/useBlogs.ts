@@ -58,7 +58,7 @@ export const useBlogs = (locale: 'fr' | 'en' = 'fr', category?: string, publishe
         summaryEn: item.summary_en || item.summaryEn,
         contentFr: item.content_fr || item.contentFr,
         contentEn: item.content_en || item.contentEn,
-        author: item.author,
+        author: 'FIMA', // Valeur par défaut car colonne n'existe pas en DB
         category: item.category,
         tags: item.tags || [],
         featuredImage: item.featured_image || item.featuredImage || '',
@@ -142,7 +142,7 @@ export const useBlog = (slug: string, locale: 'fr' | 'en' = 'fr') => {
             summaryEn: data.summary_en || data.summaryEn,
             contentFr: data.content_fr || data.contentFr,
             contentEn: data.content_en || data.contentEn,
-            author: data.author,
+            author: 'FIMA', // Valeur par défaut car colonne n'existe pas en DB
             category: data.category,
             tags: data.tags || [],
             featuredImage: data.featured_image || data.featuredImage || '',
@@ -194,7 +194,6 @@ export const useBlogMutation = () => {
           summary_en: blogData.summaryEn,
           content_fr: blogData.contentFr,
           content_en: blogData.contentEn,
-          author: blogData.author,
           category: blogData.category,
           tags: blogData.tags,
           featured_image: blogData.featuredImage,
@@ -233,7 +232,7 @@ export const useBlogMutation = () => {
       if (blogData.summaryEn) updateData.summary_en = blogData.summaryEn;
       if (blogData.contentFr) updateData.content_fr = blogData.contentFr;
       if (blogData.contentEn) updateData.content_en = blogData.contentEn;
-      if (blogData.author) updateData.author = blogData.author;
+      // if (blogData.author) updateData.author = blogData.author; // Colonne author n'existe pas
       if (blogData.category) updateData.category = blogData.category;
       if (blogData.tags) updateData.tags = blogData.tags;
       if (blogData.featuredImage !== undefined) updateData.featured_image = blogData.featuredImage;
