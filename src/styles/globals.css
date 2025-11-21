@@ -153,6 +153,25 @@
     position: relative;
   }
   
+  /* Apply Montserrat to all elements */
+  * {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  }
+  
+  /* Force Montserrat on business cards and hero elements */
+  .business-card *,
+  .hero-section *,
+  [class*="business"] *,
+  [class*="hero"] *,
+  .card *,
+  .bg-white *,
+  .bg-gray *,
+  div *,
+  span *,
+  a * {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  }
+  
   /* Root container - SANS surcharge */
   #root {
     min-height: 100%;
@@ -339,10 +358,20 @@
     box-shadow: 0 2px 6px rgba(181, 194, 51, 0.2);
   }
   
+  /* Filter Sidebar - Sticky on scroll */
+  .filter-sidebar-sticky {
+    position: sticky !important;
+    top: 1rem !important;
+    width: 256px !important;
+    max-height: calc(100vh - 2rem) !important;
+    z-index: 40 !important;
+    overflow-y: auto !important;
+  }
+  
   /* Boutons avec icônes - Alignement du texte */
   .fima-btn-primary > *:not(svg),
   .fima-btn-secondary > *:not(svg) {
-    display: inline-block;
+    display: inline-block;lay: inline-block;
   }
 
   /* ======================================= */

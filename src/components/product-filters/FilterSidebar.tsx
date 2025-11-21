@@ -165,10 +165,10 @@ export function FilterSidebar({
       )}
 
       {/* Desktop Filters Sidebar */}
-      <div className=" lg:block w-64 flex-shrink-0 mr-8">
-        <div className="sticky top-0 max-h-[calc(100vh-2rem)]">
+      <div className="hidden lg:block w-64 flex-shrink-0 mr-8">
+        <div className="sticky top-4 max-h-screen overflow-y-auto z-40">
           <div
-            className="overflow-y-auto max-h-full space-y-6 p-6 rounded-lg"
+            className="space-y-6 p-6 rounded-lg shadow-lg"
             style={{
               backgroundColor: "#B5C233",
             }}
