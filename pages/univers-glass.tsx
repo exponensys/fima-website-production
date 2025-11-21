@@ -2,15 +2,11 @@ import { useRouter } from 'next/router';
 import { UniversGlassPage } from '../src/components/business-units/UniversGlassPage';
 import { Header } from '../src/components/Header';
 
-export default function UniversGlass() {
+export default function UniversGlassPageRoute() {
   const router = useRouter();
 
-  const handleNavigate = (page: string, category?: string) => {
-    if (page === 'all-products' && category) {
-      router.push(`/products?category=${category}`);
-    } else {
-      router.push(`/${page}`);
-    }
+  const handleNavigate = (page: string) => {
+    router.push(`/${page}`);
   };
 
   const handleBack = () => {
@@ -18,7 +14,7 @@ export default function UniversGlass() {
   };
 
   const handleQuoteRequest = () => {
-    console.log('Quote request for Univers Glass');
+    // Handle quote request
   };
 
   return (

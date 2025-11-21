@@ -5,8 +5,8 @@ import { Header } from '../src/components/Header';
 export default function ProductsPage() {
   const router = useRouter();
 
-  const handleProductClick = (productId: string) => {
-    router.push(`/product/${productId}`);
+  const handleProductClick = (product: any) => {
+    router.push(`/product/${product.id}`);
   };
 
   const handleBack = () => {

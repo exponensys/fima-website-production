@@ -1,15 +1,12 @@
 import { useRouter } from 'next/router';
 import { FimaCouchagePage } from '../src/components/business-units/FimaCouchagePage';
+import { Header } from '../src/components/Header';
 
-export default function FimaCouchage() {
+export default function FimaCouchagePageRoute() {
   const router = useRouter();
 
-  const handleNavigate = (page: string, category?: string) => {
-    if (page === 'all-products' && category) {
-      router.push(`/products?category=${category}`);
-    } else {
-      router.push(`/${page}`);
-    }
+  const handleNavigate = (page: string) => {
+    router.push(`/${page}`);
   };
 
   const handleBack = () => {
@@ -17,15 +14,17 @@ export default function FimaCouchage() {
   };
 
   const handleQuoteRequest = () => {
-    // You can implement quote request logic here
-    console.log('Quote request for FIMA Couchage');
+    // Handle quote request
   };
 
   return (
-    <FimaCouchagePage
-      onNavigate={handleNavigate}
-      onBack={handleBack}
-      onQuoteRequest={handleQuoteRequest}
-    />
+    <>
+      <Header onNavigate={handleNavigate} />
+      <FimaCouchagePage
+        onNavigate={handleNavigate}
+        onBack={handleBack}
+        onQuoteRequest={handleQuoteRequest}
+      />
+    </>
   );
 }

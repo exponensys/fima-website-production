@@ -2,15 +2,11 @@ import { useRouter } from 'next/router';
 import { FimaDesignPage } from '../src/components/business-units/FimaDesignPage';
 import { Header } from '../src/components/Header';
 
-export default function FimaDesign() {
+export default function FimaDesignPageRoute() {
   const router = useRouter();
 
-  const handleNavigate = (page: string, category?: string) => {
-    if (page === 'all-products' && category) {
-      router.push(`/products?category=${category}`);
-    } else {
-      router.push(`/${page}`);
-    }
+  const handleNavigate = (page: string) => {
+    router.push(`/${page}`);
   };
 
   const handleBack = () => {
@@ -18,7 +14,7 @@ export default function FimaDesign() {
   };
 
   const handleQuoteRequest = () => {
-    console.log('Quote request for FIMA Design');
+    // Handle quote request
   };
 
   return (
