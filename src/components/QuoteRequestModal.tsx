@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark, faUser, faEnvelope, faPhone, faBuilding, faFileText, faCalendar, faCheckCircle, faUpload } from '@fortawesome/free-solid-svg-icons';
+import { sendQuoteEmail } from '../services/emailService';
+import { toast } from 'sonner';
 
 interface QuoteRequestModalProps {
   isOpen: boolean;
@@ -150,10 +152,19 @@ export function QuoteRequestModal({ isOpen, onClose }: QuoteRequestModalProps) {
     }));
   };
 
-  const handleSubmit = () => {
-    // Ici, vous ajouteriez la logique d'envoi du formulaire
-    console.log('Données du formulaire:', formData);
-    setStep(4); // Étape de confirmation
+  const handleSubmit = async () => {
+    try {
+      const success = await sendQuoteEmail(formData);
+      if (success) {
+        setStep(4); // Étape de confirmation
+        toast.success('Demande de devis envoyée avec succès!');
+      } else {
+        toast.error('Erreur lors de l\'envoi. Veuillez réessayer.');
+      }
+    } catch (error) {
+      console.error('Erreur envoi devis:', error);
+      toast.error('Erreur lors de l\'envoi. Veuillez réessayer.');
+    }
   };
 
   const handleClose = () => {

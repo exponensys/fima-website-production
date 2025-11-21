@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark, faUser, faCalendar, faMessage, faPhone, faCheckCircle, faClock, faUsers, faAward } from '@fortawesome/free-solid-svg-icons';
 import { toast } from 'sonner';
+import { sendAppointmentEmail } from '../services/emailService';
 
 interface ExpertConsultationModalProps {
   isOpen: boolean;
@@ -107,28 +108,32 @@ export function ExpertConsultationModal({ isOpen, onClose, consultationType = 'e
     setIsSubmitting(true);
     
     try {
-      // Simulation d'envoi
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      const success = await sendAppointmentEmail(formData);
       
-      toast.success(
-        consultationType === 'appointment' 
-          ? 'Rendez-vous planifié avec succès ! Vous recevrez une confirmation par email.'
-          : 'Demande envoyée ! Un expert vous contactera dans les 24h.'
-      );
-      
-      onClose();
-      setStep(1);
-      setFormData({
-        firstName: '', lastName: '', email: '', phone: '', company: '',
-        serviceType: '', consultationType: consultationType,
-        projectDescription: '', budget: '', timeline: '',
-        preferredDate: '', preferredTime: '', consultationMode: 'presential',
-        newsletter: false, dataProcessing: false
-      });
-      setEmailError('');
-      setPhoneError('');
+      if (success) {
+        toast.success(
+          consultationType === 'appointment' 
+            ? 'Rendez-vous planifié avec succès ! Vous recevrez une confirmation par email.'
+            : 'Demande envoyée ! Un expert vous contactera dans les 24h.'
+        );
+        
+        onClose();
+        setStep(1);
+        setFormData({
+          firstName: '', lastName: '', email: '', phone: '', company: '',
+          serviceType: '', consultationType: consultationType,
+          projectDescription: '', budget: '', timeline: '',
+          preferredDate: '', preferredTime: '', consultationMode: 'presential',
+          newsletter: false, dataProcessing: false
+        });
+        setEmailError('');
+        setPhoneError('');
+      } else {
+        toast.error('Erreur lors de l\'envoi. Veuillez réessayer.');
+      }
       
     } catch (error) {
+      console.error('Erreur envoi rendez-vous:', error);
       toast.error('Une erreur est survenue. Veuillez réessayer.');
     } finally {
       setIsSubmitting(false);
