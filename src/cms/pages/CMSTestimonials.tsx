@@ -29,17 +29,17 @@ export function CMSTestimonials() {
   const handleEdit = (testimonial: any) => {
     setEditingId(testimonial.id);
     setFormData({
-      clientName: testimonial.clientName || '',
-      clientLocation: testimonial.clientLocation || '',
-      clientPhoto: testimonial.clientPhoto || '',
-      testimonialFr: testimonial.testimonialFr || '',
-      testimonialEn: testimonial.testimonialEn || '',
+      clientName: testimonial.name || '',
+      clientLocation: testimonial.location || '',
+      clientPhoto: testimonial.avatar || '',
+      testimonialFr: testimonial.content_fr || '',
+      testimonialEn: testimonial.content_en || '',
       project: testimonial.project || '',
       rating: testimonial.rating || 5,
       category: testimonial.category || 'general',
-      featured: testimonial.featured || false,
-      published: testimonial.published || false,
-      testimonialDate: testimonial.testimonialDate || new Date().toISOString().split('T')[0]
+      featured: testimonial.is_featured || false,
+      published: testimonial.is_active || false,
+      testimonialDate: testimonial.created_at?.split('T')[0] || new Date().toISOString().split('T')[0]
     });
     setIsAddingNew(true);
   };
@@ -61,10 +61,16 @@ export function CMSTestimonials() {
 
     if (editingId) {
       const result = await updateTestimonial(editingId, { 
-        ...formData, 
+        name: formData.clientName,
+        location: formData.clientLocation,
+        avatar: formData.clientPhoto,
+        content_fr: formData.testimonialFr,
+        content_en: formData.testimonialEn,
         rating: formData.rating as 1 | 2 | 3 | 4 | 5,
-        clientPosition: '',
-        clientCompany: ''
+        is_featured: formData.featured,
+        is_active: formData.published,
+        position: '',
+        company: ''
       });
       if (result.success) {
         toast.success('Témoignage mis à jour avec succès');
@@ -77,10 +83,16 @@ export function CMSTestimonials() {
       }
     } else {
       const result = await createTestimonial({ 
-        ...formData, 
+        name: formData.clientName,
+        location: formData.clientLocation,
+        avatar: formData.clientPhoto,
+        content_fr: formData.testimonialFr,
+        content_en: formData.testimonialEn,
         rating: formData.rating as 1 | 2 | 3 | 4 | 5,
-        clientPosition: '',
-        clientCompany: ''
+        is_featured: formData.featured,
+        is_active: formData.published,
+        position: '',
+        company: ''
       });
       if (result.success) {
         toast.success('Témoignage créé avec succès');
@@ -380,23 +392,23 @@ export function CMSTestimonials() {
                 <tr key={testimonial.id} className="hover:bg-gray-50">
                   <td className="py-3 px-4">
                     <div className="flex items-center space-x-3">
-                      {testimonial.clientPhoto && testimonial.clientPhoto.startsWith('http') ? (
+                      {testimonial.avatar && testimonial.avatar.startsWith('http') ? (
                         <img 
-                          src={testimonial.clientPhoto} 
-                          alt={testimonial.clientName}
+                          src={testimonial.avatar} 
+                          alt={testimonial.name}
                           className="w-10 h-10 object-cover"
                         />
                       ) : (
-                        <div className="text-2xl">{testimonial.clientPhoto || '👤'}</div>
+                        <div className="text-2xl">{testimonial.avatar || '👤'}</div>
                       )}
                       <div>
-                        <div className="font-medium text-gray-900">{testimonial.clientName}</div>
-                        <div className="text-sm text-gray-500">{testimonial.clientLocation}</div>
+                        <div className="font-medium text-gray-900">{testimonial.name}</div>
+                        <div className="text-sm text-gray-500">{testimonial.location}</div>
                       </div>
                     </div>
                   </td>
                   <td className="py-3 px-4 max-w-xs">
-                    <div className="text-sm text-gray-900 truncate">{testimonial.testimonialFr}</div>
+                    <div className="text-sm text-gray-900 truncate">{testimonial.content_fr}</div>
                     {testimonial.project && (
                       <div className="text-xs text-green-600 font-medium mt-1">{testimonial.project}</div>
                     )}
@@ -415,7 +427,7 @@ export function CMSTestimonials() {
                   </td>
                   <td className="py-3 px-4">
                     <div className="flex items-center space-x-2">
-                      {testimonial.published ? (
+                      {testimonial.is_active ? (
                         <span className="flex items-center text-green-600 text-sm">
                           <Eye className="w-4 h-4 mr-1" />
                           Publié
@@ -426,7 +438,7 @@ export function CMSTestimonials() {
                           Brouillon
                         </span>
                       )}
-                      {testimonial.featured && (
+                      {testimonial.is_featured && (
                         <span className="px-2 py-1 text-xs font-medium bg-yellow-100 text-yellow-800">
                           ⭐ Vedette
                         </span>

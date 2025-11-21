@@ -102,11 +102,11 @@ export function BedtimeStoriesSection() {
           <div className="products-grid w-full">
             {displayedTestimonials.map((testimonial, index) => {
               // Avatar emoji basé sur le nom ou photo
-              const avatar = testimonial.clientPhoto || "👤";
+              const avatar = testimonial.avatar || "👤";
               const testimonialText =
                 (selectedLanguage as string) === "en"
-                  ? testimonial.testimonialEn
-                  : testimonial.testimonialFr;
+                  ? testimonial.content_en
+                  : testimonial.content_fr;
 
               return (
                 <div
@@ -115,15 +115,15 @@ export function BedtimeStoriesSection() {
                 >
                   {/* Header avec avatar et info */}
                   <div className="flex items-start gap-4 mb-6">
-                    {testimonial.clientPhoto ? (
+                    {testimonial.avatar ? (
                       <img
-                        src={testimonial.clientPhoto}
-                        alt={testimonial.clientName}
+                        src={testimonial.avatar}
+                        alt={testimonial.name}
                         className="w-12 h-12 object-cover rounded-full"
                       />
                     ) : (
                       <div className="w-12 h-12 rounded-full bg-[#B5C233] flex items-center justify-center text-white text-xl">
-                        {testimonial.clientName.charAt(0)}
+                        {testimonial.name?.charAt(0) || '?'}
                       </div>
                     )}
                     <div className="flex-1">
@@ -145,13 +145,13 @@ export function BedtimeStoriesSection() {
                           color: "#000000",
                         }}
                       >
-                        {testimonial.clientName}
+                        {testimonial.name}
                       </h4>
                       <p
                         className="text-sm"
                         style={{ color: "#6E6E6E" }}
                       >
-                        {testimonial.clientLocation}
+                        {testimonial.location}
                       </p>
                     </div>
                   </div>

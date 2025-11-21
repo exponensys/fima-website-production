@@ -1,29 +1,22 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../utils/supabase/client';
 
-// Types pour les testimonials basés sur Types.md
+// Types pour les testimonials basés sur le schéma DB
 export interface Testimonial {
   id: string;
-  clientName: string;
-  clientPosition: string;
-  clientCompany: string;
-  clientLocation: string;
-  clientPhoto?: string;
-  testimonialFr: string;
-  testimonialEn: string;
+  name: string;
+  company: string;
+  position: string;
+  content_fr: string;
+  content_en: string;
+  avatar?: string;
   rating: 1 | 2 | 3 | 4 | 5;
-  project?: string;
-  projectId?: string;
-  category: string;
-  featured?: boolean;
-  published: boolean;
-  publishedDate?: string;
-  videoUrl?: string;
-  createdAt: string;
-  updatedAt?: string;
+  location: string;
+  is_featured: boolean;
+  is_active: boolean;
+  created_at: string;
+  updated_at?: string;
 }
-
-// Utilisation directe du client Supabase au lieu des Edge Functions
 
 /**
  * Hook pour récupérer les testimonials depuis l'API backend
@@ -49,12 +42,14 @@ export const useTestimonials = (
 
         let query = supabase.from('testimonials').select('*');
         
-        // Ajouter les paramètres de filtrage
-        if (category) {
-          query = query.eq('category', category);
+        // Filtrer les testimonials actifs seulement si publishedOnly est true
+        if (publishedOnly) {
+          query = query.eq('is_active', true);
         }
+        
+        // Ajouter les paramètres de filtrage
         if (featuredOnly) {
-          query = query.eq('featured', true);
+          query = query.eq('is_featured', true);
         }
         
         const { data, error: supabaseError } = await query.order('created_at', { ascending: false });
@@ -67,41 +62,15 @@ export const useTestimonials = (
           return;
         }
 
-        let testimonialsData: Testimonial[] = (data || []).map(item => ({
-          id: item.id,
-          clientName: item.client_name,
-          clientPosition: item.client_position,
-          clientCompany: item.client_company,
-          clientLocation: item.client_location,
-          clientPhoto: item.client_photo,
-          testimonialFr: item.testimonial_fr,
-          testimonialEn: item.testimonial_en,
-          rating: item.rating,
-          project: item.project,
-          projectId: item.project_id,
-          category: item.category,
-          featured: item.featured,
-          published: item.published,
-          publishedDate: item.published_date,
-          videoUrl: item.video_url,
-          createdAt: item.created_at,
-          updatedAt: item.updated_at
-        }));
+        let testimonialsData: Testimonial[] = data || [];
 
-        // Filtrer les testimonials publiés uniquement si demandé
-        if (publishedOnly) {
-          testimonialsData = testimonialsData.filter(t => t.published);
-        }
-
-        // Trier par date de publication décroissante, puis par featured
+        // Trier par featured puis par date
         testimonialsData.sort((a, b) => {
-          // Featured first
-          if (a.featured && !b.featured) return -1;
-          if (!a.featured && b.featured) return 1;
+          if (a.is_featured && !b.is_featured) return -1;
+          if (!a.is_featured && b.is_featured) return 1;
           
-          // Then by date
-          const dateA = new Date(a.publishedDate || a.createdAt).getTime();
-          const dateB = new Date(b.publishedDate || b.createdAt).getTime();
+          const dateA = new Date(a.created_at).getTime();
+          const dateB = new Date(b.created_at).getTime();
           return dateB - dateA;
         });
 
@@ -150,26 +119,7 @@ export const useTestimonial = (id: string, locale: 'fr' | 'en' = 'fr') => {
         }
 
         if (data) {
-          setTestimonial({
-            id: data.id,
-            clientName: data.client_name,
-            clientPosition: data.client_position,
-            clientCompany: data.client_company,
-            clientLocation: data.client_location,
-            clientPhoto: data.client_photo,
-            testimonialFr: data.testimonial_fr,
-            testimonialEn: data.testimonial_en,
-            rating: data.rating,
-            project: data.project,
-            projectId: data.project_id,
-            category: data.category,
-            featured: data.featured,
-            published: data.published,
-            publishedDate: data.published_date,
-            videoUrl: data.video_url,
-            createdAt: data.created_at,
-            updatedAt: data.updated_at
-          });
+          setTestimonial(data);
         }
       } catch (err) {
         console.error('Error fetching testimonial:', err);
@@ -195,38 +145,20 @@ export const useTestimonialMutation = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const createTestimonial = async (testimonialData: Omit<Testimonial, 'id' | 'createdAt'>) => {
+  const createTestimonial = async (testimonialData: Omit<Testimonial, 'id' | 'created_at'>) => {
     try {
       setLoading(true);
       setError(null);
 
-      const { data, error: supabaseError } = await supabase
+      const { error: supabaseError } = await supabase
         .from('testimonials')
-        .insert({
-          client_name: testimonialData.clientName,
-          client_position: testimonialData.clientPosition,
-          client_company: testimonialData.clientCompany,
-          client_location: testimonialData.clientLocation,
-          client_photo: testimonialData.clientPhoto,
-          testimonial_fr: testimonialData.testimonialFr,
-          testimonial_en: testimonialData.testimonialEn,
-          rating: testimonialData.rating,
-          project: testimonialData.project,
-          project_id: testimonialData.projectId,
-          category: testimonialData.category,
-          featured: testimonialData.featured,
-          published: testimonialData.published,
-          published_date: testimonialData.publishedDate,
-          video_url: testimonialData.videoUrl
-        })
-        .select()
-        .single();
+        .insert(testimonialData);
 
       if (supabaseError) {
         throw new Error(`Erreur lors de la création du testimonial: ${supabaseError.message}`);
       }
 
-      return { success: true, data };
+      return { success: true };
     } catch (err) {
       console.error('Error creating testimonial:', err);
       const errorMessage = err instanceof Error ? err.message : 'Erreur inconnue';
@@ -242,29 +174,30 @@ export const useTestimonialMutation = () => {
       setLoading(true);
       setError(null);
 
+      console.log('Updating testimonial:', id, testimonialData);
+      
       const { data, error: supabaseError } = await supabase
-        .from('testimonials')
-        .update({
-          client_name: testimonialData.clientName,
-          client_position: testimonialData.clientPosition,
-          client_company: testimonialData.clientCompany,
-          client_location: testimonialData.clientLocation,
-          client_photo: testimonialData.clientPhoto,
-          testimonial_fr: testimonialData.testimonialFr,
-          testimonial_en: testimonialData.testimonialEn,
-          rating: testimonialData.rating,
-          project: testimonialData.project,
-          project_id: testimonialData.projectId,
-          category: testimonialData.category,
-          featured: testimonialData.featured,
-          published: testimonialData.published,
-          published_date: testimonialData.publishedDate,
-          video_url: testimonialData.videoUrl,
-          updated_at: new Date().toISOString()
-        })
-        .eq('id', id)
-        .select()
-        .single();
+        .rpc('update_testimonial', {
+          testimonial_id: id,
+          testimonial_data: testimonialData
+        });
+
+      if (supabaseError) {
+        // Fallback vers update direct si RPC n'existe pas
+        const { data: fallbackData, error: fallbackError } = await supabase
+          .from('testimonials')
+          .update(testimonialData)
+          .eq('id', id)
+          .select();
+        
+        if (fallbackError) {
+          throw new Error(`Erreur lors de la mise à jour: ${fallbackError.message}`);
+        }
+        
+        return { success: true, data: fallbackData };
+      }
+
+      console.log('Update result:', { data, error: supabaseError, count });
 
       if (supabaseError) {
         throw new Error(`Erreur lors de la mise à jour du testimonial: ${supabaseError.message}`);
@@ -286,16 +219,35 @@ export const useTestimonialMutation = () => {
       setLoading(true);
       setError(null);
 
-      const { error: supabaseError } = await supabase
-        .from('testimonials')
-        .delete()
-        .eq('id', id);
+      console.log('Deleting testimonial:', id);
+      
+      const { data, error: supabaseError } = await supabase
+        .rpc('delete_testimonial', {
+          testimonial_id: id
+        });
+
+      if (supabaseError) {
+        // Fallback vers delete direct si RPC n'existe pas
+        const { data: fallbackData, error: fallbackError } = await supabase
+          .from('testimonials')
+          .delete()
+          .eq('id', id)
+          .select();
+        
+        if (fallbackError) {
+          throw new Error(`Erreur lors de la suppression: ${fallbackError.message}`);
+        }
+        
+        return { success: true, data: fallbackData };
+      }
+
+      console.log('Delete result:', { data, error: supabaseError, count });
 
       if (supabaseError) {
         throw new Error(`Erreur lors de la suppression du testimonial: ${supabaseError.message}`);
       }
 
-      return { success: true };
+      return { success: true, data };
     } catch (err) {
       console.error('Error deleting testimonial:', err);
       const errorMessage = err instanceof Error ? err.message : 'Erreur inconnue';
