@@ -89,10 +89,7 @@ export function ProductDetailPage({ product, onBack, onExpertClick, onProductCli
   const [reviewSort, setReviewSort] = useState('recent');
   const [isCustomOrderModalOpen, setIsCustomOrderModalOpen] = useState(false);
   
-  // États pour l'effet de zoom latéral
-  const [isHovering, setIsHovering] = useState(false);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [imageContainerRect, setImageContainerRect] = useState<DOMRect | null>(null);
+
   
   const videoRef = useRef<HTMLVideoElement>(null);
   const imageContainerRef = useRef<HTMLDivElement>(null);
@@ -584,57 +581,7 @@ export function ProductDetailPage({ product, onBack, onExpertClick, onProductCli
     };
   }, [is360Playing]);
 
-  // Fonctions pour l'effet de zoom latéral
-  const handleMouseEnter = () => {
-    if (activeMediaType === 'image' && imageContainerRef.current) {
-      const rect = imageContainerRef.current.getBoundingClientRect();
-      setImageContainerRect(rect);
-      setIsHovering(true);
-    }
-  };
 
-  const handleMouseLeave = () => {
-    setIsHovering(false);
-    setImageContainerRect(null);
-  };
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (isHovering && imageContainerRect && activeMediaType === 'image') {
-      const x = e.clientX - imageContainerRect.left;
-      const y = e.clientY - imageContainerRect.top;
-      
-      // S'assurer que les coordonnées sont dans les limites
-      const clampedX = Math.max(0, Math.min(x, imageContainerRect.width));
-      const clampedY = Math.max(0, Math.min(y, imageContainerRect.height));
-      
-      setMousePosition({ x: clampedX, y: clampedY });
-    }
-  };
-
-  // Calculer la position du zoom pour le panneau latéral
-  const getZoomStyle = () => {
-    if (!imageContainerRect || !isHovering || activeMediaType !== 'image') return {};
-    
-    const zoomLevel = 2.5; // Niveau de zoom
-    const containerWidth = imageContainerRect.width;
-    const containerHeight = imageContainerRect.height;
-    
-    // Calculer le pourcentage de position de la souris
-    const xPercent = (mousePosition.x / containerWidth) * 100;
-    const yPercent = (mousePosition.y / containerHeight) * 100;
-    
-    // Calculer la position de l'image zoomée pour centrer la zone survolée
-    const backgroundPosX = Math.max(0, Math.min(100, xPercent));
-    const backgroundPosY = Math.max(0, Math.min(100, yPercent));
-    
-    return {
-      backgroundImage: `url(${productMedia[selectedImageIndex]?.src || productToUse.image})`,
-      backgroundSize: `${zoomLevel * 100}%`,
-      backgroundPosition: `${backgroundPosX}% ${backgroundPosY}%`,
-      backgroundRepeat: 'no-repeat',
-      cursor: 'crosshair'
-    };
-  };
 
   const getAverageRating = () => {
     const total = sampleReviews.reduce((sum, review) => sum + review.rating, 0);
@@ -773,12 +720,7 @@ export function ProductDetailPage({ product, onBack, onExpertClick, onProductCli
               <div className="flex-1">
                 <div 
                   ref={imageContainerRef}
-                  className={`aspect-square bg-white rounded-2xl overflow-hidden shadow-lg relative product-zoom-container ${
-                    activeMediaType === 'image' && isHovering ? 'zoom-active' : ''
-                  }`}
-                  onMouseEnter={handleMouseEnter}
-                  onMouseLeave={handleMouseLeave}
-                  onMouseMove={handleMouseMove}
+                  className="aspect-square bg-white rounded-2xl overflow-hidden shadow-lg relative"
                 >
                   {activeMediaType === 'image' && (
                     <div className="relative h-full">
@@ -787,12 +729,7 @@ export function ProductDetailPage({ product, onBack, onExpertClick, onProductCli
                         alt={product.title}
                         className="w-full h-full object-cover"
                       />
-                      {/* Indicateur de zoom au hover */}
-                      {isHovering && (
-                        <div className="absolute top-4 right-4 bg-black/70 backdrop-blur-sm rounded-full p-2 pointer-events-none">
-                          <ZoomIn className="w-4 h-4 text-white" />
-                        </div>
-                      )}
+
                       {/* Bouton pour ouvrir en modal (toujours visible) */}
                       <Dialog open={isZoomed} onOpenChange={setIsZoomed}>
                         <DialogTrigger asChild>
@@ -878,36 +815,19 @@ export function ProductDetailPage({ product, onBack, onExpertClick, onProductCli
                 </div>
               </div>
 
-              {/* Panneau de zoom latéral - visible uniquement sur desktop quand on hover */}
-              {isHovering && activeMediaType === 'image' && (
-                <div className="hidden lg:block w-80 aspect-square bg-white rounded-2xl shadow-2xl border-2 border-gray-200 overflow-hidden relative">
-                  <div 
-                    className="w-full h-full transition-all duration-100 ease-out"
-                    style={getZoomStyle()}
-                  />
-                  <div className="absolute top-2 right-2 bg-black/50 backdrop-blur-sm rounded px-2 py-1">
-                    <span className="text-white text-xs font-medium">Zoom 2.5x</span>
-                  </div>
-                </div>
-              )}
+
             </div>
             
-            {/* Miniatures */}
+            {/* Miniatures - sans hover effects */}
             {activeMediaType === 'image' && productMedia.filter(m => m.type === 'image').length >= 1 && (
               <div className="flex gap-3 overflow-x-auto pb-2">
                 {productMedia.filter(m => m.type === 'image').map((media, index) => (
                   <button
                     key={index}
                     onClick={() => setSelectedImageIndex(index)}
-                    className="flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 transition-colors"
+                    className="flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2"
                     style={{
                       borderColor: selectedImageIndex === index ? '#B5C233' : '#e5e7eb'
-                    }}
-                    onMouseEnter={(e) => {
-                      if (selectedImageIndex !== index) e.currentTarget.style.borderColor = '#d1d5db';
-                    }}
-                    onMouseLeave={(e) => {
-                      if (selectedImageIndex !== index) e.currentTarget.style.borderColor = '#e5e7eb';
                     }}
                   >
                     <ImageWithFallback 

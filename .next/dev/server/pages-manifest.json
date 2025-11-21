@@ -5,6 +5,8 @@
   "/_error": "pages/_error.js",
   "/cms": "pages/cms.js",
   "/content-hub": "pages/content-hub.js",
+  "/home": "pages/home.js",
+  "/product/[id]": "pages/product/[id].js",
   "/products": "pages/products.js",
   "/projects": "pages/projects.js"
 }

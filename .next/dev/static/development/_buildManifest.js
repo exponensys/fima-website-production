@@ -11,6 +11,12 @@ self.__BUILD_MANIFEST = {
   "/content-hub": [
     "static/chunks/pages/content-hub.js"
   ],
+  "/home": [
+    "static/chunks/pages/home.js"
+  ],
+  "/product/[id]": [
+    "static/chunks/pages/product/[id].js"
+  ],
   "/products": [
     "static/chunks/pages/products.js"
   ],
@@ -31,6 +37,7 @@ self.__BUILD_MANIFEST = {
     "/fima-couchage",
     "/fima-design",
     "/home",
+    "/product/[id]",
     "/products",
     "/projects",
     "/univers-glass"

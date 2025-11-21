@@ -50,7 +50,10 @@ export function NewsSection({
   const { blogs, loading, error } = useBlogs(
     selectedLanguage.toLowerCase() as "fr" | "en",
     selectedCategory,
+    false // Afficher tous les articles (publiés et brouillons)
   );
+
+
 
   // Détecter si on est sur mobile
   useEffect(() => {
