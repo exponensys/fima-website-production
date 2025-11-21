@@ -32,7 +32,7 @@ export function SEOContentHub({
   const { blogs, loading, error } = useBlogs(
     selectedLanguage.toLowerCase() === "en" ? "en" : "fr",
     undefined,
-    true // Seulement les articles publiés
+    false // Afficher tous les articles (publiés et brouillons)
   );
 
   console.log('📚 SEOContentHub - Blogs loaded from CMS:', blogs);
@@ -42,7 +42,7 @@ export function SEOContentHub({
     id: blog.id,
     title: selectedLanguage.toLowerCase() === "en" ? blog.titleEn : blog.titleFr,
     subtitle: "", // Pas de subtitle dans le modèle Blog
-    category: blog.category,
+    category: blog.category || 'Non catégorisé',
     type: "article",
     readTime: `${blog.readTime} min`,
     author: blog.author,
@@ -63,10 +63,10 @@ export function SEOContentHub({
   // Compter les articles par catégorie depuis le CMS
   const categoryCounts = {
     tous: cmsArticles.length,
-    guides: cmsArticles.filter(a => a.category.toLowerCase().includes('guide')).length,
-    conseils: cmsArticles.filter(a => a.category.toLowerCase().includes('conseil')).length,
-    tendances: cmsArticles.filter(a => a.category.toLowerCase().includes('tendance')).length,
-    technique: cmsArticles.filter(a => a.category.toLowerCase().includes('technique')).length,
+    guides: cmsArticles.filter(a => a.category && a.category.toLowerCase().includes('guide')).length,
+    conseils: cmsArticles.filter(a => a.category && a.category.toLowerCase().includes('conseil')).length,
+    tendances: cmsArticles.filter(a => a.category && a.category.toLowerCase().includes('tendance')).length,
+    technique: cmsArticles.filter(a => a.category && a.category.toLowerCase().includes('technique')).length,
   };
 
   const contentCategories = [
@@ -81,10 +81,10 @@ export function SEOContentHub({
   const filteredContent = cmsArticles.filter((item) => {
     const matchesCategory =
       activeCategory === "tous" ||
-      (activeCategory === "guides" && item.category.toLowerCase().includes("guide")) ||
-      (activeCategory === "conseils" && item.category.toLowerCase().includes("conseil")) ||
-      (activeCategory === "tendances" && item.category.toLowerCase().includes("tendance")) ||
-      (activeCategory === "technique" && item.category.toLowerCase().includes("technique"));
+      (activeCategory === "guides" && item.category && item.category.toLowerCase().includes("guide")) ||
+      (activeCategory === "conseils" && item.category && item.category.toLowerCase().includes("conseil")) ||
+      (activeCategory === "tendances" && item.category && item.category.toLowerCase().includes("tendance")) ||
+      (activeCategory === "technique" && item.category && item.category.toLowerCase().includes("technique"));
 
     const matchesSearch =
       !searchQuery ||

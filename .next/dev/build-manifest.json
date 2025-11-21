@@ -1,8 +1,8 @@
 {
   "pages": {
     "/": [
-      "static/chunks/src_7dd3c960._.js",
-      "static/chunks/src_components_e43709ab._.js",
+      "static/chunks/src_386e176d._.js",
+      "static/chunks/src_components_e443157b._.js",
       "static/chunks/src_hooks_40c471f9._.js",
       "static/chunks/src_App_tsx_653205ec._.js",
       "static/chunks/src_dd523c1d._.js",
@@ -27,7 +27,7 @@
       "static/chunks/node_modules_react-slick_lib_09dd504a._.js",
       "static/chunks/node_modules_b1119b2b._.js",
       "static/chunks/pages_index_2da965e7._.js",
-      "static/chunks/turbopack-pages_index_2ea6b12b._.js"
+      "static/chunks/turbopack-pages_index_cf491ae9._.js"
     ],
     "/_app": [
       "static/chunks/node_modules_next_dist_compiled_8ca6b690._.js",
