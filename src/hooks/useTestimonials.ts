@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { projectId, publicAnonKey } from '../utils/supabase/info';
+import { supabase } from '../utils/supabase/client';
 
 // Types pour les testimonials basés sur Types.md
 export interface Testimonial {
@@ -23,7 +23,7 @@ export interface Testimonial {
   updatedAt?: string;
 }
 
-const API_BASE_URL = `https://${projectId}.supabase.co/functions/v1/make-server-98c6ec1c`;
+// Utilisation directe du client Supabase au lieu des Edge Functions
 
 /**
  * Hook pour récupérer les testimonials depuis l'API backend
@@ -224,26 +224,35 @@ export const useTestimonialMutation = () => {
       setLoading(true);
       setError(null);
 
-      const response = await fetch(`${API_BASE_URL}/testimonials/${id}`, {
-        method: 'PUT',
-        headers: {
-          'Authorization': `Bearer ${publicAnonKey}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(testimonialData),
-      });
+      const { data, error: supabaseError } = await supabase
+        .from('testimonials')
+        .update({
+          client_name: testimonialData.clientName,
+          client_position: testimonialData.clientPosition,
+          client_company: testimonialData.clientCompany,
+          client_location: testimonialData.clientLocation,
+          client_photo: testimonialData.clientPhoto,
+          testimonial_fr: testimonialData.testimonialFr,
+          testimonial_en: testimonialData.testimonialEn,
+          rating: testimonialData.rating,
+          project: testimonialData.project,
+          project_id: testimonialData.projectId,
+          category: testimonialData.category,
+          featured: testimonialData.featured,
+          published: testimonialData.published,
+          published_date: testimonialData.publishedDate,
+          video_url: testimonialData.videoUrl,
+          updated_at: new Date().toISOString()
+        })
+        .eq('id', id)
+        .select()
+        .single();
 
-      if (!response.ok) {
-        throw new Error(`Erreur lors de la mise à jour du testimonial: ${response.statusText}`);
+      if (supabaseError) {
+        throw new Error(`Erreur lors de la mise à jour du testimonial: ${supabaseError.message}`);
       }
 
-      const result = await response.json();
-      
-      if (!result.success) {
-        throw new Error(result.error || 'Erreur lors de la mise à jour du testimonial');
-      }
-
-      return { success: true, data: result.data };
+      return { success: true, data };
     } catch (err) {
       console.error('Error updating testimonial:', err);
       const errorMessage = err instanceof Error ? err.message : 'Erreur inconnue';
@@ -259,22 +268,13 @@ export const useTestimonialMutation = () => {
       setLoading(true);
       setError(null);
 
-      const response = await fetch(`${API_BASE_URL}/testimonials/${id}`, {
-        method: 'DELETE',
-        headers: {
-          'Authorization': `Bearer ${publicAnonKey}`,
-          'Content-Type': 'application/json',
-        },
-      });
+      const { error: supabaseError } = await supabase
+        .from('testimonials')
+        .delete()
+        .eq('id', id);
 
-      if (!response.ok) {
-        throw new Error(`Erreur lors de la suppression du testimonial: ${response.statusText}`);
-      }
-
-      const result = await response.json();
-      
-      if (!result.success) {
-        throw new Error(result.error || 'Erreur lors de la suppression du testimonial');
+      if (supabaseError) {
+        throw new Error(`Erreur lors de la suppression du testimonial: ${supabaseError.message}`);
       }
 
       return { success: true };
