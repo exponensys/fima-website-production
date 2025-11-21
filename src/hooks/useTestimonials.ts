@@ -47,48 +47,46 @@ export const useTestimonials = (
         setLoading(true);
         setError(null);
 
-        const url = new URL(`${API_BASE_URL}/testimonials`);
+        let query = supabase.from('testimonials').select('*');
         
         // Ajouter les paramètres de filtrage
         if (category) {
-          url.searchParams.append('category', category);
+          query = query.eq('category', category);
         }
         if (featuredOnly) {
-          url.searchParams.append('featured', 'true');
+          query = query.eq('featured', true);
         }
         
-        const response = await fetch(url.toString(), {
-          method: 'GET',
-          headers: {
-            'Authorization': `Bearer ${publicAnonKey}`,
-            'Content-Type': 'application/json',
-          },
-        });
+        const { data, error: supabaseError } = await query.order('created_at', { ascending: false });
 
-        if (!response.ok) {
-          console.error(`Testimonials API error: ${response.status} ${response.statusText}`);
-          // Ne pas throw l'erreur, juste retourner un tableau vide
+        if (supabaseError) {
+          console.error('Testimonials Supabase error:', supabaseError);
           setTestimonials([]);
-          setError(`Erreur API: ${response.statusText}. Veuillez initialiser les données depuis le CMS.`);
+          setError(`Erreur lors du chargement des témoignages: ${supabaseError.message}`);
           setLoading(false);
           return;
         }
 
-        const result = await response.json();
-        
-        // DEBUG: Afficher ce qui est retourné par l'API
-        console.log('🔍 Testimonials API Response:', result);
-        console.log('🔍 Number of testimonials:', result.data?.length);
-        
-        if (!result.success) {
-          console.error('Testimonials API returned error:', result.error);
-          setTestimonials([]);
-          setError(result.error || 'Aucune donnée disponible. Veuillez initialiser les testimonials depuis le CMS.');
-          setLoading(false);
-          return;
-        }
-
-        let testimonialsData: Testimonial[] = result.data || [];
+        let testimonialsData: Testimonial[] = (data || []).map(item => ({
+          id: item.id,
+          clientName: item.client_name,
+          clientPosition: item.client_position,
+          clientCompany: item.client_company,
+          clientLocation: item.client_location,
+          clientPhoto: item.client_photo,
+          testimonialFr: item.testimonial_fr,
+          testimonialEn: item.testimonial_en,
+          rating: item.rating,
+          project: item.project,
+          projectId: item.project_id,
+          category: item.category,
+          featured: item.featured,
+          published: item.published,
+          publishedDate: item.published_date,
+          videoUrl: item.video_url,
+          createdAt: item.created_at,
+          updatedAt: item.updated_at
+        }));
 
         // Filtrer les testimonials publiés uniquement si demandé
         if (publishedOnly) {
@@ -141,25 +139,38 @@ export const useTestimonial = (id: string, locale: 'fr' | 'en' = 'fr') => {
         setLoading(true);
         setError(null);
 
-        const response = await fetch(`${API_BASE_URL}/testimonials/${id}`, {
-          method: 'GET',
-          headers: {
-            'Authorization': `Bearer ${publicAnonKey}`,
-            'Content-Type': 'application/json',
-          },
-        });
+        const { data, error: supabaseError } = await supabase
+          .from('testimonials')
+          .select('*')
+          .eq('id', id)
+          .single();
 
-        if (!response.ok) {
-          throw new Error(`Erreur lors du chargement du testimonial: ${response.statusText}`);
+        if (supabaseError) {
+          throw new Error(`Erreur lors du chargement du testimonial: ${supabaseError.message}`);
         }
 
-        const result = await response.json();
-        
-        if (!result.success) {
-          throw new Error(result.error || 'Testimonial non trouvé');
+        if (data) {
+          setTestimonial({
+            id: data.id,
+            clientName: data.client_name,
+            clientPosition: data.client_position,
+            clientCompany: data.client_company,
+            clientLocation: data.client_location,
+            clientPhoto: data.client_photo,
+            testimonialFr: data.testimonial_fr,
+            testimonialEn: data.testimonial_en,
+            rating: data.rating,
+            project: data.project,
+            projectId: data.project_id,
+            category: data.category,
+            featured: data.featured,
+            published: data.published,
+            publishedDate: data.published_date,
+            videoUrl: data.video_url,
+            createdAt: data.created_at,
+            updatedAt: data.updated_at
+          });
         }
-
-        setTestimonial(result.data);
       } catch (err) {
         console.error('Error fetching testimonial:', err);
         setError(err instanceof Error ? err.message : 'Erreur inconnue');
@@ -189,26 +200,33 @@ export const useTestimonialMutation = () => {
       setLoading(true);
       setError(null);
 
-      const response = await fetch(`${API_BASE_URL}/testimonials`, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${publicAnonKey}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(testimonialData),
-      });
+      const { data, error: supabaseError } = await supabase
+        .from('testimonials')
+        .insert({
+          client_name: testimonialData.clientName,
+          client_position: testimonialData.clientPosition,
+          client_company: testimonialData.clientCompany,
+          client_location: testimonialData.clientLocation,
+          client_photo: testimonialData.clientPhoto,
+          testimonial_fr: testimonialData.testimonialFr,
+          testimonial_en: testimonialData.testimonialEn,
+          rating: testimonialData.rating,
+          project: testimonialData.project,
+          project_id: testimonialData.projectId,
+          category: testimonialData.category,
+          featured: testimonialData.featured,
+          published: testimonialData.published,
+          published_date: testimonialData.publishedDate,
+          video_url: testimonialData.videoUrl
+        })
+        .select()
+        .single();
 
-      if (!response.ok) {
-        throw new Error(`Erreur lors de la création du testimonial: ${response.statusText}`);
+      if (supabaseError) {
+        throw new Error(`Erreur lors de la création du testimonial: ${supabaseError.message}`);
       }
 
-      const result = await response.json();
-      
-      if (!result.success) {
-        throw new Error(result.error || 'Erreur lors de la création du testimonial');
-      }
-
-      return { success: true, data: result.data };
+      return { success: true, data };
     } catch (err) {
       console.error('Error creating testimonial:', err);
       const errorMessage = err instanceof Error ? err.message : 'Erreur inconnue';
