@@ -184,23 +184,27 @@ export const useBlogMutation = () => {
       setLoading(true);
       setError(null);
 
+      // Insertion directe avec gestion RLS
+      const insertData = {
+        title_fr: blogData.titleFr,
+        title_en: blogData.titleEn,
+        slug: blogData.slug,
+        summary_fr: blogData.summaryFr,
+        summary_en: blogData.summaryEn,
+        content_fr: blogData.contentFr,
+        content_en: blogData.contentEn,
+        category: blogData.category,
+        tags: blogData.tags || [],
+        featured_image: blogData.featuredImage || '',
+        published: blogData.published || false,
+        published_date: blogData.publishedDate || new Date().toISOString(),
+        read_time: blogData.readTime || 5,
+        created_at: new Date().toISOString()
+      };
+
       const { data, error: supabaseError } = await supabase
         .from('blogs')
-        .insert({
-          title_fr: blogData.titleFr,
-          title_en: blogData.titleEn,
-          slug: blogData.slug,
-          summary_fr: blogData.summaryFr,
-          summary_en: blogData.summaryEn,
-          content_fr: blogData.contentFr,
-          content_en: blogData.contentEn,
-          category: blogData.category,
-          tags: blogData.tags,
-          featured_image: blogData.featuredImage,
-          published: blogData.published,
-          published_date: blogData.publishedDate,
-          read_time: blogData.readTime
-        })
+        .insert(insertData)
         .select()
         .single();
 
