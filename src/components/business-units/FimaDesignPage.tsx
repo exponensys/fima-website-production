@@ -667,7 +667,7 @@ export function FimaDesignPage({
             </h2>
             <p className="mb-8 max-w-2xl mx-auto opacity-90">
               Nos experts vous accompagnent de la conception à
-              la réalisation. Devis gratuit et conseil
+              la réalisation. Devis et conseil
               personnalisé.
             </p>
 
@@ -688,7 +688,7 @@ export function FimaDesignPage({
                     "#B5C233")
                 }
               >
-                Demander un devis gratuit
+                Demander un devis
               </button>
               <button
                 className=" px-8 py-4 bg-gray text-[#B5C233] rounded-xl  transition-colors"
