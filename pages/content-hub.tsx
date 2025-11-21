@@ -9,10 +9,22 @@ export default function ContentHubPage() {
     router.push(`/${page}`);
   };
 
+  const handleArticleClick = (article: any) => {
+    // Handle article navigation if needed
+  };
+
+  const handleBack = () => {
+    router.push('/');
+  };
+
   return (
     <>
       <Header onNavigate={handleNavigate} />
-      <SEOContentHub />
+      <SEOContentHub 
+        onNavigate={handleNavigate}
+        onArticleClick={handleArticleClick}
+        onBack={handleBack}
+      />
     </>
   );
 }
