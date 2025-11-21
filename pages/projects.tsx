@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { AllProjectsPage } from '../src/components/AllProjectsPage';
 import { Header } from '../src/components/Header';
+import { Footer } from '../src/components/Footer';
 
 export default function ProjectsPage() {
   const router = useRouter();
@@ -25,6 +26,7 @@ export default function ProjectsPage() {
         onNavigate={handleNavigate}
         onBack={handleBack}
       />
+      <Footer onNavigate={handleNavigate} />
     </>
   );
 }

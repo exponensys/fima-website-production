@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { ProductDetailPage } from '../../src/components/ProductDetailPage';
 import { Header } from '../../src/components/Header';
+import { Footer } from '../../src/components/Footer';
 import { useProducts } from '../../src/hooks/useProducts';
 
 export default function ProductPage() {
@@ -76,6 +77,7 @@ export default function ProductPage() {
         onProductClick={handleProductClick}
         onViewAllProducts={() => router.push('/products')}
       />
+      <Footer onNavigate={handleNavigate} />
     </>
   );
 }

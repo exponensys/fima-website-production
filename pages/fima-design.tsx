@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { FimaDesignPage } from '../src/components/business-units/FimaDesignPage';
 import { Header } from '../src/components/Header';
+import { Footer } from '../src/components/Footer';
 
 export default function FimaDesignPageRoute() {
   const router = useRouter();
@@ -25,6 +26,7 @@ export default function FimaDesignPageRoute() {
         onBack={handleBack}
         onQuoteRequest={handleQuoteRequest}
       />
+      <Footer onNavigate={handleNavigate} />
     </>
   );
 }

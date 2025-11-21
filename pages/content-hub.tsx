@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { SEOContentHub } from '../src/components/SEOContentHub';
 import { Header } from '../src/components/Header';
+import { Footer } from '../src/components/Footer';
 
 export default function ContentHubPage() {
   const router = useRouter();
@@ -25,6 +26,7 @@ export default function ContentHubPage() {
         onArticleClick={handleArticleClick}
         onBack={handleBack}
       />
+      <Footer onNavigate={handleNavigate} />
     </>
   );
 }

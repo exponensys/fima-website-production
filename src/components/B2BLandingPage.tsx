@@ -22,12 +22,14 @@ interface B2BLandingPageProps {
   onNavigate: (page: string) => void;
   onBack: () => void;
   onQuoteRequest: () => void;
+  onAppointmentRequest?: () => void;
 }
 
 export function B2BLandingPage({
   onNavigate,
   onBack,
   onQuoteRequest,
+  onAppointmentRequest,
 }: B2BLandingPageProps) {
   const [activeTab, setActiveTab] = useState("avantages");
 
@@ -705,6 +707,7 @@ export function B2BLandingPage({
                 Demander une étude
               </button>
               <button
+                onClick={onAppointmentRequest}
                 className="px-8 py-4 bg-white rounded-xl font-semibold transition-colors"
                 style={{ color: "#0EA5E9" }}
                 onMouseEnter={(e) =>

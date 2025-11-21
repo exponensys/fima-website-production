@@ -3,9 +3,11 @@
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
+  "/b2b-solutions": "pages/b2b-solutions.js",
   "/cms": "pages/cms.js",
   "/content-hub": "pages/content-hub.js",
   "/home": "pages/home.js",
+  "/our-history": "pages/our-history.js",
   "/product/[id]": "pages/product/[id].js",
   "/products": "pages/products.js",
   "/projects": "pages/projects.js"

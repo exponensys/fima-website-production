@@ -103,13 +103,18 @@ export function ProductDetailPage({ product, onBack, onExpertClick, onProductCli
 
   // Filtrer les produits similaires côté client
   // 1. Exclure le produit actuel
-  // 2. Prioriser la même catégorie si possible
-  // 3. Sinon prendre des produits aléatoires
+  // 2. Exclure les produits inactifs
+  // 3. Prioriser la même catégorie si possible
+  // 4. Sinon prendre des produits aléatoires
   const filteredSimilarProducts = (() => {
     if (!allProducts || allProducts.length === 0) return [];
     
-    // Exclure le produit actuel
-    let filtered = allProducts.filter(p => p.id !== product.id && p.sku !== product.sku);
+    // Exclure le produit actuel et les produits inactifs
+    let filtered = allProducts.filter(p => 
+      p.id !== product.id && 
+      p.sku !== product.sku && 
+      p.status !== 'inactive'
+    );
     
     // Si le produit a une catégorie valide, prioriser les produits de la même catégorie
     if (productToUse.category && productToUse.category !== 'undefined') {

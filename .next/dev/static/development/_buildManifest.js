@@ -5,6 +5,9 @@ self.__BUILD_MANIFEST = {
   "/_error": [
     "static/chunks/pages/_error.js"
   ],
+  "/b2b-solutions": [
+    "static/chunks/pages/b2b-solutions.js"
+  ],
   "/cms": [
     "static/chunks/pages/cms.js"
   ],
@@ -13,6 +16,9 @@ self.__BUILD_MANIFEST = {
   ],
   "/home": [
     "static/chunks/pages/home.js"
+  ],
+  "/our-history": [
+    "static/chunks/pages/our-history.js"
   ],
   "/product/[id]": [
     "static/chunks/pages/product/[id].js"
@@ -32,11 +38,14 @@ self.__BUILD_MANIFEST = {
     "/",
     "/_app",
     "/_error",
+    "/all-products",
+    "/b2b-solutions",
     "/cms",
     "/content-hub",
     "/fima-couchage",
     "/fima-design",
     "/home",
+    "/our-history",
     "/product/[id]",
     "/products",
     "/projects",

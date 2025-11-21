@@ -53,6 +53,15 @@ type PagesPageConfig = {
   type __Unused = __Check
 }
 
+// Validate ../../../pages/b2b-solutions.tsx
+{
+  type __IsExpected<Specific extends PagesPageConfig> = Specific
+  const handler = {} as typeof import("../../../pages/b2b-solutions.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../../pages/cms.tsx
 {
   type __IsExpected<Specific extends PagesPageConfig> = Specific
@@ -102,6 +111,15 @@ type PagesPageConfig = {
 {
   type __IsExpected<Specific extends PagesPageConfig> = Specific
   const handler = {} as typeof import("../../../pages/index.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../../pages/our-history.tsx
+{
+  type __IsExpected<Specific extends PagesPageConfig> = Specific
+  const handler = {} as typeof import("../../../pages/our-history.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check

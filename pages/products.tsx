@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { AllProductsPage } from '../src/components/AllProductsPage';
 import { Header } from '../src/components/Header';
+import { Footer } from '../src/components/Footer';
 
 export default function ProductsPage() {
   const router = useRouter();
@@ -24,6 +25,7 @@ export default function ProductsPage() {
         onProductClick={handleProductClick}
         onBack={handleBack}
       />
+      <Footer onNavigate={handleNavigate} />
     </>
   );
 }
