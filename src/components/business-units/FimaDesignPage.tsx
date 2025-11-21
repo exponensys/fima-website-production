@@ -558,8 +558,8 @@ export function FimaDesignPage({
         </section>
       )} */}
 
-      {/* Portfolio de réalisations */}
-      <section
+      {/* Portfolio de réalisations - TEMPORAIREMENT MASQUÉ */}
+      {/* <section
         className="py-16 bg-gray-50"
         id="nos-realisations"
       >
@@ -650,7 +650,7 @@ export function FimaDesignPage({
             </button>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* CTA Section */}
       <section
