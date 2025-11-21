@@ -361,8 +361,8 @@ export function NewsSection({
                         style={{ color: "#6E6E6E" }}
                       >
                         {(() => {
-                          const words =
-                            article.excerpt.split(" ");
+                          if (!article.excerpt) return "";
+                          const words = article.excerpt.split(" ");
                           if (words.length > 15) {
                             return (
                               words.slice(0, 15).join(" ") +

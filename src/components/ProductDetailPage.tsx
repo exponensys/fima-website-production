@@ -1214,8 +1214,15 @@ export function ProductDetailPage({ product, onBack, onExpertClick, onProductCli
 
             <TabsContent value="description" className="mt-8">
               <div className="prose max-w-none" style={{ fontFamily: 'Montserrat' }}>
-                {productToUse.description ? (
-                  <div dangerouslySetInnerHTML={{ __html: productToUse.description }} />
+                {productToUse.shortDescription ? (
+                  <>
+                    <div className="mb-6 p-2 text-sm">
+                      <div dangerouslySetInnerHTML={{ __html: productToUse.shortDescription }} />
+                    </div>
+                    {productToUse.description && (
+                      <div dangerouslySetInnerHTML={{ __html: productToUse.description }} />
+                    )}
+                  </>
                 ) : (
                   <p className="text-gray-500 text-center py-8">
                     Aucune description disponible pour ce produit.

@@ -33,21 +33,21 @@ export function Footer({ onNavigate }: FooterProps) {
       <div className="container mx-auto px-4 pt-[48px] pr-[16px] pb-[15px] pl-[16px]">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-y-8 gap-x-12">
           {/* Logo et description */}
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-2 text-center md:text-left">
             <div>
               {/* Logo FIMA stylisé */}
-              <div className="flex mt-0 mb-4">
+              <div className="flex justify-center md:justify-start mt-0 mb-4">
                 <img
                   src={fimaFooterLogo}
                   alt="GROUP FIMA - Literie - Menuiserie - Vitres - Aluminium"
-                  className="w-auto object-contain ml-0"
+                  className="w-auto object-contain"
                   style={{ maxWidth: "220px" }}
                 />
               </div>
             </div>
             <p
-              className="text-sm mb-1 pr-24"
-              style={{ color: "#B5C233", textAlign: "justify" }}
+              className="text-sm mb-1 md:pr-24"
+              style={{ color: "#B5C233", textAlign: "center" }}
             >
               Expert ivoirien en conception et fabrique des
               solutions en literie, menuiserie et
@@ -81,7 +81,7 @@ export function Footer({ onNavigate }: FooterProps) {
             </div>
 
             {/* Réseaux sociaux */}
-            <div className="flex gap-4 mb-[24px] mt-[-9px] mr-[0px] ml-[0px]">
+            <div className="flex justify-center md:justify-start gap-4 mb-[24px] mt-[-9px]">
               <a
                 href="#"
                 className="p-2 transition-colors hover:bg-gray-100"
@@ -130,7 +130,7 @@ export function Footer({ onNavigate }: FooterProps) {
 
             {/* Copyright */}
             <div
-              className="text-sm"
+              className="text-sm text-center md:text-left"
               style={{ color: "#B5C233" }}
             >
               © 2025 FIMA. Tous droits réservés.
@@ -138,7 +138,7 @@ export function Footer({ onNavigate }: FooterProps) {
           </div>
 
           {/* Nos métiers */}
-          <div className="mt-[0px] mr-[0px] mb-[0px] ml-[-31px]">
+          <div className="text-center md:text-left md:ml-[-31px]">
             <h4
               className="mb-6"
               style={{
@@ -189,7 +189,7 @@ export function Footer({ onNavigate }: FooterProps) {
           </div>
 
           {/* Informations légales */}
-          <div className="mt-[0px] mr-[0px] mb-[0px] ml-[-59px]">
+          <div className="text-center md:text-left md:ml-[-59px]">
             <h4
               className="mb-6"
               style={{
@@ -259,7 +259,7 @@ export function Footer({ onNavigate }: FooterProps) {
           </div>
 
           {/* Contact */}
-          <div>
+          <div className="text-center md:text-left">
             <h4
               className="mb-6"
               style={{
@@ -270,7 +270,7 @@ export function Footer({ onNavigate }: FooterProps) {
               Contact
             </h4>
             <div className="space-y-4">
-              <div className="flex items-start gap-3">
+              <div className="flex justify-center md:justify-start items-start gap-3">
                 <FontAwesomeIcon
                   icon={faMapPin}
                   className="w-4 h-4 mt-1 flex-shrink-0"
@@ -289,7 +289,7 @@ export function Footer({ onNavigate }: FooterProps) {
                 </div>
               </div>
 
-              <div className="flex items-center gap-3">
+              <div className="flex justify-center md:justify-start items-center gap-3">
                 <FontAwesomeIcon
                   icon={faPhone}
                   className="w-4 h-4 flex-shrink-0"
@@ -304,7 +304,7 @@ export function Footer({ onNavigate }: FooterProps) {
                   +225 27 23 50 61 02
                 </a>
               </div>
-              <div className="flex items-center gap-3">
+              <div className="flex justify-center md:justify-start items-center gap-3">
                 <FontAwesomeIcon
                   icon={faPhone}
                   className="w-4 h-4 flex-shrink-0"
@@ -320,7 +320,7 @@ export function Footer({ onNavigate }: FooterProps) {
                 </a>
               </div>
 
-              <div className="flex items-center gap-3">
+              <div className="flex justify-center md:justify-start items-center gap-3">
                 <FontAwesomeIcon
                   icon={faEnvelope}
                   className="w-4 h-4 flex-shrink-0"

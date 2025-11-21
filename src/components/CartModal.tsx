@@ -99,7 +99,7 @@ export function CartModal({ onNavigate }: CartModalProps = {}) {
       />
       
       {/* Modal */}
-      <div className="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-xl flex flex-col">
+      <div className="absolute right-0 top-0 h-full w-full sm:max-w-md bg-white shadow-xl flex flex-col">
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b">
           <div className="flex items-center gap-3">
@@ -110,9 +110,10 @@ export function CartModal({ onNavigate }: CartModalProps = {}) {
           </div>
           <button
             onClick={() => setIsCartOpen(false)}
-            className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+            className="p-2 hover:bg-gray-100 rounded-full transition-colors z-10"
+            style={{ minWidth: '40px', minHeight: '40px' }}
           >
-            <X className="w-5 h-5" />
+            <X className="w-6 h-6" />
           </button>
         </div>
 

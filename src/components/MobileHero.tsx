@@ -118,6 +118,7 @@ export function MobileHero({ onNavigate }: MobileHeroProps) {
         WebkitOverflowScrolling: 'touch',
         touchAction: 'manipulation',
         WebkitTapHighlightColor: 'transparent',
+        marginTop: '60px', // Compenser la hauteur du header mobile
       }}
     >
       {/* Image de fond */}
