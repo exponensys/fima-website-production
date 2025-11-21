@@ -42,8 +42,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     ${formData.company ? `<p><strong>Entreprise:</strong> ${formData.company}</p>` : ''}
     
     <h3>Projet</h3>
-    <p><strong>Type:</strong> ${projectTypes[formData.projectType] || formData.projectType}</p>
-    <p><strong>Métiers concernés:</strong> ${formData.businessUnit.map(unit => businessUnits[unit] || unit).join(', ')}</p>
+    <p><strong>Type:</strong> ${projectTypes[formData.projectType as keyof typeof projectTypes] || formData.projectType}</p>
+    <p><strong>Métiers concernés:</strong> ${formData.businessUnit.map(unit => businessUnits[unit as keyof typeof businessUnits] || unit).join(', ')}</p>
     <p><strong>Budget:</strong> ${formData.budget}</p>
     <p><strong>Délai:</strong> ${formData.timeline}</p>
     

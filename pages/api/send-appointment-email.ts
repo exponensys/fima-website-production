@@ -42,7 +42,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     ${formData.company ? `<p><strong>Entreprise:</strong> ${formData.company}</p>` : ''}
     
     <h3>Service demandé</h3>
-    <p><strong>Domaine:</strong> ${services[formData.serviceType] || formData.serviceType}</p>
+    <p><strong>Domaine:</strong> ${services[formData.serviceType as keyof typeof services] || formData.serviceType}</p>
     <p><strong>Description du projet:</strong> ${formData.projectDescription}</p>
     <p><strong>Budget:</strong> ${formData.budget}</p>
     <p><strong>Délai:</strong> ${formData.timeline}</p>
@@ -50,7 +50,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     <h3>Rendez-vous souhaité</h3>
     <p><strong>Date:</strong> ${formData.preferredDate}</p>
     <p><strong>Heure:</strong> ${formData.preferredTime}</p>
-    <p><strong>Mode:</strong> ${consultationModes[formData.consultationMode] || formData.consultationMode}</p>
+    <p><strong>Mode:</strong> ${consultationModes[formData.consultationMode as keyof typeof consultationModes] || formData.consultationMode}</p>
   `;
 
   try {
