@@ -874,7 +874,7 @@ function AppContent() {
               <Suspense fallback={<LoadingSpinner />}>
                 <LazyComponentWrapper>
                   <CategoryDetailPage 
-                    categorySlug={categoryDetailSlug}
+                    category={categoryDetailSlug}
                     onNavigate={handleNavigation}
                   />
                 </LazyComponentWrapper>

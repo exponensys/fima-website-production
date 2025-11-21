@@ -22,12 +22,14 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 interface CategoryDetailPageProps {
-  categorySlug: string;
+  category: string;
   onNavigate: (page: string) => void;
+  onBack?: () => void;
+  onProductClick?: (product: any) => void;
 }
 
 export function CategoryDetailPage({
-  categorySlug,
+  category: categorySlug,
   onNavigate,
 }: CategoryDetailPageProps) {
   const { categories: allCategories, loading } =

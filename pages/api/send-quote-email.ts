@@ -43,7 +43,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     
     <h3>Projet</h3>
     <p><strong>Type:</strong> ${projectTypes[formData.projectType as keyof typeof projectTypes] || formData.projectType}</p>
-    <p><strong>Métiers concernés:</strong> ${formData.businessUnit.map(unit => businessUnits[unit as keyof typeof businessUnits] || unit).join(', ')}</p>
+    <p><strong>Métiers concernés:</strong> ${formData.businessUnit.map((unit: string) => businessUnits[unit as keyof typeof businessUnits] || unit).join(', ')}</p>
     <p><strong>Budget:</strong> ${formData.budget}</p>
     <p><strong>Délai:</strong> ${formData.timeline}</p>
     
