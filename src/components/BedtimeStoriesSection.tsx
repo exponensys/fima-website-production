@@ -156,20 +156,7 @@ export function BedtimeStoriesSection() {
                     </div>
                   </div>
 
-                  {/* Nom du produit/projet */}
-                  {testimonial.project && (
-                    <h5
-                      className="mb-4"
-                      style={{
-                        fontFamily: "Montserrat",
-                        color: "#B5C233",
-                        fontSize: "1.1rem",
-                        fontWeight: "600",
-                      }}
-                    >
-                      {testimonial.project}
-                    </h5>
-                  )}
+
 
                   {/* Témoignage */}
                   <blockquote

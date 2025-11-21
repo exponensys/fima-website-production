@@ -197,12 +197,6 @@ export const useTestimonialMutation = () => {
         return { success: true, data: fallbackData };
       }
 
-      console.log('Update result:', { data, error: supabaseError, count });
-
-      if (supabaseError) {
-        throw new Error(`Erreur lors de la mise à jour du testimonial: ${supabaseError.message}`);
-      }
-
       return { success: true, data };
     } catch (err) {
       console.error('Error updating testimonial:', err);
@@ -239,12 +233,6 @@ export const useTestimonialMutation = () => {
         }
         
         return { success: true, data: fallbackData };
-      }
-
-      console.log('Delete result:', { data, error: supabaseError, count });
-
-      if (supabaseError) {
-        throw new Error(`Erreur lors de la suppression du testimonial: ${supabaseError.message}`);
       }
 
       return { success: true, data };

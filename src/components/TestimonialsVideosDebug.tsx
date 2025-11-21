@@ -68,11 +68,8 @@ export function TestimonialsVideosDebug() {
               ✅ <strong>{testimonials.length}</strong> témoignage(s) chargé(s)
             </p>
             <ul style={{ fontSize: '12px', color: '#6E6E6E', marginTop: '5px', paddingLeft: '20px' }}>
-              <li>{testimonials.filter(t => t.published).length} publiés</li>
-              <li>{testimonials.filter(t => t.featured).length} en vedette</li>
-              <li>{testimonials.filter(t => t.category === 'couchage').length} couchage</li>
-              <li>{testimonials.filter(t => t.category === 'design').length} design</li>
-              <li>{testimonials.filter(t => t.category === 'glass').length} glass</li>
+              <li>{testimonials.filter(t => t.is_active).length} publiés</li>
+              <li>{testimonials.filter(t => t.is_featured).length} en vedette</li>
             </ul>
           </div>
         )}

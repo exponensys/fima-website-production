@@ -382,7 +382,6 @@ export function CMSTestimonials() {
                 <th className="text-left py-3 px-4 text-sm font-medium text-gray-700">Client</th>
                 <th className="text-left py-3 px-4 text-sm font-medium text-gray-700">Témoignage</th>
                 <th className="text-left py-3 px-4 text-sm font-medium text-gray-700">Note</th>
-                <th className="text-left py-3 px-4 text-sm font-medium text-gray-700">Catégorie</th>
                 <th className="text-left py-3 px-4 text-sm font-medium text-gray-700">Statut</th>
                 <th className="text-left py-3 px-4 text-sm font-medium text-gray-700">Actions</th>
               </tr>
@@ -416,11 +415,6 @@ export function CMSTestimonials() {
                         <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
                       ))}
                     </div>
-                  </td>
-                  <td className="py-3 px-4">
-                    <span className="inline-flex px-2 py-1 text-xs font-medium bg-gray-100 text-gray-800">
-                      {testimonial.category}
-                    </span>
                   </td>
                   <td className="py-3 px-4">
                     <div className="flex items-center space-x-2">

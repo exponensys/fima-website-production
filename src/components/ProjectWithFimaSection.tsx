@@ -111,20 +111,20 @@ export function ProjectWithFimaSection({
   // Mapper les testimonials Supabase vers le format attendu
   const mappedTestimonials = testimonials.map((t) => ({
     id: t.id,
-    name: t.clientName,
-    company: t.clientCompany,
-    location: t.clientLocation,
+    name: t.name,
+    company: t.company,
+    location: t.location,
     image:
-      t.clientPhoto ||
+      t.avatar ||
       "https://images.unsplash.com/photo-1709715357519-2a84f9765e57?w=1080",
     comment:
       selectedLanguage.toLowerCase() === "fr"
-        ? t.testimonialFr
-        : t.testimonialEn,
+        ? t.content_fr
+        : t.content_en,
     rating: t.rating,
-    project: t.project || "",
-    featured: t.featured,
-    published: t.published,
+    project: "",
+    featured: t.is_featured,
+    published: t.is_active,
   }));
 
   const featuredTestimonials = mappedTestimonials.filter(
