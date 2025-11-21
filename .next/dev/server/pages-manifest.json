@@ -4,5 +4,7 @@
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
   "/cms": "pages/cms.js",
-  "/products": "pages/products.js"
+  "/content-hub": "pages/content-hub.js",
+  "/products": "pages/products.js",
+  "/projects": "pages/projects.js"
 }

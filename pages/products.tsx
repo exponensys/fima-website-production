@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import { AllProductsPage } from '../src/components/AllProductsPage';
+import { Header } from '../src/components/Header';
 
 export default function ProductsPage() {
   const router = useRouter();
@@ -12,10 +13,17 @@ export default function ProductsPage() {
     router.push('/');
   };
 
+  const handleNavigate = (page: string) => {
+    router.push(`/${page}`);
+  };
+
   return (
-    <AllProductsPage
-      onProductClick={handleProductClick}
-      onBack={handleBack}
-    />
+    <>
+      <Header onNavigate={handleNavigate} />
+      <AllProductsPage
+        onProductClick={handleProductClick}
+        onBack={handleBack}
+      />
+    </>
   );
 }

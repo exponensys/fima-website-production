@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import { UniversGlassPage } from '../src/components/business-units/UniversGlassPage';
+import { Header } from '../src/components/Header';
 
 export default function UniversGlass() {
   const router = useRouter();
@@ -21,10 +22,13 @@ export default function UniversGlass() {
   };
 
   return (
-    <UniversGlassPage
-      onNavigate={handleNavigate}
-      onBack={handleBack}
-      onQuoteRequest={handleQuoteRequest}
-    />
+    <>
+      <Header onNavigate={handleNavigate} />
+      <UniversGlassPage
+        onNavigate={handleNavigate}
+        onBack={handleBack}
+        onQuoteRequest={handleQuoteRequest}
+      />
+    </>
   );
 }

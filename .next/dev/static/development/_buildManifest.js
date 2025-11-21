@@ -8,8 +8,14 @@ self.__BUILD_MANIFEST = {
   "/cms": [
     "static/chunks/pages/cms.js"
   ],
+  "/content-hub": [
+    "static/chunks/pages/content-hub.js"
+  ],
   "/products": [
     "static/chunks/pages/products.js"
+  ],
+  "/projects": [
+    "static/chunks/pages/projects.js"
   ],
   "__rewrites": {
     "afterFiles": [],
@@ -21,8 +27,10 @@ self.__BUILD_MANIFEST = {
     "/_app",
     "/_error",
     "/cms",
+    "/content-hub",
     "/fima-couchage",
     "/fima-design",
+    "/home",
     "/products",
     "/projects",
     "/univers-glass"

@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import { AllProjectsPage } from '../src/components/AllProjectsPage';
+import { Header } from '../src/components/Header';
 
 export default function ProjectsPage() {
   const router = useRouter();
@@ -17,10 +18,13 @@ export default function ProjectsPage() {
   };
 
   return (
-    <AllProjectsPage
-      onProjectClick={handleProjectClick}
-      onNavigate={handleNavigate}
-      onBack={handleBack}
-    />
+    <>
+      <Header onNavigate={handleNavigate} />
+      <AllProjectsPage
+        onProjectClick={handleProjectClick}
+        onNavigate={handleNavigate}
+        onBack={handleBack}
+      />
+    </>
   );
 }
