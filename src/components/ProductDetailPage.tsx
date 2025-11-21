@@ -1144,19 +1144,19 @@ export function ProductDetailPage({ product, onBack, onExpertClick, onProductCli
               <div className="space-y-3">
                 <div className="flex items-center gap-3">
                   <Shield className="w-5 h-5" style={{ color: '#B5C233' }} />
-                  <span className="text-sm">Garantie 10 ans fabricant</span>
+                  <span className="text-sm">Garantie fabricant</span>
                 </div>
-                <div className="flex items-center gap-3">
+                {/* <div className="flex items-center gap-3">
                   <Truck className="w-5 h-5" style={{ color: '#B5C233' }} />
-                  <span className="text-sm">Livraison et installation gratuites</span>
-                </div>
+                  <span className="text-sm">Livraison et installation </span>
+                </div> */}
                 {/* <div className="flex items-center gap-3">
                   <RotateCcw className="w-5 h-5" style={{ color: '#B5C233' }} />
                   <span className="text-sm">Retour gratuit sous 30 jours</span>
                 </div> */}
                 <div className="flex items-center gap-3">
                   <MessageCircle className="w-5 h-5" style={{ color: '#B5C233' }} />
-                  <span className="text-sm">Conseils d'experts disponibles</span>
+                  <span className="text-sm">SAV et Conseils d'experts disponibles</span>
                 </div>
               </div>
             </div>
