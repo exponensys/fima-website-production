@@ -24,7 +24,7 @@ export interface Blog {
   likes?: number;
 }
 
-const API_BASE_URL = `https://${projectId}.supabase.co/functions/v1/make-server-98c6ec1c`;
+const API_BASE_URL = `https://${projectId}.supabase.co/functions/v1/make-server-4a2f605a`;
 
 /**
  * Hook pour récupérer les blogs depuis l'API backend
@@ -42,9 +42,7 @@ export const useBlogs = (locale: 'fr' | 'en' = 'fr', category?: string, publishe
       setLoading(true);
       setError(null);
 
-      const url = new URL(`${API_BASE_URL}/blogs`);
-      
-      const response = await fetch(url.toString(), {
+      const response = await fetch(`${API_BASE_URL}/blogs`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${publicAnonKey}`,
@@ -85,14 +83,7 @@ export const useBlogs = (locale: 'fr' | 'en' = 'fr', category?: string, publishe
     } catch (err) {
       console.error('Error fetching blogs:', err);
       const errorMessage = err instanceof Error ? err.message : 'Erreur inconnue';
-      
-      // Si c'est une erreur de réseau (Failed to fetch), donner plus de détails
-      if (errorMessage.includes('Failed to fetch')) {
-        setError('Impossible de se connecter au serveur. Veuillez vérifier que le serveur backend est démarré.');
-      } else {
-        setError(errorMessage);
-      }
-      
+      setError(errorMessage);
       setBlogs([]);
     } finally {
       setLoading(false);

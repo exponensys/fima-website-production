@@ -77,6 +77,7 @@ export function AllProductsPage({ onProductClick, onBack, initialCategory }: All
     const searchLower = filters.search.toLowerCase();
     
     return (
+      product.status !== 'inactive' &&
       (filters.category === "all" || product.category === filters.category) &&
       (filters.business === "all" || product.business === filters.business) &&
       (filters.firmness === "all" || !product.firmness || product.firmness === filters.firmness) &&

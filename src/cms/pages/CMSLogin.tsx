@@ -107,7 +107,7 @@ export function CMSLogin({ onLogin, onBackToSite }: CMSLoginProps) {
         </div>
 
         {/* Demo credentials */}
-        <div className="mt-6 bg-blue-50 border border-blue-200 p-4 text-center">
+        {/*<div className="mt-6 bg-blue-50 border border-blue-200 p-4 text-center">
           <p className="text-sm text-blue-900 mb-2">
             <strong>Identifiants de démonstration :</strong>
           </p>
@@ -115,7 +115,7 @@ export function CMSLogin({ onLogin, onBackToSite }: CMSLoginProps) {
             Email: <span className="font-mono">admin@fima.com</span><br />
             Mot de passe: <span className="font-mono">admin123</span>
           </p>
-        </div>
+        </div>*/}
       </div>
     </div>
   );
