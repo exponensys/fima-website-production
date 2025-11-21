@@ -34,7 +34,7 @@ export function CMSTestimonials() {
       clientPhoto: testimonial.avatar || '',
       testimonialFr: testimonial.content_fr || '',
       testimonialEn: testimonial.content_en || '',
-      project: testimonial.project || '',
+      project: '',
       rating: testimonial.rating || 5,
       category: testimonial.category || 'general',
       featured: testimonial.is_featured || false,
@@ -409,9 +409,6 @@ export function CMSTestimonials() {
                   </td>
                   <td className="py-3 px-4 max-w-xs">
                     <div className="text-sm text-gray-900 truncate">{testimonial.content_fr}</div>
-                    {testimonial.project && (
-                      <div className="text-xs text-green-600 font-medium mt-1">{testimonial.project}</div>
-                    )}
                   </td>
                   <td className="py-3 px-4">
                     <div className="flex items-center">
