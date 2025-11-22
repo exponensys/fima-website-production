@@ -35,6 +35,8 @@ export function MobileHero({ onNavigate }: MobileHeroProps) {
       badge: slide.translation.badge,
       background: slide.background_image_url,
       slideDuration: slide.slide_duration,
+      isVideo: slide.is_video,
+      videoUrl: slide.video_url,
       ctaBgColor: slide.cta_bg_color || "#FFFFFF",
       ctaTextColor: slide.cta_text_color || "#B5C233",
     }));
@@ -121,16 +123,42 @@ export function MobileHero({ onNavigate }: MobileHeroProps) {
         marginTop: '60px', // Compenser la hauteur du header mobile
       }}
     >
-      {/* Image de fond */}
-      <div
-        className="absolute inset-0 transition-opacity duration-700"
-        style={{
-          backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url(${currentHeroSlide.background})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-        }}
-      />
+      {/* Image ou vidéo de fond */}
+      {currentHeroSlide.isVideo && currentHeroSlide.videoUrl ? (
+        <div className="absolute inset-0">
+          {currentHeroSlide.videoUrl.includes('youtube.com') || currentHeroSlide.videoUrl.includes('youtu.be') ? (
+            <iframe
+              className="absolute inset-0 w-full h-full"
+              src={currentHeroSlide.videoUrl.replace('watch?v=', 'embed/').replace('youtu.be/', 'youtube.com/embed/') + '?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&modestbranding=1'}
+              frameBorder="0"
+              allow="autoplay; encrypted-media"
+              style={{ pointerEvents: 'none' }}
+            />
+          ) : (
+            <video
+              className="absolute inset-0 w-full h-full object-cover"
+              autoPlay
+              muted
+              loop
+              playsInline
+              style={{ pointerEvents: 'none' }}
+            >
+              <source src={currentHeroSlide.videoUrl} type="video/mp4" />
+            </video>
+          )}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black/60" />
+        </div>
+      ) : (
+        <div
+          className="absolute inset-0 transition-opacity duration-700"
+          style={{
+            backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url(${currentHeroSlide.background})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+          }}
+        />
+      )}
 
       {/* Logo FIMA centré - Cliquable */}
       <div className="relative z-10 h-full flex items-center justify-center p-4">

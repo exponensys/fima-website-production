@@ -124,16 +124,7 @@ export function Hero({
     }
   }, [currentHeroSlide]);
 
-  // Détecter le scroll pour cacher les boutons de navigation
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY || window.pageYOffset;
-      setIsScrolled(scrollY > 5);
-    };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   // Auto-défilement des slides
   useEffect(() => {
@@ -432,7 +423,7 @@ export function Hero({
                       type="video/mp4"
                     />
                     <source
-                      src="https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4"
+                      src="https://youtu.be/YhY3YXF6tTg?si=CqVyNH4I0n3MzsAa"
                       type="video/mp4"
                     />
                     Votre navigateur ne supporte pas les vidéos
@@ -607,17 +598,17 @@ export function Hero({
             </div>
           )}
 
-          {/* Boutons de navigation Prev/Next - cachés au scroll pour ne pas bloquer le logo */}
+          {/* Boutons de navigation Prev/Next - toujours visibles */}
           <button
             onClick={handlePrevSlide}
-            className={`absolute left-4 top-[45%] -translate-y-1/2 z-10 bg-white/20 hover:bg-white/40 backdrop-blur-sm text-white transition-all duration-300 hover:scale-110 shadow-lg p-3 ${isScrolled ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
+            className="absolute left-4 top-[45%] -translate-y-1/2 z-50 bg-white/20 hover:bg-white/40 backdrop-blur-sm text-white transition-all duration-300 hover:scale-110 shadow-lg p-3"
             aria-label="Slide précédent"
           >
             <FontAwesomeIcon icon={faChevronLeft} className="w-6 h-6" />
           </button>
           <button
             onClick={handleNextSlide}
-            className={`absolute right-4 top-[45%] -translate-y-1/2 z-10 bg-white/20 hover:bg-white/40 backdrop-blur-sm text-white p-3 transition-all duration-300 hover:scale-110 shadow-lg ${isScrolled ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
+            className="absolute right-4 top-[45%] -translate-y-1/2 z-50 bg-white/20 hover:bg-white/40 backdrop-blur-sm text-white p-3 transition-all duration-300 hover:scale-110 shadow-lg"
             aria-label="Slide suivant"
           >
             <FontAwesomeIcon icon={faChevronRight} className="w-6 h-6" />

@@ -15,6 +15,7 @@ const logoKpmg = '/kpmg-logo.svg';
 const logoSara = '/sara-logo.svg';
 import { motion } from "motion/react";
 import { useEffect, useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface PartnersSectionProps {
   onNavigate?: (page: string) => void;
@@ -56,6 +57,15 @@ export function PartnersSection({ onNavigate }: PartnersSectionProps) {
   ];
 
   const [isPaused, setIsPaused] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const nextSlide = () => {
+    setCurrentIndex((prev) => (prev + 1) % (partners.length / 2));
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prev) => (prev - 1 + (partners.length / 2)) % (partners.length / 2));
+  };
 
   return (
     <section className="py-16 bg-gray-50">
@@ -73,7 +83,19 @@ export function PartnersSection({ onNavigate }: PartnersSectionProps) {
           </p>
         </div>
 
-        <div className="max-w-6xl mx-auto overflow-hidden">
+        <div className="max-w-6xl mx-auto overflow-hidden relative">
+          <button
+            onClick={prevSlide}
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white p-2 rounded-full shadow-lg transition-all"
+          >
+            <ChevronLeft className="w-6 h-6 text-gray-600" />
+          </button>
+          <button
+            onClick={nextSlide}
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white p-2 rounded-full shadow-lg transition-all"
+          >
+            <ChevronRight className="w-6 h-6 text-gray-600" />
+          </button>
           <motion.div
             className="flex gap-8"
             animate={{

@@ -66,6 +66,7 @@ import { MobileLayout } from "./components/MobileLayout";
 import { MobileHeader } from "./components/MobileHeader";
 import { MobileHeaderV2 } from "./components/MobileHeaderV2";
 import { MobileHero } from "./components/MobileHero";
+
 // BusinessUnitsSection fusionnée dans Hero - plus besoin d'import
 // SimpleDataInitializer et LoadingDiagnostic désactivés - données locales utilisées par défaut
 
@@ -88,7 +89,6 @@ type ViewType =
   | 'our-history'
   | 'our-certifications'
   | 'checkout'
-  | 'auth'
   | 'login'
   | 'signup'
   | 'account'
@@ -269,7 +269,7 @@ function AppContent() {
   const [authInitialTab, setAuthInitialTab] = useState<'login' | 'signup'>('login');
   const [selectedOrderId, setSelectedOrderId] = useState<string>('');
   const [externalCategoryChange, setExternalCategoryChange] = useState<string>('');
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' ? window.innerWidth <= 768 : false);
   const [isRestoringState, setIsRestoringState] = useState(true);
 
   // Définir le favicon du site
@@ -321,7 +321,7 @@ function AppContent() {
       console.log('🔄 Restauration depuis URL:', path);
       const viewFromPath = path.substring(1) as ViewType; // Enlever le '/' initial
       
-      if (viewFromPath && ['home', 'product', 'all-products', 'category', 'category-detail', 'fima-couchage', 'fima-design', 'univers-glass', 'b2b-solutions', 'large-accounts', 'content-hub', 'all-projects', 'project-detail', 'article-detail', 'careers', 'our-history', 'our-certifications', 'checkout', 'auth', 'login', 'signup', 'account', 'order-detail', 'order-tracking', 'sitemap', 'brand-guidelines', 'privacy-policy', 'cms', 'admin-dashboard'].includes(viewFromPath)) {
+      if (viewFromPath && ['home', 'product', 'all-products', 'category', 'category-detail', 'fima-couchage', 'fima-design', 'univers-glass', 'b2b-solutions', 'large-accounts', 'content-hub', 'all-projects', 'project-detail', 'article-detail', 'careers', 'our-history', 'our-certifications', 'checkout', 'login', 'signup', 'account', 'order-detail', 'order-tracking', 'sitemap', 'brand-guidelines', 'privacy-policy', 'cms', 'admin-dashboard'].includes(viewFromPath)) {
         setCurrentView(viewFromPath);
         
         // Restaurer les données associées depuis les paramètres URL
@@ -424,20 +424,21 @@ function AppContent() {
     isRestoringState
   ]);
 
-  // Détection mobile
+  // Détection mobile - synchrone pour éviter les problèmes de layout
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+    const checkMobile = () => {
+      const mobile = window.innerWidth <= 768;
+      setIsMobile(mobile);
+    };
+    
+    // Vérification immédiate
     checkMobile();
+    
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // Fermer les modaux au montage
-  useEffect(() => {
-    setIsFavoritesOpen(false);
-    setIsQuoteModalOpen(false);
-    setIsExpertModalOpen(false);
-  }, []);
+
 
   // Auto scroll to top à chaque changement de vue - RENFORCÉ
   useAutoScrollToTop(currentView);
@@ -484,7 +485,6 @@ function AppContent() {
       'our-history': 'Notre Histoire - FIMA',
       'our-certifications': 'Nos Certifications - FIMA',
       'checkout': 'Panier - FIMA',
-      'auth': 'Connexion - FIMA',
       'login': 'Connexion - FIMA',
       'signup': 'Inscription - FIMA',
       'account': 'Mon Compte - FIMA',
@@ -503,10 +503,12 @@ function AppContent() {
   // Log pour debug
   useEffect(() => {
     console.log('🏠 AppContent - Vue actuelle:', currentView);
+    console.log('📱 AppContent - isMobile:', isMobile);
+    console.log('🔄 AppContent - isRestoringState:', isRestoringState);
     if (currentView === 'category-detail') {
       console.log('📂 AppContent - Category detail slug:', categoryDetailSlug);
     }
-  }, [currentView, categoryDetailSlug]);
+  }, [currentView, categoryDetailSlug, isMobile, isRestoringState]);
 
   const handleExpertClick = useCallback((type: ConsultationType) => {
     setConsultationType(type);
@@ -651,6 +653,11 @@ function AppContent() {
         }
         break;
       case 'auth':
+        setAuthInitialTab('login');
+        setCurrentView('auth');
+        newState.view = 'auth';
+        url = '/auth';
+        break;
       case 'login':
         setAuthInitialTab('login');
         setCurrentView('auth');
@@ -662,6 +669,16 @@ function AppContent() {
         setCurrentView('auth');
         newState.view = 'auth';
         url = '/signup';
+        break;
+      case 'account':
+        setCurrentView('account');
+        newState.view = 'account';
+        url = '/account';
+        break;
+      case 'checkout':
+        setCurrentView('checkout');
+        newState.view = 'checkout';
+        url = '/checkout';
         break;
       default:
         // Pages simples sans paramètres
@@ -1085,23 +1102,7 @@ function AppContent() {
           </main>
         );
 
-      case 'checkout':
-        return (
-          <main className="mt-[17px] mr-[0px] mb-[0px] ml-[0px]">
-            <ErrorBoundary FallbackComponent={ErrorFallback}>
-              <Suspense fallback={<LoadingSpinner />}>
-                <LazyComponentWrapper>
-                  <CheckoutPage 
-                    onBack={handleBackFromCheckout}
-                    onNavigate={handleNavigation}
-                  />
-                </LazyComponentWrapper>
-              </Suspense>
-            </ErrorBoundary>
-          </main>
-        );
-
-      case 'auth':
+      case 'login':
         return (
           <main>
             <ErrorBoundary FallbackComponent={ErrorFallback}>
@@ -1110,7 +1111,7 @@ function AppContent() {
                   <AuthPage 
                     onBack={handleBackFromAuth}
                     onNavigate={handleNavigation}
-                    initialTab={authInitialTab}
+                    initialTab="login"
                   />
                 </LazyComponentWrapper>
               </Suspense>
@@ -1133,6 +1134,24 @@ function AppContent() {
             </ErrorBoundary>
           </main>
         );
+
+      case 'checkout':
+        return (
+          <main className="mt-[17px] mr-[0px] mb-[0px] ml-[0px]">
+            <ErrorBoundary FallbackComponent={ErrorFallback}>
+              <Suspense fallback={<LoadingSpinner />}>
+                <LazyComponentWrapper>
+                  <CheckoutPage 
+                    onBack={handleBackFromCheckout}
+                    onNavigate={handleNavigation}
+                  />
+                </LazyComponentWrapper>
+              </Suspense>
+            </ErrorBoundary>
+          </main>
+        );
+
+     
 
       case 'order-detail':
         return (
@@ -1272,7 +1291,7 @@ function AppContent() {
             WebkitOverflowScrolling: 'touch',
           }}
         >
-          {isMobile ? (
+          {typeof window !== 'undefined' && window.innerWidth <= 768 ? (
             /* Mobile: Layout ultra-simplifié SANS wrappers */
             <div 
               className="w-full bg-white"
@@ -1296,14 +1315,14 @@ function AppContent() {
               </ErrorBoundary>
             </div>
           ) : (
-            /* Desktop: Layout normal */
-            <div className="max-w-[1600px] mx-auto w-[calc(100%-40px)] bg-white shadow-xl my-[20px]" style={{ overflow: 'visible' }}>
+            /* Desktop: Layout normal - wrapper toujours appliqué */
+            <div className="max-w-[1600px] mx-auto w-[calc(100%-40px)] bg-white shadow-xl" style={{ overflow: 'visible', marginTop: '20px', marginRight: '20px', marginLeft: '20px' }}>
+              <Header 
+                onNavigate={handleNavigation}
+                onFavoritesClick={() => setIsFavoritesOpen(true)}
+                onExpertClick={handleExpertClick}
+              />
               <ErrorBoundary FallbackComponent={ErrorFallback}>
-                <Header 
-                  onNavigate={handleNavigation}
-                  onFavoritesClick={() => setIsFavoritesOpen(true)}
-                  onExpertClick={handleExpertClick}
-                />
                 {renderCurrentView()}
                 <Footer onNavigate={handleNavigation} />
               </ErrorBoundary>

@@ -1,6 +1,6 @@
 import { X, Plus, Minus, ShoppingBag, Truck } from 'lucide-react';
 import { useApp } from '../contexts/AppContext';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { useCurrency } from '../hooks/useCurrency';
 import { smartConvertPrice, CURRENCIES } from '../utils/currency';
@@ -48,12 +48,33 @@ export function CartModal({ onNavigate }: CartModalProps = {}) {
   const { selectedCurrency } = useCurrency();
   const [isCheckingOut, setIsCheckingOut] = useState(false);
 
+  // Fermer le panier automatiquement lors de la navigation
+  useEffect(() => {
+    const handleNavigation = () => {
+      if (isCartOpen) {
+        setIsCartOpen(false);
+      }
+    };
+
+    // Écouter les changements d'URL
+    window.addEventListener('popstate', handleNavigation);
+    
+    return () => {
+      window.removeEventListener('popstate', handleNavigation);
+    };
+  }, [isCartOpen, setIsCartOpen]);
+
   if (!isCartOpen) return null;
 
   const handleCheckout = () => {
+    // Toujours fermer le panier d'abord
+    setIsCartOpen(false);
+    
     if (onNavigate) {
-      setIsCartOpen(false);
-      onNavigate('checkout');
+      // Petit délai pour s'assurer que le panier se ferme avant la navigation
+      setTimeout(() => {
+        onNavigate('checkout');
+      }, 100);
     } else {
       setIsCheckingOut(true);
       // Fallback si onNavigate n'est pas fourni
@@ -91,7 +112,7 @@ export function CartModal({ onNavigate }: CartModalProps = {}) {
   const total = safeSubtotal + shipping;
 
   return (
-    <div className="fixed inset-0 z-50 overflow-hidden">
+    <div className="fixed inset-0 z-[9999] overflow-hidden">
       {/* Overlay */}
       <div 
         className="absolute inset-0 bg-black/50 transition-opacity"
@@ -99,9 +120,9 @@ export function CartModal({ onNavigate }: CartModalProps = {}) {
       />
       
       {/* Modal */}
-      <div className="absolute right-0 top-0 h-full w-full sm:max-w-md bg-white shadow-xl flex flex-col">
+      <div className="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-xl flex flex-col">
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b">
+        <div className="flex items-center justify-between p-6 border-b relative">
           <div className="flex items-center gap-3">
             <ShoppingBag className="w-6 h-6" style={{ color: '#B5C233' }} />
             <h2 style={{ fontFamily: 'Montserrat', color: '#000000' }}>
@@ -109,9 +130,18 @@ export function CartModal({ onNavigate }: CartModalProps = {}) {
             </h2>
           </div>
           <button
-            onClick={() => setIsCartOpen(false)}
-            className="p-2 hover:bg-gray-100 rounded-full transition-colors z-10"
-            style={{ minWidth: '40px', minHeight: '40px' }}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setIsCartOpen(false);
+            }}
+            className="p-2 hover:bg-gray-100 rounded-full transition-colors relative z-[10001]"
+            style={{ 
+              minWidth: '40px', 
+              minHeight: '40px',
+              position: 'relative',
+              zIndex: 10001
+            }}
           >
             <X className="w-6 h-6" />
           </button>
@@ -151,14 +181,22 @@ export function CartModal({ onNavigate }: CartModalProps = {}) {
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <button
-                          onClick={() => updateQuantity(item.id, item.size, item.quantity - 1)}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            updateQuantity(item.id, item.size, item.quantity - 1);
+                          }}
                           className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100"
                         >
                           <Minus className="w-4 h-4" />
                         </button>
                         <span className="w-8 text-center">{item.quantity}</span>
                         <button
-                          onClick={() => updateQuantity(item.id, item.size, item.quantity + 1)}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            updateQuantity(item.id, item.size, item.quantity + 1);
+                          }}
                           className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100"
                         >
                           <Plus className="w-4 h-4" />
@@ -172,7 +210,11 @@ export function CartModal({ onNavigate }: CartModalProps = {}) {
                           {smartConvertPrice(calculateItemTotal(item.price, item.quantity), item.currency, selectedCurrency)}
                         </div>
                         <button
-                          onClick={() => removeFromCart(item.id, item.size)}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            removeFromCart(item.id, item.size);
+                          }}
                           className="text-sm text-gray-500 hover:text-red-600 transition-colors"
                         >
                           Supprimer
@@ -225,7 +267,11 @@ export function CartModal({ onNavigate }: CartModalProps = {}) {
 
             {/* Checkout button */}
             <button
-              onClick={handleCheckout}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                handleCheckout();
+              }}
               disabled={isCheckingOut}
               className="w-full fima-btn-primary text-lg py-4 disabled:opacity-50"
             >

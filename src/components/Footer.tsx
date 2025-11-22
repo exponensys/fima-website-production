@@ -47,7 +47,7 @@ export function Footer({ onNavigate }: FooterProps) {
             </div>
             <p
               className="text-sm mb-1 md:pr-24"
-              style={{ color: "#B5C233", textAlign: "center" }}
+              style={{ color: "#B5C233", textAlign: "justify" }}
             >
               Expert ivoirien en conception et fabrique des
               solutions en literie, menuiserie et
@@ -295,7 +295,6 @@ export function Footer({ onNavigate }: FooterProps) {
                   className="w-4 h-4 flex-shrink-0"
                   style={{ color: "#B5C233" }}
                 />
-
                 <a
                   href="tel:+2252723506102"
                   className="text-sm hover:underline transition-colors"
@@ -304,13 +303,13 @@ export function Footer({ onNavigate }: FooterProps) {
                   +225 27 23 50 61 02
                 </a>
               </div>
+              
               <div className="flex justify-center md:justify-start items-center gap-3">
                 <FontAwesomeIcon
                   icon={faPhone}
                   className="w-4 h-4 flex-shrink-0"
                   style={{ color: "#B5C233" }}
                 />
-
                 <a
                   href="tel:+2250788989998"
                   className="text-sm hover:underline transition-colors"
@@ -327,7 +326,7 @@ export function Footer({ onNavigate }: FooterProps) {
                   style={{ color: "#B5C233" }}
                 />
                 <a
-                  href="mailto:contact@fima.fr"
+                  href="mailto:contact@groupfima.com"
                   className="text-sm hover:underline transition-colors"
                   style={{ color: "#B5C233" }}
                 >

@@ -5,6 +5,7 @@ const image_f854c7794a9ab7d0c09684a330f067a2080edcf6 = '/f854c7794a9ab7d0c09684a
 const image_bfee1efa158eed65cd0e62adf3c79b0e7a321689 = '/bfee1efa158eed65cd0e62adf3c79b0e7a321689.png';
 const image_2a3a1c86b3f1ff31c7ff112d18730075fb8f827d = '/2a3a1c86b3f1ff31c7ff112d18730075fb8f827d.png';
 const newHeaderLogo = '/90a0803cf2304a13ca1191a66fb32d2239a69bdf.png';
+const fimaIconLogo = '/4b857e02fcaeb1cf1a3cbd382b322ca5ae9584ec.png';
 import React, {
   useState,
   useEffect,
@@ -85,6 +86,12 @@ export function Header({
   const [searchQuery, setSearchQuery] = useState("");
   const [hasScrolled, setHasScrolled] = useState(false);
 
+  // Debug pour le logo
+  useEffect(() => {
+    console.log('🔍 Logo Debug - hasScrolled:', hasScrolled);
+    console.log('🔍 Logo Debug - Logo actuel:', hasScrolled ? newHeaderLogo : fimaIconLogo);
+  }, [hasScrolled]);
+
   // États pour le positionnement dynamique des dropdowns
   const [dropdownPosition, setDropdownPosition] = useState({
     top: 0,
@@ -138,6 +145,8 @@ export function Header({
       scrollTimeout = setTimeout(() => {
         if (window.scrollY > 50) {
           setHasScrolled(true);
+        } else {
+          setHasScrolled(false);
         }
       }, 100);
     };
@@ -163,23 +172,23 @@ export function Header({
   } = useProductCategories();
 
   // DEBUG: Log pour vérifier les données
-  useEffect(() => {
-    console.log("🔍 Header Debug - Languages:", languages);
-    console.log("🔍 Header Debug - Currencies:", currencies);
-    console.log(
-      "🔍 Header Debug - Selected Language:",
-      selectedLanguage,
-    );
-    console.log(
-      "🔍 Header Debug - Selected Currency:",
-      selectedCurrency,
-    );
-  }, [
-    languages,
-    currencies,
-    selectedLanguage,
-    selectedCurrency,
-  ]);
+  // useEffect(() => {
+  //   console.log("🔍 Header Debug - Languages:", languages);
+  //   console.log("🔍 Header Debug - Currencies:", currencies);
+  //   console.log(
+  //     "🔍 Header Debug - Selected Language:",
+  //     selectedLanguage,
+  //   );
+  //   console.log(
+  //     "🔍 Header Debug - Selected Currency:",
+  //     selectedCurrency,
+  //   );
+  // }, [
+  //   languages,
+  //   currencies,
+  //   selectedLanguage,
+  //   selectedCurrency,
+  // ]);
 
   // Créer la structure productCategoriesByBusiness à partir des données Supabase
   const productCategoriesByBusiness = useMemo(() => {
@@ -574,7 +583,7 @@ export function Header({
   return (
     <header
       ref={headerRef}
-      className="bg-white shadow-sm sticky top-0 z-50 px-[1px] py-[2px] md:py-[0px]"
+      className="bg-white shadow-sm md:sticky md:top-0 z-50 px-[1px] py-[2px] md:py-[0px]"
     >
       {/* VERSION MOBILE - Style Amazon */}
       <div
@@ -615,24 +624,30 @@ export function Header({
               onClick={() => handleNavigateWithClose("home")}
             >
               <img
-                src="https://jxikbrjmdmznoehhccdw.supabase.co/storage/v1/object/public/make-98c6ec1c-media/images/b10bd9f8-288d-4f40-8f3e-0f10bfa1961f.PNG"
+                key={hasScrolled ? 'scrolled' : 'top'}
+                src={hasScrolled 
+                  ? newHeaderLogo
+                  : fimaIconLogo
+                }
                 alt="GROUP FIMA - Literie - Menuiserie - Vitres - Aluminium"
-                className="fima-logo-mobile"
+                className="fima-logo-mobile transition-all duration-300"
                 style={{
                   height: "24px",
                   width: "auto",
                   objectFit: "contain",
                 }}
+                onLoad={() => console.log('🔍 Logo chargé:', hasScrolled ? 'Logo texte' : 'Logo icon')}
+                onError={() => console.log('❌ Erreur chargement logo')}
               />
             </div>
 
             {/* Actions à droite */}
             <div className="flex items-center gap-0.5">
-              {/* Sélecteur de langue - juste le flag */}
+              {/* Sélecteur de langue - Caché */}
               <button
                 ref={languageButtonRef}
                 onClick={handleLanguageToggle}
-                className="text-white p-2 min-w-[44px] min-h-[44px] flex items-center justify-center active:bg-white/10 transition-colors"
+                className="text-white p-2 min-w-[44px] min-h-[44px] flex items-center justify-center active:bg-white/10 transition-colors hidden"
                 style={{
                   touchAction: "manipulation",
                   WebkitTapHighlightColor: "transparent",
@@ -710,7 +725,7 @@ export function Header({
                 </button>
               ) : (
                 <button
-                  onClick={() => onNavigate("auth")}
+                  onClick={() => onNavigate("login")}
                   className="text-white p-2 min-w-[44px] min-h-[44px] flex items-center justify-center active:bg-white/10 transition-colors"
                   style={{
                     touchAction: "manipulation",
@@ -727,22 +742,25 @@ export function Header({
             </div>
           </div>
 
-          {/* Barre de recherche pleine largeur */}
-          <div className="flex items-center bg-white overflow-hidden h-7">
-            <div className="flex-1 flex items-center h-full">
-              <FontAwesomeIcon
-                icon={faSearch}
-                className="w-3 h-3 text-gray-400 ml-2"
-              />
-              <Input
-                type="text"
-                placeholder="Rechercher des produits..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="border-0 outline-0 ring-0 focus:ring-0 focus:border-0 bg-transparent text-xs px-1.5 py-0 flex-1 h-full"
-                style={{ fontFamily: "Inter" }}
-              />
+          {/* Barre de recherche pleine largeur avec bouton filtre */}
+          <div className="flex items-center gap-2">
+            <div className="flex-1 flex items-center bg-white overflow-hidden h-7">
+              <div className="flex-1 flex items-center h-full">
+                <FontAwesomeIcon
+                  icon={faSearch}
+                  className="w-3 h-3 text-gray-400 ml-2"
+                />
+                <Input
+                  type="text"
+                  placeholder="Rechercher des produits..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="border-0 outline-0 ring-0 focus:ring-0 focus:border-0 bg-transparent text-xs px-1.5 py-0 flex-1 h-full"
+                  style={{ fontFamily: "Inter" }}
+                />
+              </div>
             </div>
+
           </div>
         </div>
 
@@ -1047,7 +1065,7 @@ export function Header({
                 </div>
               ) : (
                 <button
-                  onClick={() => onNavigate("auth")}
+                  onClick={() => onNavigate("login")}
                   className="flex items-center gap-2 px-3 py-2 transition-colors text-sm touch-manipulation"
                   style={{ color: "#0EA5E9" }}
                   title="Se connecter"
@@ -1062,8 +1080,8 @@ export function Header({
                 </button>
               )}
 
-              {/* Language Selector - Plus compact */}
-              <div className="relative">
+              {/* Language Selector - Caché */}
+              <div className="relative hidden">
                 <button
                   ref={languageButtonRef}
                   onClick={handleLanguageToggle}

@@ -1,4 +1,4 @@
-import { projectId, publicAnonKey } from './supabase/info';
+import { projectId, publicAnonKey } from './supabase/info.tsx';
 
 /**
  * 🎬 Initialise les Hero Slides dynamiques dans Supabase
@@ -33,7 +33,7 @@ export async function initHeroSlides(): Promise<{
     console.log('🎬 Initialisation des Hero Slides...');
     
     const response = await fetch(
-      `https://${projectId}.supabase.co/functions/v1/make-server-98c6ec1c/api/init-hero-slides`,
+      `https://${projectId}.supabase.co/functions/v1/make-server-4a2f605a/api/init-hero-slides`,
       {
         method: 'POST',
         headers: {
@@ -80,7 +80,7 @@ export async function getHeroSlides(locale: 'fr' | 'en' = 'fr'): Promise<{
 }> {
   try {
     const response = await fetch(
-      `https://${projectId}.supabase.co/functions/v1/make-server-98c6ec1c/api/hero-slides?locale=${locale}`,
+      `https://${projectId}.supabase.co/functions/v1/make-server-4a2f605a/api/hero-slides?locale=${locale}`,
       {
         headers: {
           'Authorization': `Bearer ${publicAnonKey}`,

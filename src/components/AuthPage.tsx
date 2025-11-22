@@ -40,7 +40,7 @@ interface AuthPageProps {
   initialTab?: "login" | "signup";
 }
 
-export function AuthPage({
+export default function AuthPage({
   onBack,
   onNavigate,
   initialTab = "login",

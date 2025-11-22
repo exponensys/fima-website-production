@@ -652,7 +652,7 @@ export function ProductDetailPage({ product, onBack, onExpertClick, onProductCli
       <Breadcrumb items={breadcrumbItems} accentColor={getAccentColor()} />
       
       {/* Header */}
-      <div className="bg-white border-b border-gray-200 sticky top-20 z-10">
+      <div className="bg-white border-b border-gray-200 sticky top-0 z-10">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between py-4">
             <div className="flex items-center gap-2 p-2">
@@ -1165,13 +1165,13 @@ export function ProductDetailPage({ product, onBack, onExpertClick, onProductCli
 
         {/* Section mobile des produits recommandés */}
         <div className="lg:hidden mb-12">
-          <div className="bg-white rounded-2xl p-6">
-            <h2 className="text-xl font-bold mb-4" style={{ fontFamily: 'Montserrat', color: '#000000' }}>
+          <div className="bg-white rounded-2xl p-4 sm:p-6">
+            <h2 className="text-lg sm:text-xl font-bold mb-4" style={{ fontFamily: 'Montserrat', color: '#000000' }}>
               Produits recommandés
             </h2>
             
             {similarLoading ? (
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 gap-3 sm:gap-4">
                 {[...Array(4)].map((_, i) => (
                   <div key={i} className="animate-pulse">
                     <div className="bg-gray-200 aspect-square rounded-lg mb-2"></div>
@@ -1181,7 +1181,7 @@ export function ProductDetailPage({ product, onBack, onExpertClick, onProductCli
                 ))}
               </div>
             ) : filteredSimilarProducts && filteredSimilarProducts.length > 0 ? (
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 gap-3 sm:gap-4">
                 {filteredSimilarProducts.map((similarProduct) => (
                   <ProductCard 
                     key={similarProduct.id} 
@@ -1203,17 +1203,17 @@ export function ProductDetailPage({ product, onBack, onExpertClick, onProductCli
         </div>
 
         {/* Onglets de contenu détaillé */}
-        <div className="bg-white rounded-2xl p-8 mb-16">
+        <div className="bg-white rounded-2xl p-4 sm:p-6 lg:p-8 mb-16">
           <Tabs defaultValue="description" className="w-full">
-            <TabsList className="grid w-full grid-cols-4">
-              <TabsTrigger value="description">Description</TabsTrigger>
-              <TabsTrigger value="technical">Caractéristiques</TabsTrigger>
-              <TabsTrigger value="benefits">Bénéfices</TabsTrigger>
-              <TabsTrigger value="reviews">Avis ({sampleReviews.length})</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 h-auto">
+              <TabsTrigger value="description" className="text-xs sm:text-sm p-2 sm:p-3">Description</TabsTrigger>
+              <TabsTrigger value="technical" className="text-xs sm:text-sm p-2 sm:p-3">Caractéristiques</TabsTrigger>
+              <TabsTrigger value="benefits" className="text-xs sm:text-sm p-2 sm:p-3">Bénéfices</TabsTrigger>
+              <TabsTrigger value="reviews" className="text-xs sm:text-sm p-2 sm:p-3">Avis ({sampleReviews.length})</TabsTrigger>
             </TabsList>
 
-            <TabsContent value="description" className="mt-8">
-              <div className="prose max-w-none" style={{ fontFamily: 'Montserrat' }}>
+            <TabsContent value="description" className="mt-4 sm:mt-6 lg:mt-8">
+              <div className="prose max-w-none text-sm sm:text-base" style={{ fontFamily: 'Montserrat' }}>
                 {productToUse.shortDescription ? (
                   <>
                     <div className="mb-6 p-2 text-sm">
@@ -1231,13 +1231,13 @@ export function ProductDetailPage({ product, onBack, onExpertClick, onProductCli
               </div>
             </TabsContent>
 
-            <TabsContent value="technical" className="mt-8">
+            <TabsContent value="technical" className="mt-4 sm:mt-6 lg:mt-8">
               {productToUse.features ? (
                 <div className="prose max-w-none" style={{ fontFamily: 'Montserrat' }}>
                   <div dangerouslySetInnerHTML={{ __html: productToUse.features }} />
                 </div>
               ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
                   {technicalSpecs.map((category, categoryIndex) => (
                     <Card key={categoryIndex}>
                       <CardHeader>
@@ -1257,7 +1257,7 @@ export function ProductDetailPage({ product, onBack, onExpertClick, onProductCli
               )}
             </TabsContent>
 
-            <TabsContent value="benefits" className="mt-8">
+            <TabsContent value="benefits" className="mt-4 sm:mt-6 lg:mt-8">
               {productToUse.benefits && productToUse.benefits.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {productToUse.benefits.map((benefit: string, index: number) => (
@@ -1295,7 +1295,7 @@ export function ProductDetailPage({ product, onBack, onExpertClick, onProductCli
               )}
             </TabsContent>
 
-            <TabsContent value="reviews" className="mt-8">
+            <TabsContent value="reviews" className="mt-4 sm:mt-6 lg:mt-8">
               {sampleReviews.length === 0 ? (
                 <div className="text-center py-12">
                   <Star className="w-16 h-16 mx-auto mb-4 text-gray-300" />
@@ -1307,7 +1307,7 @@ export function ProductDetailPage({ product, onBack, onExpertClick, onProductCli
               ) : (
                 <div className="space-y-8">
                   {/* Résumé des avis */}
-                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
                   <div className="lg:col-span-1">
                     <Card>
                       <CardContent className="p-6 text-center">
