@@ -16,7 +16,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { useApp } from "../contexts/AppContext";
 import { useUser } from "../contexts/UserContext";
-const fimaLogo = '/f854c7794a9ab7d0c09684a330f067a2080edcf6.png';
+const fimaLogo = '/1da2d5f603cd62a74c69b55293bcdadb2f6d8468.png';
 
 interface MobileHeaderProps {
   onNavigate: (page: string, category?: string, data?: any) => void;

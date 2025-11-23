@@ -497,10 +497,10 @@ export function ProductsSection({
       {/* Featured Products Section - Sous les cartes flottantes */}
       {activeCategory && (
         <div className="mt-0 md:mt-24">
-          <div className="md:py-12 rounded-t-xl mt-[10px] mr-[0px] mb-[0px] ml-[0px] py-[58px] px-[0px] pt-[80px] pr-[0px] pb-[48px] pl-[0px]">
+          <div className="md:py-6 rounded-t-xl mr-[0px] mb-[0px] ml-[0px] px-[0px] pr-[0px] pb-[48px] pl-[0px]">
             {/* Titre principal mobile uniquement */}
-            <div className="md:hidden px-4 mb-6">
-              <h2
+            <div className="md:hidden px-4 mb-6" style={{ marginTop: '-40px' }}>
+              {/* <h2
                 className="text-2xl mb-1"
                 style={{
                   fontFamily: "Montserrat",
@@ -508,9 +508,9 @@ export function ProductsSection({
                 }}
               >
                 Nos Catégories
-              </h2>
+              </h2> */}
               <p
-                className="text-sm"
+                className="text-2xl"
                 style={{ color: "#6E6E6E" }}
               >
                 Parcourez nos produits par métier

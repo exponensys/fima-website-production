@@ -28,7 +28,7 @@ const CareersPage = lazy(() => import("./components/CareersPage").then(module =>
 const OurHistoryPage = lazy(() => import("./components/OurHistoryPage").then(module => ({ default: module.OurHistoryPage })));
 const OurCertificationsPage = lazy(() => import("./components/OurCertificationsPage").then(module => ({ default: module.OurCertificationsPage })));
 const CheckoutPage = lazy(() => import("./components/CheckoutPage").then(module => ({ default: module.CheckoutPage })));
-const AuthPage = lazy(() => import("./components/AuthPage").then(module => ({ default: module.AuthPage })));
+const AuthPage = lazy(() => import("./components/AuthPage"));
 const AccountDashboard = lazy(() => import("./components/AccountDashboard").then(module => ({ default: module.AccountDashboard })));
 const OrderDetailPage = lazy(() => import("./components/OrderDetailPage").then(module => ({ default: module.OrderDetailPage })));
 const OrderTrackingPage = lazy(() => import("./components/OrderTrackingPage").then(module => ({ default: module.OrderTrackingPage })));
@@ -89,6 +89,7 @@ type ViewType =
   | 'our-history'
   | 'our-certifications'
   | 'checkout'
+  | 'auth'
   | 'login'
   | 'signup'
   | 'account'
@@ -485,6 +486,7 @@ function AppContent() {
       'our-history': 'Notre Histoire - FIMA',
       'our-certifications': 'Nos Certifications - FIMA',
       'checkout': 'Panier - FIMA',
+      'auth': 'Authentification - FIMA',
       'login': 'Connexion - FIMA',
       'signup': 'Inscription - FIMA',
       'account': 'Mon Compte - FIMA',
@@ -1308,7 +1310,9 @@ function AppContent() {
               <ErrorBoundary FallbackComponent={ErrorFallback}>
                 <MobileHeaderV2 
                   onNavigate={handleNavigation}
-                  onFavoritesClick={() => setIsFavoritesOpen(true)}
+                  onFavoritesClick={() => setIsFavoritesOpen(!isFavoritesOpen)}
+                  isFavoritesOpen={isFavoritesOpen}
+                  currentView={currentView}
                 />
                 {renderCurrentView()}
                 <Footer onNavigate={handleNavigation} />

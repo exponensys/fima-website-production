@@ -4,8 +4,8 @@ const image_16f5aa14051faa89fe781369ef2ec1badcac7e8d = '/16f5aa14051faa89fe78136
 const image_f854c7794a9ab7d0c09684a330f067a2080edcf6 = '/f854c7794a9ab7d0c09684a330f067a2080edcf6.png';
 const image_bfee1efa158eed65cd0e62adf3c79b0e7a321689 = '/bfee1efa158eed65cd0e62adf3c79b0e7a321689.png';
 const image_2a3a1c86b3f1ff31c7ff112d18730075fb8f827d = '/2a3a1c86b3f1ff31c7ff112d18730075fb8f827d.png';
-const newHeaderLogo = '/90a0803cf2304a13ca1191a66fb32d2239a69bdf.png';
-const fimaIconLogo = '/4b857e02fcaeb1cf1a3cbd382b322ca5ae9584ec.png';
+const newHeaderLogo = '/1da2d5f603cd62a74c69b55293bcdadb2f6d8468.png';
+const fimaIconLogo = '/90a0803cf2304a13ca1191a66fb32d2239a69bdf.png';
 import React, {
   useState,
   useEffect,
@@ -583,7 +583,21 @@ export function Header({
   return (
     <header
       ref={headerRef}
-      className="bg-white shadow-sm md:sticky md:top-0 z-50 px-[1px] py-[2px] md:py-[0px]"
+      className="bg-white shadow-sm"
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 9999,
+        transform: 'translate3d(0, 0, 0)',
+        WebkitTransform: 'translate3d(0, 0, 0)',
+        backfaceVisibility: 'hidden',
+        WebkitBackfaceVisibility: 'hidden',
+        willChange: 'transform',
+        padding: 0,
+        margin: 0,
+      }}
     >
       {/* VERSION MOBILE - Style Amazon */}
       <div
@@ -1221,15 +1235,44 @@ export function Header({
               className="cursor-pointer transition-transform hover:scale-105 flex-shrink-0"
               onClick={() => handleNavigateWithClose("home")}
             >
-              <div className="h-12 flex items-center">
-                <img
-                  src={newHeaderLogo}
-                  alt="GROUP FIMA - Literie - Menuiserie - Vitres - Aluminium"
-                  className="fima-logo-desktop lg:ml-15"
-                  style={{
-                    height: "48px",
-                    width: "auto",
-                    objectFit: "contain",
+              <div className="h-12 flex items-center relative">
+                {/* Logo icône - Disparaît au scroll */}
+                <motion.img 
+                  src={fimaIconLogo} 
+                  alt="FIMA" 
+                  style={{ 
+                    height: '50px', 
+                    width: 'auto',
+                    objectFit: 'contain',
+                    position: 'absolute',
+                    paddingLeft: '25px',
+                  }}
+                  animate={{ 
+                    opacity: hasScrolled ? 0 : 1,
+                  }}
+                  transition={{ 
+                    duration: 0.3,
+                    ease: "easeOut",
+                  }}
+                />
+                {/* Logo GROUP FIMA - Apparaît au scroll */}
+                <motion.img 
+                  src={newHeaderLogo} 
+                  alt="GROUP FIMA" 
+                  style={{ 
+                    height: '35px', 
+                    width: 'auto',
+                    objectFit: 'contain',
+                  }}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ 
+                    opacity: hasScrolled ? 1 : 0,
+                    scale: hasScrolled ? 1 : 0.8,
+                  }}
+                  transition={{ 
+                    duration: 0.5,
+                    delay: hasScrolled ? 0.2 : 0,
+                    ease: [0.43, 0.13, 0.23, 0.96],
                   }}
                 />
               </div>

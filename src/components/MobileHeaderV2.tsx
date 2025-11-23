@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -15,12 +15,14 @@ import {
 import { useApp } from "../contexts/AppContext";
 import { useUser } from "../contexts/UserContext";
 import { useLogoScrollAnimation } from "../hooks/useLogoScrollAnimation";
-const fimaLogoIcon = '/f854c7794a9ab7d0c09684a330f067a2080edcf6.png';
-const fimaLogoText = '/657c215f98beaa37718ea9d4ec19b4ef660894a8.png';
+const fimaLogoIcon = '/90a0803cf2304a13ca1191a66fb32d2239a69bdf.png';
+const fimaLogoText = '/1da2d5f603cd62a74c69b55293bcdadb2f6d8468.png';
 
 interface MobileHeaderV2Props {
   onNavigate: (page: string, category?: string, data?: any) => void;
   onFavoritesClick?: () => void;
+  isFavoritesOpen?: boolean;
+  currentView?: string;
 }
 
 /**
@@ -29,13 +31,19 @@ interface MobileHeaderV2Props {
  * Technique: position fixed + transform: translate3d(0,0,0)
  * Ceci force une nouvelle couche de composition GPU et évite le bounce
  */
-export function MobileHeaderV2({ onNavigate, onFavoritesClick }: MobileHeaderV2Props) {
+export function MobileHeaderV2({ onNavigate, onFavoritesClick, isFavoritesOpen, currentView }: MobileHeaderV2Props) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const { cartItems, favorites, getCartCount } = useApp();
   const { user } = useUser();
   const { hasScrolled } = useLogoScrollAnimation();
 
   const totalItems = getCartCount();
+
+  // Détection client
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const handleNavigateWithClose = (page: string, category?: string) => {
     setIsMobileMenuOpen(false);
@@ -105,7 +113,7 @@ export function MobileHeaderV2({ onNavigate, onFavoritesClick }: MobileHeaderV2P
                 src={fimaLogoIcon} 
                 alt="FIMA" 
                 style={{ 
-                  height: '24px', 
+                  height: '54px', 
                   width: 'auto',
                   objectFit: 'contain',
                   position: 'absolute',
@@ -124,7 +132,7 @@ export function MobileHeaderV2({ onNavigate, onFavoritesClick }: MobileHeaderV2P
                 src={fimaLogoText} 
                 alt="GROUP FIMA" 
                 style={{ 
-                  height: '24px', 
+                  height: '34px', 
                   width: 'auto',
                   objectFit: 'contain',
                   willChange: hasScrolled ? 'opacity, transform' : 'auto',
@@ -144,26 +152,7 @@ export function MobileHeaderV2({ onNavigate, onFavoritesClick }: MobileHeaderV2P
 
             {/* Actions à droite */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
-              {/* Langue FR */}
-              <button
-                style={{
-                  padding: '0.25rem 0.5rem',
-                  color: '#fff',
-                  background: 'none',
-                  border: 'none',
-                  minHeight: '44px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  touchAction: 'manipulation',
-                  WebkitTapHighlightColor: 'transparent',
-                  cursor: 'pointer',
-                  fontSize: '14px',
-                  fontWeight: 600,
-                }}
-              >
-                FR
-              </button>
+
 
               {/* Favoris */}
               <button
@@ -188,7 +177,7 @@ export function MobileHeaderV2({ onNavigate, onFavoritesClick }: MobileHeaderV2P
                 }}
               >
                 <FontAwesomeIcon icon={faHeart} size="lg" />
-                {favorites && favorites.length > 0 && (
+                {mounted && favorites && favorites.length > 0 && (
                   <span 
                     style={{
                       position: 'absolute',
@@ -213,7 +202,14 @@ export function MobileHeaderV2({ onNavigate, onFavoritesClick }: MobileHeaderV2P
 
               {/* Panier */}
               <button
-                onClick={() => handleNavigateWithClose("checkout")}
+                onClick={() => {
+                  // Toggle: si on est déjà sur checkout, retourner à home
+                  if (currentView === 'checkout') {
+                    handleNavigateWithClose("home");
+                  } else {
+                    handleNavigateWithClose("checkout");
+                  }
+                }}
                 style={{
                   position: 'relative',
                   padding: '0.5rem',
@@ -231,7 +227,7 @@ export function MobileHeaderV2({ onNavigate, onFavoritesClick }: MobileHeaderV2P
                 }}
               >
                 <FontAwesomeIcon icon={faShoppingCart} size="lg" />
-                {totalItems > 0 && (
+                {mounted && totalItems > 0 && (
                   <span 
                     style={{
                       position: 'absolute',
@@ -345,6 +341,10 @@ export function MobileHeaderV2({ onNavigate, onFavoritesClick }: MobileHeaderV2P
             
             <MenuItem onClick={() => handleNavigateWithClose("all-projects")} icon={<FontAwesomeIcon icon={faFolderOpen} size="lg" />}>
               Nos Projets
+            </MenuItem>
+            
+            <MenuItem onClick={() => handleNavigateWithClose("our-history")} icon={<FontAwesomeIcon icon={faBuilding} size="lg" />}>
+              À propos
             </MenuItem>
             
             {onFavoritesClick && (

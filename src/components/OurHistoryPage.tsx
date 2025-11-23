@@ -1,5 +1,5 @@
 const image_76eb04a06107aac17049b46414ee32567a0e3dc5 = '/76eb04a06107aac17049b46414ee32567a0e3dc5.png';
-const image1985 = '/a3b514bed4d9e8bd077d886d8a0f83bc80762cae.png';
+const image1985 = 'https://jxikbrjmdmznoehhccdw.supabase.co/storage/v1/object/public/make-98c6ec1c-media/images/63f05d3b-ef84-477f-94b9-d8dbbd8566a4.jpg';
 const image2015 = '/1ce167b002f03ad021af8910a7cb432549feb714.png';
 const image2008 = '/ec8b6823107c5a366f55b7ba8faa0ab7d47e5ce5.png';
 const image2024 = '/c6487dd8bc2d05ff3b91c3d417a7256b9b9356c7.png';

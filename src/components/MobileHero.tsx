@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft, faChevronRight, faHouse, faWrench, faBuilding } from '@fortawesome/free-solid-svg-icons';
 import { useHeroSlides } from "../hooks/useHeroSlides";
-const fimaLogo = '/1da2d5f603cd62a74c69b55293bcdadb2f6d8468.png';
 
 interface MobileHeroProps {
   onNavigate: (page: string) => void;
@@ -19,6 +18,32 @@ interface MobileHeroProps {
  */
 export function MobileHero({ onNavigate }: MobileHeroProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [mounted, setMounted] = useState(false);
+
+  // Catégories business units
+  const businessCategories = [
+    {
+      key: 'fima-couchage',
+      title: 'FIMA Couchage',
+      subtitle: 'Literie Premium',
+      icon: faHouse,
+      color: '#B5C233',
+    },
+    {
+      key: 'fima-design',
+      title: 'FIMA Design',
+      subtitle: 'Menuiserie',
+      icon: faWrench,
+      color: '#6E6E6E',
+    },
+    {
+      key: 'univers-glass',
+      title: 'UNIVERS GLASS',
+      subtitle: 'Vitrerie',
+      icon: faBuilding,
+      color: '#0EA5E9',
+    },
+  ];
   
   // Récupérer les slides
   const { slides: heroSlidesData, loading } = useHeroSlides();
@@ -65,9 +90,14 @@ export function MobileHero({ onNavigate }: MobileHeroProps) {
 
   const currentHeroSlide = slidesToDisplay[currentSlide];
 
+  // Détection client
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   // Auto-défilement
   useEffect(() => {
-    if (slidesToDisplay.length <= 1) return;
+    if (!mounted || slidesToDisplay.length <= 1) return;
 
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slidesToDisplay.length);
@@ -102,134 +132,76 @@ export function MobileHero({ onNavigate }: MobileHeroProps) {
     return 'all-products';
   };
 
-  const handleHeroClick = () => {
-    const targetPage = getPageFromSlideTitle(currentHeroSlide.title);
-    onNavigate(targetPage);
-  };
-
   return (
-    <section
-      className="relative w-full overflow-hidden cursor-pointer"
-      onClick={handleHeroClick}
-      style={{
-        height: '60vh',
-        minHeight: '400px',
-        maxHeight: '600px',
-        position: 'relative',
-        overscrollBehavior: 'none',
-        WebkitOverflowScrolling: 'touch',
-        touchAction: 'manipulation',
-        WebkitTapHighlightColor: 'transparent',
-        marginTop: '60px', // Compenser la hauteur du header mobile
-      }}
-    >
-      {/* Image ou vidéo de fond */}
-      {currentHeroSlide.isVideo && currentHeroSlide.videoUrl ? (
-        <div className="absolute inset-0">
-          {currentHeroSlide.videoUrl.includes('youtube.com') || currentHeroSlide.videoUrl.includes('youtu.be') ? (
-            <iframe
-              className="absolute inset-0 w-full h-full"
-              src={currentHeroSlide.videoUrl.replace('watch?v=', 'embed/').replace('youtu.be/', 'youtube.com/embed/') + '?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&modestbranding=1'}
-              frameBorder="0"
-              allow="autoplay; encrypted-media"
-              style={{ pointerEvents: 'none' }}
-            />
-          ) : (
-            <video
-              className="absolute inset-0 w-full h-full object-cover"
-              autoPlay
-              muted
-              loop
-              playsInline
-              style={{ pointerEvents: 'none' }}
-            >
-              <source src={currentHeroSlide.videoUrl} type="video/mp4" />
-            </video>
-          )}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black/60" />
-        </div>
-      ) : (
+    <div className="w-full" style={{ marginTop: '60px' }}>
+      {/* Hero Slide */}
+      <div className="relative w-full h-48 overflow-hidden">
         <div
           className="absolute inset-0 transition-opacity duration-700"
           style={{
-            backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url(${currentHeroSlide.background})`,
+            backgroundImage: `url(${currentHeroSlide.background})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
           }}
         />
-      )}
-
-      {/* Logo FIMA centré - Cliquable */}
-      <div className="relative z-10 h-full flex items-center justify-center p-4">
-        <img 
-          src={fimaLogo} 
-          alt="GROUP FIMA" 
-          style={{
-            width: 'auto',
-            height: 'auto',
-            maxWidth: '80%',
-            maxHeight: '30%',
-            objectFit: 'contain',
-            pointerEvents: 'none', // Le clic est géré par le parent
-          }}
-        />
+        
+        {/* Navigation - visible seulement côté client */}
+        {mounted && slidesToDisplay.length > 1 && (
+          <>
+            <button
+              onClick={goToPrevSlide}
+              className="absolute left-2 top-1/2 -translate-y-1/2 z-20 p-2 bg-black/30 text-white rounded"
+            >
+              <FontAwesomeIcon icon={faChevronLeft} className="w-4 h-4" />
+            </button>
+            <button
+              onClick={goToNextSlide}
+              className="absolute right-2 top-1/2 -translate-y-1/2 z-20 p-2 bg-black/30 text-white rounded"
+            >
+              <FontAwesomeIcon icon={faChevronRight} className="w-4 h-4" />
+            </button>
+            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 z-20 flex gap-1">
+              {slidesToDisplay.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentSlide(index)}
+                  className="w-2 h-2 rounded-full"
+                  style={{
+                    backgroundColor: index === currentSlide ? '#B5C233' : 'rgba(255,255,255,0.5)',
+                  }}
+                />
+              ))}
+            </div>
+          </>
+        )}
       </div>
 
-      {/* Navigation si plusieurs slides */}
-      {slidesToDisplay.length > 1 && (
-        <>
-          {/* Boutons Prev/Next - Stop propagation pour ne pas déclencher navigation */}
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              goToPrevSlide();
-            }}
-            className="absolute left-2 top-1/2 -translate-y-1/2 z-20 p-2 bg-black/30 backdrop-blur-sm text-white"
-            style={{
-              touchAction: 'manipulation',
-              WebkitTapHighlightColor: 'transparent',
-            }}
-          >
-            <FontAwesomeIcon icon={faChevronLeft} className="w-6 h-6" />
-          </button>
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              goToNextSlide();
-            }}
-            className="absolute right-2 top-1/2 -translate-y-1/2 z-20 p-2 bg-black/30 backdrop-blur-sm text-white"
-            style={{
-              touchAction: 'manipulation',
-              WebkitTapHighlightColor: 'transparent',
-            }}
-          >
-            <FontAwesomeIcon icon={faChevronRight} className="w-6 h-6" />
-          </button>
+      {/* Titre section */}
+      <div className="bg-black text-white p-3 text-sm font-semibold">
+        Meilleures offres
+      </div>
 
-          {/* Indicateurs - Stop propagation pour ne pas déclencher navigation */}
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex gap-2">
-            {slidesToDisplay.map((_, index) => (
-              <button
-                key={index}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setCurrentSlide(index);
-                }}
-                className="w-2 h-2 transition-all"
-                style={{
-                  backgroundColor:
-                    index === currentSlide
-                      ? '#B5C233'
-                      : 'rgba(255,255,255,0.5)',
-                  touchAction: 'manipulation',
-                  WebkitTapHighlightColor: 'transparent',
-                }}
-              />
-            ))}
-          </div>
-        </>
-      )}
-    </section>
+      {/* Catégories */}
+      <div className="grid grid-cols-3 gap-2 p-2 bg-white">
+        {businessCategories.map((category) => (
+          <button
+            key={category.key}
+            onClick={() => onNavigate(category.key)}
+            className="bg-white border border-gray-200 rounded-lg p-3 flex flex-col items-center gap-2 hover:shadow-md transition-shadow"
+          >
+            <div
+              className="w-12 h-12 rounded-full flex items-center justify-center text-white"
+              style={{ backgroundColor: category.color }}
+            >
+              <FontAwesomeIcon icon={category.icon} className="w-6 h-6" />
+            </div>
+            <div className="text-center">
+              <div className="text-xs font-bold text-gray-900">{category.title}</div>
+              <div className="text-xs text-gray-500">{category.subtitle}</div>
+            </div>
+          </button>
+        ))}
+      </div>
+    </div>
   );
 }
